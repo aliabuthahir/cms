@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from "../../services/authentication.service";
+import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
-import {UserModel} from "../../models/user.model";
+import {UserModel} from '../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.user.email = this.email;
-    //this.user.passWord = this.passWord;
+    // this.user.email = this.email;
+    // this.user.passWord = this.passWord;
   }
 
   signIn() {
