@@ -1,10 +1,14 @@
-import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from "@angular/router";
-import * as firebase from "firebase/app";
-import {AngularFireAuth} from "@angular/fire/auth";
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+  UrlTree} from '@angular/router';
+import * as firebase from 'firebase/app';
+import {AngularFireAuth} from '@angular/fire/auth';
 
-import {Observable} from "rxjs";
-import {map, take} from "rxjs/operators";
+import {Observable} from 'rxjs';
+import {map, take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +20,10 @@ export class AuthenticationGaurdService implements CanActivate {
     this.user = afAuth.authState;
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot,
+              state: RouterStateSnapshot)
+    : Observable<boolean | UrlTree> | Promise<boolean
+    | UrlTree> | boolean | UrlTree {
     return this.user.pipe(map((auth) => {
       if (!auth) {
         this.router.navigateByUrl('/login');

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import * as firebase from "firebase/app";
-import {AngularFireAuth} from "@angular/fire/auth";
-import {UserModel} from "../models/user.model";
+import {Observable} from 'rxjs';
+import * as firebase from 'firebase/app';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {UserModel} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class AuthenticationService {
     return this.afAuth.auth.signOut();
   }
 
-  currentUser(){
+  currentUser() {
     return this.user;
   }
 }

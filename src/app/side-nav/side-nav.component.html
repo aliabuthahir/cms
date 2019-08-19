@@ -20,6 +20,7 @@
       <a mat-button
          [routerLink]="">Upload</a>
     </div>
+
     <div [@toolBarAnimate]="displayMode">
       <a routerLink='/sign'
          mat-button
@@ -27,6 +28,8 @@
       <a mat-button (click)="signOut()"
          *ngIf="(user|async)?.uid">Sign Out</a>
     </div>
+
+
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -66,6 +69,7 @@
   </mat-sidenav>
   <mat-sidenav-content class="test">
     <!-- Add Content Here -->
+    <app-login></app-login>
     <router-outlet name="side-nav"></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

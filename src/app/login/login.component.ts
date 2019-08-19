@@ -12,15 +12,15 @@ export class LoginComponent implements OnInit {
   email: string;
   passWord: string;
   errorMsg: string;
+  user: UserModel;
 
   constructor(private authSvc: AuthenticationService,
-              private router: Router,
-              private user: UserModel) {
+              private router: Router) {
   }
 
   ngOnInit() {
-    this.user.email = this.email;
-    this.user.passWord = this.passWord;
+    //this.user.email = this.email;
+    //this.user.passWord = this.passWord;
   }
 
   signIn() {

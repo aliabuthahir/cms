@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {GalleryImageModel} from "../models/gallery-image.model";
+import {Observable} from 'rxjs';
+import {GalleryImageModel} from '../models/gallery-image.model';
 
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireDatabase} from '@angular/fire/database';
@@ -20,10 +20,10 @@ export class ImageService {
     });
   }
 
-  getImages(): Observable<GalleryImageModel[]>{
+  getImages(): Observable<GalleryImageModel[]> {
     let result: Observable<unknown[]>;
     result = this.db
-      .list("/uploads").valueChanges();
+      .list('/uploads').valueChanges();
     let data: Observable<GalleryImageModel[]>;
     [data] = result[0];
     return data;
