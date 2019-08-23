@@ -22,11 +22,11 @@ export class UploadService {
 
   uploadFile(upload: UploadModel) {
 //    const storageRef = firebase.storage;
-   const storageRef = this.afs.ref(`${this.basePath}`);
-   const uploadTask = storageRef
+    const storageRef = this.afs.ref(`${this.basePath}`);
+    const uploadTask = storageRef
       .child(`/${upload.file.name}`)
       .put(upload.file);
-   uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       snapshot => {
         // state changed observer.
         upload.progress = (uploadTask

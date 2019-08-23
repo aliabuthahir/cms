@@ -16,7 +16,7 @@ import {
   MatSnackBarModule,
   MatCardModule
 } from '@angular/material';
-import {MatProgressBarModule} from '@angular/material/typings/progress-bar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatInputModule} from '@angular/material/input';
 import {GalleryComponent} from './gallery/gallery.component';
 import {ImageDetailComponent} from './image-detail/image-detail.component';
