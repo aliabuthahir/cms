@@ -28,4 +28,11 @@ export class ImageService {
     [data] = result[0];
     return data;
   }
+
+  getImage(key: string) {
+    return firebase.database()
+      .ref('/upload' + key)
+      .once('value')
+      .then(snap => snap.val());
+  }
 }
