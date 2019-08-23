@@ -28,8 +28,6 @@
       <a mat-button (click)="signOut()"
          *ngIf="(user|async)?.uid">Sign Out</a>
     </div>
-
-
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -67,9 +65,8 @@
         Link 3</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="test">
+  <mat-sidenav-content>
     <!-- Add Content Here -->
-    <app-login></app-login>
     <router-outlet name="side-nav"></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

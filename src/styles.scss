@@ -4,18 +4,17 @@ html, body {
   height: 100%;
   overflow-y: hidden;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-
-.hidden {
-  display: none;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .spacer {
   flex: 1 1 auto;
 }
 
-form{
+form {
   width: 94%;
   margin: 3%;
   padding: 3%;
