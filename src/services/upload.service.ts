@@ -31,6 +31,7 @@ export class UploadService {
           .bytesTransferred / uploadTask
           .snapshot
           .totalBytes) * 100;
+        console.log(`${upload.progress}%`);
       },
       // error observer.
       error => {
