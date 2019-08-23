@@ -22,9 +22,10 @@ export class ImageService {
   }
 
   getImages(): Observable<GalleryImageModel[]> {
-    let result: Observable<unknown[]>;
+    let result: Observable<GalleryImageModel[][]>;
     result = this.db
-      .list('/uploads').valueChanges();
+      .list<GalleryImageModel[]>('/uploads')
+      .valueChanges();
     let data: Observable<GalleryImageModel[]>;
     [data] = result[0];
     return data;

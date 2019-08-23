@@ -5,6 +5,7 @@ import {AngularFireDatabase} from '@angular/fire/database';
 import {FirebaseListObservable} from '@angular/fire/database-deprecated';
 import * as firebase from 'firebase';
 import {UploadModel} from '../models/upload.model';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +16,17 @@ export class UploadService {
   private uploads: FirebaseListObservable<GalleryImageModel[]>;
 
   constructor(private ngFire: AngularFireModule,
-              private db: AngularFireDatabase) {
+              private db: AngularFireDatabase,
+              private afs: AngularFireStorage) {
   }
 
   uploadFile(upload: UploadModel) {
-    const storageRef = firebase.storage;
-//    const storageRef = firebase.storage.ref();
-
-    const uploadTask = storageRef
-      .child(`${this.basePath}/${upload.file.name}`)
+//    const storageRef = firebase.storage;
+   const storageRef = this.afs.ref(`${this.basePath}`);
+   const uploadTask = storageRef
+      .child(`/${upload.file.name}`)
       .put(upload.file);
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+   uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       snapshot => {
         // state changed observer.
         upload.progress = (uploadTask

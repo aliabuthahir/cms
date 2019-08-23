@@ -57,7 +57,7 @@ import {environment} from '../environments/environment';
     MatInputModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
   ],
   providers: [AuthenticationGaurdService,
     AuthenticationService,
