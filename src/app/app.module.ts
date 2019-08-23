@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -14,8 +13,10 @@ import {
   MatSidenavModule,
   MatIconModule,
   MatListModule,
-  MatSnackBarModule, MatCardModule
+  MatSnackBarModule,
+  MatCardModule
 } from '@angular/material';
+import {MatProgressBarModule} from '@angular/material/typings/progress-bar';
 import {GalleryComponent} from './gallery/gallery.component';
 import {ImageDetailComponent} from './image-detail/image-detail.component';
 import {LoginComponent} from './login/login.component';
@@ -51,6 +52,7 @@ import {environment} from '../environments/environment';
     MatListModule,
     MatSnackBarModule,
     MatCardModule,
+    MatProgressBarModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule

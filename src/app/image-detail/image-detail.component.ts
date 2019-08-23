@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ImageService} from '../../services/image.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-image-detail',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./image-detail.component.scss']
 })
 export class ImageDetailComponent implements OnInit {
+  private imageUrl = '';
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private imageSvc: ImageService,
+              private route: ActivatedRoute) {
   }
 
+  ngOnInit() {
+    this.getImageUrl(this.route.snapshot.params.id);
+    // this.getImageUrl(this.route.snapshot.params['id']);
+  }
+
+  getImageUrl(key: string) {
+    this.imageSvc
+      .getImages(key)
+      .then(imageUrl => {
+        this.imageUrl = imageUrl.url;
+      });
+  }
 }
