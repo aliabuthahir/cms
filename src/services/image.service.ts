@@ -5,6 +5,7 @@ import {GalleryImageModel} from '../models/gallery-image.model';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireDatabase} from '@angular/fire/database';
 import 'firebase/storage';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
