@@ -27,7 +27,7 @@ export class AuthenticationGaurdService implements CanActivate {
     return this.user.pipe(map((auth) => {
       if (!auth) {
         this.router.navigateByUrl('/login');
-        return false;
+        return true;
       }
       return true;
     })).pipe(take(1));
