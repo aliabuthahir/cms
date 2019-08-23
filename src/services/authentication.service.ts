@@ -15,11 +15,15 @@ export class AuthenticationService {
   }
 
   signIn(user: UserModel) {
-    return this.afAuth.auth.signInWithEmailAndPassword(user.email, user.passWord);
+    return this.afAuth
+      .auth
+      .signInWithEmailAndPassword(user.email, user.passWord);
   }
 
   signOut() {
-    return this.afAuth.auth.signOut();
+    return this.afAuth
+      .auth
+      .signOut();
   }
 
   currentUser() {
