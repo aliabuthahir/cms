@@ -74,7 +74,7 @@ const toHandSet = keyframes([
         width: '200px'
       })),
       state('collapsed', style({
-        width: `50px`
+        width: `60px`
       })),
       transition('*=>expanded', animate(400)),
       transition('void=>collapsed', animate(400)),

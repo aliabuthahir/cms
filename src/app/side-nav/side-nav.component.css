@@ -3,7 +3,7 @@
 }
 
 .sidenav {
-  width: 55px;
+  width: 60px;
   max-width: 300px;
 }
 
@@ -24,5 +24,5 @@
 }
 
 .sidenav-icon {
-  margin-right: 15px;
+  margin-right: 20px;
 }
