@@ -6,10 +6,13 @@
     <input type="files"
            (change)="handleFiles($event)"
            multiple>
+  </mat-card-content>
   <mat-card-actions>
     <div *ngIf="upload">
-      Progress: <mat-progress-bar mode="determinate" value="{{upload?.progress}}">
-    </mat-progress-bar> Complete
+      Progress:
+      <mat-progress-bar mode="determinate" value="{{upload?.progress}}">
+      </mat-progress-bar>
+      Complete
     </div>
     <button mat-button
             (click)="uploadFiles()">UPLOAD

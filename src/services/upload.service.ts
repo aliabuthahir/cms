@@ -19,7 +19,9 @@ export class UploadService {
   }
 
   uploadFile(upload: UploadModel) {
-    const storageRef = firebase.storage.ref();
+    const storageRef = firebase.storage;
+//    const storageRef = firebase.storage.ref();
+
     const uploadTask = storageRef
       .child(`${this.basePath}/${upload.file.name}`)
       .put(upload.file);
