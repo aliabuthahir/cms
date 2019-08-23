@@ -14,7 +14,7 @@ import {
   MatSidenavModule,
   MatIconModule,
   MatListModule,
-  MatSnackBarModule
+  MatSnackBarModule, MatCardModule
 } from '@angular/material';
 import {GalleryComponent} from './gallery/gallery.component';
 import {ImageDetailComponent} from './image-detail/image-detail.component';
@@ -50,6 +50,7 @@ import {environment} from '../environments/environment';
     MatIconModule,
     MatListModule,
     MatSnackBarModule,
+    MatCardModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule

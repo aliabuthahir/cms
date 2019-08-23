@@ -9,8 +9,8 @@ import {UserModel} from '../../models/user.model';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email: string;
-  passWord: string;
+  // email: string;
+  // passWord: string;
   errorMsg: string;
   user: UserModel;
 
