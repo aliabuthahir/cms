@@ -32,7 +32,7 @@ export class ImageService {
 
   getImage(key: string) {
     return firebase.database()
-      .ref('/upload' + key)
+      .ref('/uploads' + key)
       .once('value')
       .then(snap => snap.val());
   }

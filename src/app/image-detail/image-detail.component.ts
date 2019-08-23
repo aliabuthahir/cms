@@ -22,8 +22,8 @@ export class ImageDetailComponent implements OnInit {
   getImageUrl(key: string) {
     this.imageSvc
       .getImage(key)
-      .then(imageUrl => {
-        this.imageUrl = imageUrl.url;
+      .then(image => {
+        this.imageUrl = image.url;
       });
   }
 }
