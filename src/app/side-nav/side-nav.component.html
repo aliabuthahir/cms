@@ -22,7 +22,7 @@
     </div>
 
     <div [@toolBarAnimate]="displayMode">
-      <a [routerLink]="['/tasks', {outlets: {side: ['create']}}]
+      <a [routerLink]="['/sign']"
          *ngIf=" !(user|async)?.uid"
       mat-button>Sign In</a>
       <a mat-button (click)="signOut()"
@@ -67,9 +67,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <!-- Add Content Here -->
-    <router-outlet name="side-nav"
-                   (activate)="openSidebar = true"
-                   (deactivate)="openSidebar = false">
+    <router-outlet name="side-nav">
     </router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
