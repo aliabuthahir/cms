@@ -10,7 +10,7 @@ const routes: Route[] = [
   {path: 'sign', component: LoginComponent, outlet: 'side-nav' },
   {path: '', redirectTo: '/gallery', pathMatch: 'full'},
   {path: 'gallery', component: GalleryComponent, outlet: 'side-nav'},
-  {path: 'upload', component: UploadComponent, canActivate: [AuthenticationGaurdService], outlet: 'side-nav'},
+  {path: 'upload', component: UploadComponent, outlet: 'side-nav'},
   {path: 'image/:id', component: ImageDetailComponent, canActivate: [AuthenticationGaurdService], outlet: 'side-nav'}
  ];
 
