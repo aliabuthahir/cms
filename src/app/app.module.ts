@@ -17,6 +17,7 @@ import {
   MatCardModule
 } from '@angular/material';
 import {MatProgressBarModule} from '@angular/material/typings/progress-bar';
+import {MatInputModule} from '@angular/material/input';
 import {GalleryComponent} from './gallery/gallery.component';
 import {ImageDetailComponent} from './image-detail/image-detail.component';
 import {LoginComponent} from './login/login.component';
@@ -53,6 +54,7 @@ import {environment} from '../environments/environment';
     MatSnackBarModule,
     MatCardModule,
     MatProgressBarModule,
+    MatInputModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule
