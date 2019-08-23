@@ -24,9 +24,29 @@ export class UploadService {
       .child(`${this.basePath}/${upload.file.name}`)
       .put(upload.file);
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-      () => {
-
+      snapshot => {
+        // state changed observer.
+        upload.progress = (uploadTask
+          .snapshot
+          .bytesTransferred / uploadTask
+          .snapshot
+          .totalBytes) * 100;
+      },
+      // error observer.
+      error => {
+        console.error(error);
+      },
+      // success observer.
+      (): any => {
+        upload.url = uploadTask.snapshot.downloadURL;
+        upload.name = upload.file.name;
+        this.saveFileData(upload);
       }
     );
+  }
+
+  saveFileData(upload: UploadModel) {
+    this.db.list(`${this.basePath}/`).push(upload);
+    console.log('File savedL ' + upload.url);
   }
 }
