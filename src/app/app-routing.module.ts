@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {GalleryComponent} from './gallery/gallery.component';
 import {AuthenticationGaurdService} from '../services/authenticationGaurd.service';
@@ -7,15 +7,26 @@ import {ImageDetailComponent} from './image-detail/image-detail.component';
 import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
-  {path: 'sign', component: LoginComponent, outlet: 'side-nav' },
-  {path: '', redirectTo: 'gallery', pathMatch: 'full'},
-  {path: 'gallery', component: GalleryComponent, outlet: 'side-nav'},
-  {path: 'upload', component: UploadComponent, outlet: 'side-nav'},
-  {path: 'image/:id', component: ImageDetailComponent, canActivate: [AuthenticationGaurdService], outlet: 'side-nav'}
- ];
+  {
+    path: '',
+    component: GalleryComponent,
+    canActivate: [AuthenticationGaurdService],
+    pathMatch: 'full'
+  },
+  {path: 'login',
+    component: LoginComponent},
+  {path: 'gallery',
+    component: GalleryComponent},
+  {path: 'upload',
+    component: UploadComponent},
+  {path: 'image/:id',
+    component: ImageDetailComponent,
+    canActivate: [AuthenticationGaurdService]}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

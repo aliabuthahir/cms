@@ -19,6 +19,6 @@ export class GalleryComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.images = this.imageSvc.getImages();
+     this.images = this.imageSvc.getImages();
   }
 }

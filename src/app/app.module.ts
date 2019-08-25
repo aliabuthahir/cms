@@ -30,7 +30,8 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from '../environments/environment';
-import {AngularFireStorageModule} from "@angular/fire/storage";
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import { Pagenotfound404Component } from './pagenotfound404/pagenotfound404.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {AngularFireStorageModule} from "@angular/fire/storage";
     GalleryComponent,
     ImageDetailComponent,
     LoginComponent,
-    UploadComponent
+    UploadComponent,
+    Pagenotfound404Component
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,7 @@ import {AngularFireStorageModule} from "@angular/fire/storage";
     AngularFireAuthModule,
     AngularFireStorageModule
   ],
-  providers: [AuthenticationGaurdService,
+   providers: [AuthenticationGaurdService,
     AuthenticationService,
     ImageService,
     UploadService],

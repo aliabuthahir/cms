@@ -22,12 +22,14 @@
     </div>
 
     <div [@toolBarAnimate]="displayMode">
-      <a [routerLink]="['/sign']"
-         *ngIf=" !(user|async)?.uid"
+      <a [routerLink]="'gallery'"
+         routerLinkActive="active"
       mat-button>Sign In</a>
       <a mat-button (click)="signOut()"
          *ngIf="(user|async)?.uid">Sign Out</a>
     </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -67,7 +69,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <!-- Add Content Here -->
-    <app-login></app-login>
-    <router-outlet name="side-nav"></router-outlet>
+    <router-outlet>
+    </router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -18,7 +18,7 @@ export class AppComponent implements AfterViewInit {
       const message = `Welcome to ${this.title}`;
 
       this.snackBar.open(message, 'CLOSE', {
-        duration: 3000
+        duration: 2500
       });
     });
   }

@@ -129,8 +129,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   user: Observable<firebase.User>;
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private router: Router,
-              private authSvc: AuthenticationService) {
+              private router: Router) {
     this.subscription = router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         if (!router.navigated) {
@@ -140,8 +139,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
-    this.user = this.authSvc.currentUser();
+  ngOnInit(): void {// this.user = this.authSvc.currentUser();
   }
 
   ngOnDestroy() {
@@ -149,9 +147,9 @@ export class SideNavComponent implements OnInit, OnDestroy {
   }
 
   signOut() {
-    this.authSvc
-      .signOut()
-      .then(onResolve => this.router.navigate(['/']));
+    // this.authSvc
+    //   .signOut()
+    //   .then(onResolve => this.router.navigate(['/']));
   }
 
   toggleNavBarState() {
