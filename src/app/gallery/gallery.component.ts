@@ -1,6 +1,6 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
 import {ImageService} from '../../services/image.service';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {GalleryImageModel} from '../../models/gallery-image.model';
 
 @Component({
@@ -19,6 +19,6 @@ export class GalleryComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-     this.images = this.imageSvc.getImages();
+    this.images = this.imageSvc.getImages();
   }
 }

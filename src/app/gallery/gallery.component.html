@@ -5,8 +5,8 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <ul id="thumbnailsList"
-        *ngIf="images; else noImages">
+     <ul id="thumbnailsList"
+        *ngIf="(images | async); else noImages">
       <li *ngFor="let image of images | async" class="img">
         <a routerLink="['/images', image.key]">
           <img src="{{image.url}}" class="tn"/>
