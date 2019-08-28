@@ -9,16 +9,17 @@ import {LoginComponent} from './login/login.component';
 const routes: Routes = [
   {
     path: '',
-    component: GalleryComponent,
-    canActivate: [AuthenticationGaurdService],
+    redirectTo: 'gallery',
     pathMatch: 'full'
   },
-  {path: 'sign-in',
+  {path: 'signin',
     component: LoginComponent},
   {path: 'gallery',
-    component: GalleryComponent},
+    component: GalleryComponent,
+    canActivate: [AuthenticationGaurdService]},
   {path: 'upload',
-    component: UploadComponent},
+    component: UploadComponent,
+    canActivate: [AuthenticationGaurdService]},
   {path: 'image/:id',
     component: ImageDetailComponent,
     canActivate: [AuthenticationGaurdService]}

@@ -1,20 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
 import {UserModel} from '../../models/user.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ToolbarService} from '../../services/toolbar.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   // private localModel: UserModel;
 
   constructor(private fb: FormBuilder,
               private authSvc: AuthenticationService,
-              private router: Router) {
+              private router: Router,
+              private toolBarSvc: ToolbarService) {
   }
 
   userForm: FormGroup;
@@ -40,7 +42,12 @@ export class LoginComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.toolBarSvc.enableSignInPage(true);
     this.buildForm();
+  }
+
+  ngOnDestroy(): void {
+    this.toolBarSvc.enableSignInPage(false);
   }
 
   toggleForm(): void {

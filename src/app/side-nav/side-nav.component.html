@@ -25,7 +25,7 @@
       <a [routerLink]="['/sign-in']"
          routerLinkActive="active"
          mat-button
-         *ngIf="!(user|async)?.uid">Sign In</a>
+         *ngIf="(!(user|async)?.uid) && (!isSignUpPage)">Sign In</a>
       <a mat-button (click)="signOut()"
          *ngIf="(user|async)?.uid">Sign Out</a>
     </div>

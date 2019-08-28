@@ -1,12 +1,13 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Observable, Subscription} from 'rxjs';
+import {Observable, Subject, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {trigger, state, style, transition, animate, keyframes} from '@angular/animations';
 import {NavigationStart, Router} from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
 import * as firebase from 'firebase/app';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {ToolbarService} from '../../services/toolbar.service';
 
 const toDesktop = keyframes([
   style({
@@ -127,12 +128,14 @@ export class SideNavComponent implements OnInit, OnDestroy {
   displayMode = '';
 
   subscription: Subscription;
-  private readonly user: Observable<firebase.User>;
+  private user: Observable<firebase.User>;
+  private isSignUpPage: Subject<boolean>;
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private afAuth: AngularFireAuth,
-              private router: Router) {
-    this.user = afAuth.authState;
+              private authSvc: AuthenticationService,
+              private router: Router,
+              private toolBarSvc: ToolbarService) {
+    this.user = authSvc.currentUser();
     this.subscription = router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         if (!router.navigated) {
@@ -142,7 +145,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {// this.user = this.authSvc.currentUser();
+  ngOnInit(): void {
+    this.isSignUpPage = this.toolBarSvc.getObserver();
   }
 
   ngOnDestroy() {
@@ -150,9 +154,9 @@ export class SideNavComponent implements OnInit, OnDestroy {
   }
 
   signOut() {
-    // this.authSvc
-    //   .signOut()
-    //   .then(onResolve => this.router.navigate(['/']));
+    this.authSvc
+      .signOut()
+      .then(onResolve => this.router.navigate(['/signin']));
   }
 
   toggleNavBarState() {
