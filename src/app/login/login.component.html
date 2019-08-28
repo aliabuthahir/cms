@@ -1,12 +1,13 @@
 <mat-card class="container mat-elevation-z0">
   <mat-card-header>
-    <mat-card-title><h2>SIGN IN</h2></mat-card-title>
+
+    <mat-card-title (click)="toggleForm()">
+      <h3>New User Signup</h3>
+      <h2>SIGN IN</h2>
+    </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <h3>New User Signup</h3>
-    <p (click)="toggleForm()">Already Registered?</p>
-    <hr>
-    <form [formGroup]="userForm"  *ngIf="newUser"  (ngSubmit)="signup()">
+    <form [formGroup]="userForm" *ngIf="newUser" (ngSubmit)="signup()">
       <mat-form-field class="form-field">
         <mat-icon
           aria-label="email icon"
@@ -18,7 +19,7 @@
                formControlName="email"
                #email
                maxlength="70"
-               required >
+               required>
         <button mat-button *ngIf="email.value"
                 matSuffix
                 mat-icon-button
@@ -28,7 +29,7 @@
         </button>
         <mat-hint
           align="start"
-          *ngIf="formErrors.email">
+          *ngIf="formErrors.email && email">
           <span class="mat-error">{{ formErrors.email }}</span>
         </mat-hint>
         <mat-hint
@@ -61,7 +62,7 @@
         </button>
         <mat-hint
           align="start"
-          *ngIf="formErrors.password">
+          *ngIf="formErrors.password && password">
           <span class="mat-error">{{ formErrors.password }}</span>
         </mat-hint>
         <mat-hint

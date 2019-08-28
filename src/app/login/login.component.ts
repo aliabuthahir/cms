@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
 import {UserModel} from '../../models/user.model';
@@ -11,7 +11,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private auth: AuthenticationService) {}
+  constructor(private fb: FormBuilder, private auth: AuthenticationService) {
+  }
+
   userForm: FormGroup;
   newUser = true; // to toggle login or signup form
   passReset = false;
@@ -23,14 +25,14 @@ export class LoginComponent implements OnInit {
 
   validationMessages = {
     email: {
-      required:      'Email is required.',
-      email:         'Email must be a valid email'
+      required: 'Email is required.',
+      email: 'Email must be a valid email'
     },
     password: {
-      required:      'Password is required.',
-      pattern:       'Password must be include at one letter and one number.',
-      minlength:     'Password must be at least 4 characters long.',
-      maxlength:     'Password cannot be more than 40 characters long.',
+      required: 'Password is required.',
+      pattern: 'Password must be include at one letter and one number.',
+      minlength: 'Password must be at least 4 characters long.',
+      maxlength: 'Password cannot be more than 40 characters long.',
     }
   };
 
@@ -51,8 +53,8 @@ export class LoginComponent implements OnInit {
   }
 
 //  resetPassword() {
-    // this.auth.resetPassword(this.userForm.value.email)
-    //   .then(() => this.passReset = true);
+  // this.auth.resetPassword(this.userForm.value.email)
+  //   .then(() => this.passReset = true);
 //  }
 
   buildForm(): void {
@@ -76,7 +78,9 @@ export class LoginComponent implements OnInit {
 
   // Updates validation state on form changes.
   onValueChanged(data?: any) {
-    if (!this.userForm) { return; }
+    if (!this.userForm) {
+      return;
+    }
     const form = this.userForm;
     // tslint:disable-next-line:forin
     for (const field in this.formErrors) {
@@ -92,5 +96,4 @@ export class LoginComponent implements OnInit {
       }
     }
   }
-
 }
