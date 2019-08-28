@@ -10,8 +10,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  // private localModel: UserModel;
 
-  constructor(private fb: FormBuilder, private auth: AuthenticationService) {
+  constructor(private fb: FormBuilder,
+              private auth: AuthenticationService,
+              private router: Router) {
   }
 
   userForm: FormGroup;
@@ -45,11 +48,19 @@ export class LoginComponent implements OnInit {
   }
 
   signup(): void {
-//    this.auth.emailSignUp(this.userForm.value);
+    //  this.auth.emailSignUp(this.userForm.value);
   }
 
-  login(): void {
-    this.auth.signIn(this.userForm.value);
+  public login(): void {
+    const userModel = new UserModel();
+    userModel.email = this.userForm.value.email;
+    userModel.passWord = this.userForm.value.password;
+    this.auth.signIn(userModel)
+      .then(() => {
+        this.router.navigate(['/gallery']);
+        console.log('login successful!');
+      })
+      .catch(() => console.log('login failed'));
   }
 
 //  resetPassword() {

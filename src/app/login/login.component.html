@@ -1,16 +1,16 @@
 <mat-card class="container mat-elevation-z0">
   <mat-card-header>
-    <mat-card-title >
-      <button mat-button
-              type="button"
-              (click)="toggleForm()">
-        <h3>Sign Up</h3>
-      </button>
+    <mat-card-title>
+      <!--    <button mat-button
+                   type="button"
+                   (click)="toggleForm()">
+             <h3>Sign Up</h3>
+           </button> -->
       <h2>SIGN IN</h2>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form [formGroup]="userForm" *ngIf="newUser" (ngSubmit)="signup()">
+    <form [formGroup]="userForm" (ngSubmit)="login()">
       <mat-form-field class="form-field">
         <mat-icon
           aria-label="email icon"
@@ -23,12 +23,12 @@
                #email
                maxlength="70"
                required>
-        <button mat-icon-button *ngIf="email.value"
-                matSuffix
-                aria-label="Clear"
-                (click)="email.value=''">
-          <mat-icon>close</mat-icon>
-        </button>
+        <!--    <button mat-icon-button *ngIf="email.value"
+                    matSuffix
+                    aria-label="Clear"
+                    (click)="email.value=''">
+              <mat-icon>close</mat-icon>
+            </button> -->
         <mat-hint
           align="start"
           *ngIf="formErrors.email">
@@ -55,12 +55,12 @@
                #pwd
                required
                maxlength="40">
-        <button mat-icon-button *ngIf="pwd.value"
-                matSuffix
-                aria-label="Clear"
-                (click)="pwd.value=''">
-          <mat-icon>close</mat-icon>
-        </button>
+        <!--        <button mat-icon-button *ngIf="pwd.value"
+                        matSuffix
+                        aria-label="Clear"
+                        (click)="pwd.value=''">
+                  <mat-icon>close</mat-icon>
+                </button> -->
         <mat-hint
           align="start"
           *ngIf="formErrors.password">
@@ -74,14 +74,15 @@
           <span class="hint"> / 40</span>
         </mat-hint>
       </mat-form-field>
+      <mat-card-actions>
+        <mat-card-title-group class="container-toolbar">
+          <button mat-button
+                  [disabled]="!userForm.valid"
+                  type="submit">SIGN IN
+          </button>
+        </mat-card-title-group>
+      </mat-card-actions>
     </form>
   </mat-card-content>
-  <mat-card-actions>
-     <mat-card-title-group class="container-toolbar">
-      <button mat-button
-              [disabled]="!userForm.valid"
-              type="submit">SIGN IN
-      </button>
-    </mat-card-title-group>
-  </mat-card-actions>
+
 </mat-card>
