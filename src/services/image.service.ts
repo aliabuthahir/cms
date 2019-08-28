@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {GalleryImageModel} from '../models/gallery-image.model';
-
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireDatabase} from '@angular/fire/database';
 import 'firebase/storage';
@@ -13,7 +12,8 @@ import * as firebase from 'firebase';
 export class ImageService {
   private uid: string;
 
-  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
+  constructor(private afAuth: AngularFireAuth,
+              private db: AngularFireDatabase) {
     this.afAuth.authState.subscribe(auth => {
       if (auth !== undefined && auth !== null) {
         this.uid = auth.uid;
@@ -36,5 +36,9 @@ export class ImageService {
       .ref('/uploads' + key)
       .once('value')
       .then(snap => snap.val());
+  }
+
+  currentUser(){
+    return this.uid;
   }
 }

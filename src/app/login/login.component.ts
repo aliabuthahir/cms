@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   // private localModel: UserModel;
 
   constructor(private fb: FormBuilder,
-              private auth: AuthenticationService,
+              private authSvc: AuthenticationService,
               private router: Router) {
   }
 
@@ -44,21 +44,20 @@ export class LoginComponent implements OnInit {
   }
 
   toggleForm(): void {
-    this.newUser = !this.newUser;
+    this.newUser = true;
   }
 
   signup(): void {
-    //  this.auth.emailSignUp(this.userForm.value);
+    //  this.authSvc.emailSignUp(this.userForm.value);
   }
 
   public login(): void {
     const userModel = new UserModel();
     userModel.email = this.userForm.value.email;
     userModel.passWord = this.userForm.value.password;
-    this.auth.signIn(userModel)
+    this.authSvc.signIn(userModel)
       .then(() => {
         this.router.navigate(['/gallery']);
-        console.log('login successful!');
       })
       .catch(() => console.log('login failed'));
   }

@@ -14,12 +14,6 @@ export class AuthenticationService {
     this.user = afAuth.authState;
   }
 
-  // signUpEmailUser(credentials: EmailPasswordCredentials): firebase.Promise<FirebaseAuthState> {
-  //   return this.af.auth.createUser(credentials)
-  //     .then(() => console.log("success"))
-  //     .catch(error => console.log(error));
-  // }
-
   signIn(user: UserModel) {
     return this.afAuth
       .auth
