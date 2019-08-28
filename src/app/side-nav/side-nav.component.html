@@ -16,23 +16,21 @@
     <div [@toolBarAnimate]="displayMode"
          *ngIf="(user|async)?.uid">
       <a mat-button
-         [routerLink]="">Image Gallery</a>
+         [routerLink]="['/gallery']">Gallery</a>
       <a mat-button
-         [routerLink]="">Upload</a>
+         [routerLink]="['/upload']">Upload</a>
     </div>
 
     <div [@toolBarAnimate]="displayMode">
-      <a [routerLink]="['/sign-in']"
+     <!-- <a [routerLink]="['/signin']"
          routerLinkActive="active"
          mat-button
-         *ngIf="(!(isSignUpPage|async)) && (!(user|async)?.uid)">Sign In</a>
+         *ngIf="(!(isSignUpPage|async)) && (!(user|async)?.uid)">Sign In</a> -->
       <a mat-button (click)="signOut()"
          *ngIf="(user|async)?.uid">Sign Out</a>
     </div>
   </mat-toolbar-row>
-  <mat-toolbar-row>
-  </mat-toolbar-row>
-</mat-toolbar>
+ </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
@@ -46,26 +44,26 @@
       [opened]="(!(isSignUpPage|async)) && (isHandset$ | async)">
     <mat-nav-list>
       <a mat-list-item
-         [routerLink]="">
+         [routerLink]="['/gallery']">
         <mat-icon
           aria-label="Side nav icon"
           class="sidenav-icon">menu
         </mat-icon>
-        Link 1</a>
+      Gallery</a>
       <a mat-list-item
-         [routerLink]="">
+         [routerLink]="['/upload']">
         <mat-icon
           aria-label="Side nav icon"
           class="sidenav-icon">menu
         </mat-icon>
-        Link 2</a>
+        Upload</a>
       <a mat-list-item
-         [routerLink]="">
+         (click)="signOut()">
         <mat-icon
           aria-label="Side nav icon"
           class="sidenav-icon">menu
         </mat-icon>
-        Link 3</a>
+        Sign Out</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
