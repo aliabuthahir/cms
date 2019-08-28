@@ -27,13 +27,14 @@
     </div>
 
     <div [@toolBarAnimate]="displayMode">
-      <!-- <a [routerLink]="['/signin']"
-          [routerLinkActive]="['mat-accent']"
-          mat-button
-          *ngIf="(!(isSignUpPage|async)) && (!(user|async)?.uid)">Sign In</a> -->
       <a mat-button (click)="signOut()"
          [routerLinkActive]="['mat-accent']"
-         *ngIf="(user|async)?.uid">Sign Out</a>
+         *ngIf="(user|async)?.uid">
+        <mat-icon
+          aria-label="Sign out icon"
+          class="sidenav-icon">power_settings_new
+        </mat-icon>
+        Sign Out</a>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -69,8 +70,8 @@
          (click)="signOut()"
          [routerLinkActive]="['active-list-item']">
         <mat-icon
-          aria-label="Side nav icon"
-          class="sidenav-icon">menu
+          aria-label="Sign out icon"
+          class="sidenav-icon">power_settings_new
         </mat-icon>
         Sign Out</a>
     </mat-nav-list>
