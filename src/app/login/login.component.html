@@ -23,9 +23,8 @@
                #email
                maxlength="70"
                required>
-        <button mat-button *ngIf="email.value"
+        <button mat-icon-button *ngIf="email.value"
                 matSuffix
-                mat-icon-button
                 aria-label="Clear"
                 (click)="email.value=''">
           <mat-icon>close</mat-icon>
@@ -56,9 +55,8 @@
                #pwd
                required
                maxlength="40">
-        <button mat-button *ngIf="pwd.value"
+        <button mat-icon-button *ngIf="pwd.value"
                 matSuffix
-                mat-icon-button
                 aria-label="Clear"
                 (click)="pwd.value=''">
           <mat-icon>close</mat-icon>
