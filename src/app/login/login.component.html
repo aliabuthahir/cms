@@ -1,30 +1,88 @@
 <mat-card class="container mat-elevation-z0">
   <mat-card-header>
-    <mat-card-title><h2>Sign In</h2></mat-card-title>
+    <mat-card-title><h2>SIGN IN</h2></mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form>
-      <mat-form-field class="example-full-width">
+    <h3>New User Signup</h3>
+    <p (click)="toggleForm()">Already Registered?</p>
+    <hr>
+    <form [formGroup]="userForm"  *ngIf="newUser"  (ngSubmit)="signup()">
+      <mat-form-field class="form-field">
+        <mat-icon
+          aria-label="email icon"
+          matPrefix
+          class="inputfield-icon">email
+        </mat-icon>
         <input type="email"
-               #email
                matInput
-               placeholder="Email">
+               formControlName="email"
+               #email
+               maxlength="70"
+               required >
+        <button mat-button *ngIf="email.value"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="email.value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint
+          align="start"
+          *ngIf="formErrors.email">
+          <span class="mat-error">{{ formErrors.email }}</span>
+        </mat-hint>
+        <mat-hint
+          align="end"
+          *ngIf="email">
+          <span class="hint">Total characters typed </span>
+          <span class="hint-value">{{email.value.length}}</span>
+          <span class="hint"> / 70</span>
+        </mat-hint>
       </mat-form-field>
 
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="form-field">
+        <mat-icon
+          aria-label="email icon"
+          matPrefix
+          class="inputfield-icon">edit
+        </mat-icon>
         <input type="password"
-               #password
                matInput
-               placeholder="Password">
+               formControlName="password"
+               #pwd
+               required
+               maxlength="40">
+        <button mat-button *ngIf="pwd.value"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="pwd.value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint
+          align="start"
+          *ngIf="formErrors.password">
+          <span class="mat-error">{{ formErrors.password }}</span>
+        </mat-hint>
+        <mat-hint
+          align="end"
+          *ngIf="pwd.value">
+          <span class="hint">Total characters typed </span>
+          <span class="hint-value">{{pwd.value.length}}</span>
+          <span class="hint"> / 40</span>
+        </mat-hint>
       </mat-form-field>
+      <mat-hint *ngIf="userForm.valid">
+        <span class="hint">Form is valid</span>
+      </mat-hint>
     </form>
   </mat-card-content>
   <mat-card-actions>
     <mat-card-title-group class="container-toolbar">
-     <button mat-button
-            (click)="signIn()">SIGN IN
-    </button>
+      <button mat-button
+              [disabled]="!userForm.valid"
+              type="submit">SIGN IN
+      </button>
     </mat-card-title-group>
   </mat-card-actions>
 </mat-card>
-

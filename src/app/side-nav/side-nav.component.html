@@ -10,7 +10,7 @@
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
     <a mat-button
-       [routerLink]="">{{'campusworks'| uppercase}}</a>
+       [routerLink]="['/']">{{'campusworks'| uppercase}}</a>
     <span class="spacer"></span>
 
     <div [@toolBarAnimate]="displayMode"
@@ -22,7 +22,7 @@
     </div>
 
     <div [@toolBarAnimate]="displayMode">
-      <a [routerLink]="'gallery'"
+      <a [routerLink]="['/sign-in']"
          routerLinkActive="active"
       mat-button>Sign In</a>
       <a mat-button (click)="signOut()"

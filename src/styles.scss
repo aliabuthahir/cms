@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-
 html, body {
   height: 100%;
+  /* Hide vertical scroll-bars in html and body.*/
   overflow-y: hidden;
 }
 
@@ -10,17 +10,21 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.hidden {
+  display: none;
+}
+
 .spacer {
   flex: 1 1 auto;
 }
 
-.container{
- margin: 2% 20% 2% 20%;
+.container {
+  margin: 2% 20% 2% 20%;
   height: 72%;
   background-color: inherit;
 }
 
-.container-toolbar{
+.container-toolbar {
   width: 90%;
   margin: 0px;
   padding: 0px;
@@ -32,3 +36,25 @@ form {
   padding: 1%;
 }
 
+/* variables.scss */
+@import "~@angular/material/theming";
+
+$accentPalette: mat-palette($mat-cyan, A100);
+$hintValuePalette: mat-palette($mat-amber, 500);
+
+.active-list-item {
+  font-weight: bold;
+  color: mat-color($accentPalette) !important; /* Note: You could also use a custom theme */
+}
+
+.hint {
+  color: mat-color($accentPalette) !important; /* Note: You could also use a custom theme */
+}
+.hint-value{
+  margin: 0px 0px 0px 3px;
+  color: mat-color($hintValuePalette) !important; /* Note: You could also use a custom theme */
+}
+
+.inputfield-icon {
+  margin: 2px 8px 2px 2px;
+}

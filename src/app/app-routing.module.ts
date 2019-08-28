@@ -13,7 +13,7 @@ const routes: Routes = [
     canActivate: [AuthenticationGaurdService],
     pathMatch: 'full'
   },
-  {path: 'login',
+  {path: 'sign-in',
     component: LoginComponent},
   {path: 'gallery',
     component: GalleryComponent},
