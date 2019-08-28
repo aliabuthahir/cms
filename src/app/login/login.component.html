@@ -29,12 +29,12 @@
         </button>
         <mat-hint
           align="start"
-          *ngIf="formErrors.email && email">
+          *ngIf="formErrors.email">
           <span class="mat-error">{{ formErrors.email }}</span>
         </mat-hint>
         <mat-hint
           align="end"
-          *ngIf="email">
+          *ngIf="email.value">
           <span class="hint">Total characters typed </span>
           <span class="hint-value">{{email.value.length}}</span>
           <span class="hint"> / 70</span>
@@ -62,7 +62,7 @@
         </button>
         <mat-hint
           align="start"
-          *ngIf="formErrors.password && password">
+          *ngIf="formErrors.password && pwd.value">
           <span class="mat-error">{{ formErrors.password }}</span>
         </mat-hint>
         <mat-hint
