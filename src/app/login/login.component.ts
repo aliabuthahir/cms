@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
     },
     password: {
       required: 'Password is required.',
-      pattern: 'Password must be include at one letter and one number.',
-      minlength: 'Password must be at least 4 characters long.',
+      pattern: 'Password must include atleast one letter and one number.',
+      minlength: 'Password must be atleast 4 characters long.',
       maxlength: 'Password cannot be more than 40 characters long.',
     }
   };

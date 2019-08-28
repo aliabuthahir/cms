@@ -1,8 +1,11 @@
 <mat-card class="container mat-elevation-z0">
   <mat-card-header>
-
-    <mat-card-title (click)="toggleForm()">
-      <h3>New User Signup</h3>
+    <mat-card-title >
+      <button mat-button
+              type="button"
+              (click)="toggleForm()">
+        <h3>Sign Up</h3>
+      </button>
       <h2>SIGN IN</h2>
     </mat-card-title>
   </mat-card-header>
@@ -62,7 +65,7 @@
         </button>
         <mat-hint
           align="start"
-          *ngIf="formErrors.password && pwd.value">
+          *ngIf="formErrors.password">
           <span class="mat-error">{{ formErrors.password }}</span>
         </mat-hint>
         <mat-hint
@@ -73,13 +76,10 @@
           <span class="hint"> / 40</span>
         </mat-hint>
       </mat-form-field>
-      <mat-hint *ngIf="userForm.valid">
-        <span class="hint">Form is valid</span>
-      </mat-hint>
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <mat-card-title-group class="container-toolbar">
+     <mat-card-title-group class="container-toolbar">
       <button mat-button
               [disabled]="!userForm.valid"
               type="submit">SIGN IN
