@@ -6,6 +6,7 @@ import {trigger, state, style, transition, animate, keyframes} from '@angular/an
 import {NavigationStart, Router} from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
 import * as firebase from 'firebase/app';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 const toDesktop = keyframes([
   style({
@@ -126,10 +127,12 @@ export class SideNavComponent implements OnInit, OnDestroy {
   displayMode = '';
 
   subscription: Subscription;
-  user: Observable<firebase.User>;
+  private readonly user: Observable<firebase.User>;
 
   constructor(private breakpointObserver: BreakpointObserver,
+              private afAuth: AngularFireAuth,
               private router: Router) {
+    this.user = afAuth.authState;
     this.subscription = router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         if (!router.navigated) {

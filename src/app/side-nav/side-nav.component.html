@@ -24,7 +24,8 @@
     <div [@toolBarAnimate]="displayMode">
       <a [routerLink]="['/sign-in']"
          routerLinkActive="active"
-      mat-button>Sign In</a>
+         mat-button
+         *ngIf="!(user|async)?.uid">Sign In</a>
       <a mat-button (click)="signOut()"
          *ngIf="(user|async)?.uid">Sign Out</a>
     </div>

@@ -37,8 +37,4 @@ export class ImageService {
       .once('value')
       .then(snap => snap.val());
   }
-
-  currentUser(){
-    return this.uid;
-  }
 }
