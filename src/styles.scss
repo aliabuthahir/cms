@@ -102,6 +102,6 @@ $primaryPalette: mat-palette($mat-purple, 700);
 .avatar-button{
   width: 95%;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
 }
