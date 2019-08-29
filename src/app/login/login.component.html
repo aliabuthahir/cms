@@ -86,16 +86,15 @@
         </mat-hint>
       </mat-form-field>
       <mat-card-actions>
-        <span class="mat-error" *ngIf="isLoginFail">
-          Your Login Attempt Failed! Retry again!</span>
-        <span class="mat-error" *ngIf="isSignUpFail">
-          Your Attempt to sign up a new user Failed! Retry again!</span>
+        <span class="mat-error" *ngIf="errorMsg">
+          {{errorMsg}}
+          </span>
         <mat-card-title-group class="container-toolbar">
           <button mat-button
+                  class="mat-primary"
                   [disabled]="!userForm.valid"
                   type="submit">
-            <span *ngIf="!newUser">SIGN IN</span>
-            <span *ngIf="newUser">SIGN UP</span>
+            <span *ngIf="signUpButtonText">{{signUpButtonText}}</span>
           </button>
         </mat-card-title-group>
       </mat-card-actions>

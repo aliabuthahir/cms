@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   userForm: FormGroup;
   newUser = false; // to toggle login or signup form
   passReset = false;
-  isLoginFail = false;
-  isSignUpFail = false;
+  errorMsg = '';
+  signUpButtonText = 'SIGN IN';
 
   formErrors = {
     email: '',
@@ -53,10 +53,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   signUpForm(): void {
     this.newUser = true;
+    this.signUpButtonText = 'SIGN UP';
   }
 
   signInForm(): void {
     this.newUser = false;
+    this.signUpButtonText = 'SIGN IN';
   }
 
 
@@ -75,24 +77,22 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.router.navigate(['/gallery']);
         })
         .catch(() => {
-          this.isLoginFail = true;
+          this.errorMsg = 'Your Login Attempt Failed! Retry again!';
           setTimeout(() => {
-            this.isLoginFail = false;
+            this.errorMsg = '';
           }, 2000);
         });
     } else if (this.newUser) {
-      console.log('inside sign up....');
       this.authSvc.signUp(userModel)
         .then(() => {
           this.router.navigate(['/signupsuccess']);
         })
         .catch(() => {
-          this.isSignUpFail = true;
+          this.errorMsg = 'Your Attempt to sign up a new user Failed! Retry again!';
           setTimeout(() => {
-            this.isSignUpFail = false;
+            this.errorMsg = '';
           }, 2000);
         });
-      ;
     }
   }
 
