@@ -23,10 +23,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   passReset = false;
   errorMsg = '';
   signUpButtonText = 'SIGN IN';
-  show = false;
   @ViewChild('pwd', {static: true})
   passwordField;
-  showHidePassWordIcon = 'visibility_off';
+  showHidePassWordIcon = 'visibility';
 
   formErrors = {
     email: '',
@@ -139,9 +138,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
     }
   }
+
   showHidePassword() {
-    this.show = !this.show;
-    if (this.show) {
+    if (this.showHidePassWordIcon === 'visibility') {
       this.passwordField.nativeElement.type = 'text';
       this.showHidePassWordIcon = 'visibility_off';
     } else {
