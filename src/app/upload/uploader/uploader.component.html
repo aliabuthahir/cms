@@ -20,9 +20,10 @@
     Choose Files
   </button>
   <mat-hint
-    *ngIf="statusMessage"
     align="end">
-    <span class="dark-text">{{statusMessage}}</span>
+    <span
+          class="hint-value">{{statusMessage}}</span>
+    <span class="hint"> Files chosen.</span>
   </mat-hint>
 </div>
 <!--

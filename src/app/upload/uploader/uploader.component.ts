@@ -15,7 +15,7 @@ export class UploaderComponent implements OnInit {
   files: File[] = [];
   @ViewChild('fileChooser', {static: true})
   fileChooser;
-  statusMessage = '(No files have been chosen)';
+  statusMessage = 'No';
 
 
   constructor() {
@@ -26,8 +26,10 @@ export class UploaderComponent implements OnInit {
 
   handleFiles(event) {
     this.actualFiles = event.target.files;
-    if (this.actualFiles) {
-      this.statusMessage = `( ${this.actualFiles.length} ) files chosen!`;
+    if (this.actualFiles.length > 0) {
+      this.statusMessage = `${this.actualFiles.length}`;
+    } else {
+      this.statusMessage = 'No';
     }
   }
 
