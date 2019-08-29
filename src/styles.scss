@@ -41,6 +41,7 @@ form {
 
 $accentPalette: mat-palette($mat-cyan, A100);
 $hintValuePalette: mat-palette($mat-amber, 500);
+$errorPalette: mat-palette($mat-deep-orange, A100);
 
 .active-list-item {
   font-weight: bold;

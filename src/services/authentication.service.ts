@@ -9,6 +9,7 @@ import {UserModel} from '../models/user.model';
 })
 export class AuthenticationService {
   private readonly user: Observable<firebase.User>;
+
   constructor(private afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
   }
@@ -17,6 +18,15 @@ export class AuthenticationService {
     return this.afAuth
       .auth
       .signInWithEmailAndPassword(user.email, user.passWord);
+  }
+
+  signUp(user: UserModel) {
+    console.log('inside sign up..!!..');
+    console.log(user.email);
+    console.log(user.passWord);
+
+    return this.afAuth
+      .auth.createUserWithEmailAndPassword(user.email, user.passWord);
   }
 
   signOut() {

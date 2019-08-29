@@ -11,7 +11,6 @@ import {ToolbarService} from '../../services/toolbar.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  // private localModel: UserModel;
 
   constructor(private fb: FormBuilder,
               private authSvc: AuthenticationService,
@@ -20,8 +19,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   userForm: FormGroup;
-  newUser = true; // to toggle login or signup form
+  newUser = false; // to toggle login or signup form
   passReset = false;
+  isLoginFail = false;
 
   formErrors = {
     email: '',
@@ -50,9 +50,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.toolBarSvc.enableSignInPage(false);
   }
 
-  toggleForm(): void {
+  signUpForm(): void {
     this.newUser = true;
   }
+
+  signInForm(): void {
+    this.newUser = false;
+  }
+
 
   signup(): void {
     //  this.authSvc.emailSignUp(this.userForm.value);
@@ -62,11 +67,22 @@ export class LoginComponent implements OnInit, OnDestroy {
     const userModel = new UserModel();
     userModel.email = this.userForm.value.email;
     userModel.passWord = this.userForm.value.password;
-    this.authSvc.signIn(userModel)
-      .then(() => {
-        this.router.navigate(['/gallery']);
-      })
-      .catch(() => console.log('login failed'));
+
+    if (!this.newUser) {
+      this.authSvc.signIn(userModel)
+        .then(() => {
+          this.router.navigate(['/gallery']);
+        })
+        .catch(() => {
+          this.isLoginFail = true;
+          setTimeout( ()=>{
+            this.isLoginFail = false;
+          }, 2000);
+        });
+    } else if (this.newUser) {
+      console.log('inside sign up....');
+      this.authSvc.signUp(userModel);
+    }
   }
 
 //  resetPassword() {
