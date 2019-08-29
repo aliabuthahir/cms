@@ -27,14 +27,41 @@
     </div>
 
     <div [@toolBarAnimate]="displayMode">
-      <a mat-button (click)="signOut()"
-         [routerLinkActive]="['mat-accent']"
-         *ngIf="(user|async)?.uid">
-        <mat-icon
-          aria-label="Sign out icon"
-          class="sidenav-icon">power_settings_new
-        </mat-icon>
-        Sign Out</a>
+      <button mat-icon-button
+              *ngIf="(user|async)?.uid"
+              [matMenuTriggerFor]="menu"
+              (menuOpened)="menuState = 'open'"
+              (menuClosed)="menuState = 'closed'"
+              [@menuAnimate]="menuState"
+              aria-label="drop down menu trigger">
+        <mat-icon>arrow_drop_up</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <mat-card class="mat-elevation-z0">
+          <!-- START: Profile Card -->
+          <mat-card-header>
+            <div mat-card-avatar class="img-avatar"></div>
+            <mat-card-title>Shiba Inu</mat-card-title>
+            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+          </mat-card-content>
+          <mat-card-actions>
+            <mat-divider>
+            </mat-divider>
+            <button mat-button
+                    class="mat-primary avatar-button"
+                    (click)="signOut()">
+              <mat-icon
+                aria-label="Sign out icon"
+                class="sidenav-icon">power_settings_new
+              </mat-icon>
+              Sign Out
+            </button>
+          </mat-card-actions>
+          <!-- END: Profile Card -->
+        </mat-card>
+      </mat-menu>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -50,6 +77,30 @@
       [mode]="(isHandset$ | async) ? 'push' : 'side'"
       [opened]="(!(isSignUpPage|async)) && (isHandset$ | async)">
     <mat-nav-list>
+      <mat-card class="mat-elevation-z0">
+        <!-- START: Profile Card -->
+        <mat-card-header>
+          <div mat-card-avatar class="img-avatar"></div>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button
+                  class="mat-primary avatar-button"
+                  (click)="signOut()">
+            <mat-icon
+              aria-label="Sign out icon"
+              class="sidenav-icon">power_settings_new
+            </mat-icon>
+            Sign Out
+          </button>
+        </mat-card-actions>
+        <mat-divider>
+        </mat-divider>
+        <!-- END: Profile Card -->
+      </mat-card>
       <a mat-list-item
          [routerLink]="['/gallery']"
          [routerLinkActive]="['active-list-item']">
@@ -60,20 +111,12 @@
         Gallery</a>
       <a mat-list-item
          [routerLink]="['/upload']"
-         [routerLinkActive]="['active-list-item']">
+         [routerLinkActive]="['mat-primary']">
         <mat-icon
           aria-label="Side nav icon"
           class="sidenav-icon">menu
         </mat-icon>
         Upload</a>
-      <a mat-list-item
-         (click)="signOut()"
-         [routerLinkActive]="['active-list-item']">
-        <mat-icon
-          aria-label="Sign out icon"
-          class="sidenav-icon">power_settings_new
-        </mat-icon>
-        Sign Out</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

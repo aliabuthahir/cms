@@ -6,7 +6,6 @@ import {trigger, state, style, transition, animate, keyframes} from '@angular/an
 import {NavigationStart, Router} from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
 import * as firebase from 'firebase/app';
-import {AngularFireAuth} from '@angular/fire/auth';
 import {ToolbarService} from '../../services/toolbar.service';
 
 const toDesktop = keyframes([
@@ -105,6 +104,57 @@ const toHandSet = keyframes([
       })),
       transition('*=>handset', animate(1000, toDesktop)),
       transition('handset=>desktop', animate(1000, toHandSet)),
+    ]),
+    trigger('menuAnimate', [
+      state('closed', style({
+        transform: 'rotate(0)'
+      })),
+      state('open', style({
+        transform: 'rotate(180deg)'
+      })),
+      transition('*=>open', animate(400, keyframes([
+        style({
+          transform: 'rotate(0)',
+          offset: 0
+        }),
+        style({
+          transform: 'rotate(-36deg)',
+          offset: 0.2
+        }),
+        style({
+          transform: 'rotate(-72deg)',
+          offset: 0.4
+        }),
+        style({
+          transform: 'rotate(-108deg)',
+          offset: 0.6
+        }),
+        style({
+          transform: 'rotate(-144deg)',
+          offset: 0.8
+        })]))),
+      transition('open=>closed', animate(400, keyframes([
+        style({
+          transform: 'rotate(-180deg)',
+          offset: 0
+        }),
+        style({
+          transform: 'rotate(-144deg)',
+          offset: 0.2
+        }),
+        style({
+          transform: 'rotate(-108deg)',
+          offset: 0.4
+        }),
+        style({
+          transform: 'rotate(-72deg)',
+          offset: 0.6
+        }),
+        style({
+          transform: 'rotate(-36deg)',
+          offset: 0.8
+        })
+      ])))
     ])
   ]
 })
@@ -126,6 +176,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   drawer;
   state = 'opened';
   displayMode = '';
+  menuState = '';
 
   subscription: Subscription;
   private user: Observable<firebase.User>;
@@ -156,7 +207,10 @@ export class SideNavComponent implements OnInit, OnDestroy {
   signOut() {
     this.authSvc
       .signOut()
-      .then(onResolve => this.router.navigate(['/signin']));
+      .then(onResolve => {
+        this.drawer.close();
+        this.router.navigate(['/signin']);
+      });
   }
 
   toggleNavBarState() {

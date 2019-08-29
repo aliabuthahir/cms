@@ -14,7 +14,8 @@ import {
   MatIconModule,
   MatListModule,
   MatSnackBarModule,
-  MatCardModule
+  MatCardModule,
+  MatMenuModule
 } from '@angular/material';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatInputModule} from '@angular/material/input';
@@ -60,6 +61,7 @@ import { Pagenotfound404Component } from './pagenotfound404/pagenotfound404.comp
     MatCardModule,
     MatProgressBarModule,
     MatInputModule,
+    MatMenuModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

@@ -41,7 +41,6 @@ form {
 
 $accentPalette: mat-palette($mat-cyan, A100);
 $hintValuePalette: mat-palette($mat-amber, 500);
-$errorPalette: mat-palette($mat-deep-orange, A100);
 
 .active-list-item {
   font-weight: bold;
@@ -51,11 +50,26 @@ $errorPalette: mat-palette($mat-deep-orange, A100);
 .hint {
   color: mat-color($accentPalette) !important; /* Note: You could also use a custom theme */
 }
-.hint-value{
+
+.hint-value {
   margin: 0px 0px 0px 3px;
   color: mat-color($hintValuePalette) !important; /* Note: You could also use a custom theme */
 }
 
 .inputfield-icon {
   margin: 2px 8px 2px 2px;
+}
+
+
+
+.img-avatar {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.avatar-button{
+  width: 95%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }

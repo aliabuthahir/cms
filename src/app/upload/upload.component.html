@@ -1,6 +1,6 @@
 <mat-card class="container mat-elevation-z0" cdkTrapFocus>
   <mat-card-header>
-    <mat-card-title><h2>Upload New Images</h2></mat-card-title>
+    <mat-card-title><h2>Upload Images</h2></mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <input type="files"
@@ -15,7 +15,9 @@
       Complete
     </div>
     <button mat-button
-            (click)="uploadFiles()">UPLOAD
+            (click)="uploadFiles()">
+      <mat-icon>file_upload</mat-icon>
+      UPLOAD
     </button>
   </mat-card-actions>
 </mat-card>
