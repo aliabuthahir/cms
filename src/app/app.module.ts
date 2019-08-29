@@ -35,6 +35,9 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import { Pagenotfound404Component } from './pagenotfound404/pagenotfound404.component';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import { DropDirective } from '../directives/drop.directive';
+import { UploadTaskComponent } from './upload/upload-task/upload-task.component';
+import { UploaderComponent } from './upload/uploader/uploader.component';
+import { FileuploaderSideNavComponent } from './upload/fileuploader-side-nav/fileuploader-side-nav.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { DropDirective } from '../directives/drop.directive';
     LoginComponent,
     UploadComponent,
     Pagenotfound404Component,
-    DropDirective
+    DropDirective,
+    UploadTaskComponent,
+    UploaderComponent,
+    FileuploaderSideNavComponent
   ],
   imports: [
     BrowserModule,

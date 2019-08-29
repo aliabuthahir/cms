@@ -39,10 +39,11 @@ form {
 /* variables.scss */
 @import "~@angular/material/theming";
 
+$primaryPalette: mat-palette($mat-purple, 700);
 $accentPalette: mat-palette($mat-cyan, A100);
 $hintValuePalette: mat-palette($mat-amber, 500);
-$primaryPalette: mat-palette($mat-purple, 700);
-
+$dropZonePalette: mat-palette($mat-gray, 700);
+$darkTextPalette: mat-palette($mat-gray, 900);
 
 .active-list-item {
   font-weight: bold;
@@ -62,6 +63,13 @@ $primaryPalette: mat-palette($mat-purple, 700);
   color: mat-color($primaryPalette) !important; /* Note: You could also use a custom theme */
 }
 
+.dark-text{
+  font-weight: bold;
+  color: mat-color($darkTextPalette) !important; /* Note: You could also use a custom theme */
+}
+
+
+
 .inputfield-icon {
   margin: 2px 8px 2px 2px;
 }
@@ -72,27 +80,30 @@ $primaryPalette: mat-palette($mat-purple, 700);
   justify-content: center;
   flex-direction: column;
   height: 200px;
-  border: 2px dashed #f16624;
+  border: 2px dashed mat-color($hintValuePalette);
   border-radius: 5px;
-  background: white;
   margin: 10px 0;
+  color: #eeeeee;
+  background: mat-color($dropZonePalette) !important; /* Note: You could also use a custom theme */
 
   &.hovering {
     border: 2px solid #f16624;
     color: #dadada !important;
+
+    .file-label {
+      font-size: 1.2em;
+    }
   }
 
 .file-input{
   margin: 30%;
   padding: 2%;
 }
-
+/*
   progress::-webkit-progress-value {
     transition: width 0.1s ease;
-  }
+  }*/
 }
-
-
 
 .img-avatar {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');

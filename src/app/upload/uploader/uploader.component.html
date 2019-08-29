@@ -1,0 +1,34 @@
+<div class="dropzone"
+     dropzone
+     (hovered)="toggleHover($event)"
+     (dropped)="onDrop($event)"
+     [class.hovering]="isHovering">
+  <h3>Drop Zone</h3>
+  <p class="dark-text">
+    Drag and drop files into this box !
+  </p>
+  <input type="file"
+         (change)="handleFiles($event)"
+         #fileChooser
+         class="hidden"
+         accept=".png,.jpg"
+         multiple>
+  <button (click)="fileChooser.click()"
+          mat-button
+          class="hint-value">
+    <mat-icon>attach_file</mat-icon>
+    Choose Files
+  </button>
+  <mat-hint
+    *ngIf="statusMessage"
+    align="end">
+    <span class="dark-text">{{statusMessage}}</span>
+  </mat-hint>
+</div>
+<!--
+<h3>Uploads</h3>
+
+<div *ngFor="let file of files">
+  <upload-task [file]="file"></upload-task>
+</div>
+-->
