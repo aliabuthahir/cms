@@ -16,7 +16,7 @@
         </button>
       </mat-card-title-group>
       <h5 class="hint"
-        *ngIf="newUser">Register New User
+          *ngIf="newUser">Register New User
       </h5>
     </mat-card-title>
   </mat-card-header>
@@ -34,12 +34,14 @@
                #email
                maxlength="70"
                required>
-        <!--    <button mat-icon-button *ngIf="email.value"
-                    matSuffix
-                    aria-label="Clear"
-                    (click)="email.value=''">
-              <mat-icon>close</mat-icon>
-            </button> -->
+        <button *ngIf="email.value"
+                type="button"
+                mat-icon-button
+                matSuffix
+                aria-label="Clear"
+                (click)="email.value=''">
+          <mat-icon>close</mat-icon>
+        </button>
         <mat-hint
           align="start"
           *ngIf="formErrors.email">
@@ -66,12 +68,22 @@
                #pwd
                required
                maxlength="40">
-        <!--        <button mat-icon-button *ngIf="pwd.value"
-                        matSuffix
-                        aria-label="Clear"
-                        (click)="pwd.value=''">
-                  <mat-icon>close</mat-icon>
-                </button> -->
+        <button *ngIf="pwd.value"
+                type="button"
+                mat-icon-button
+                matSuffix
+                aria-label="Clear"
+                (click)="pwd.value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button *ngIf="pwd.value"
+                type="button"
+                mat-icon-button
+                matSuffix
+                aria-label="show hide password"
+                (click)="showHidePassword()">
+          <mat-icon>{{showHidePassWordIcon}}</mat-icon>
+        </button>
         <mat-hint
           align="start"
           *ngIf="formErrors.password">

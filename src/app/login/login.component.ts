@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   passReset = false;
   errorMsg = '';
   signUpButtonText = 'SIGN IN';
+  show = false;
+  @ViewChild('pwd', {static: true})
+  passwordField;
+  showHidePassWordIcon = 'visibility_off';
 
   formErrors = {
     email: '',
@@ -59,11 +63,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   signInForm(): void {
     this.newUser = false;
     this.signUpButtonText = 'SIGN IN';
-  }
-
-
-  signup(): void {
-    //  this.authSvc.emailSignUp(this.userForm.value);
   }
 
   public login(): void {
@@ -138,6 +137,16 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.formErrors[field] += messages[key] + ' ';
         }
       }
+    }
+  }
+  showHidePassword() {
+    this.show = !this.show;
+    if (this.show) {
+      this.passwordField.nativeElement.type = 'text';
+      this.showHidePassWordIcon = 'visibility_off';
+    } else {
+      this.passwordField.nativeElement.type = 'password';
+      this.showHidePassWordIcon = 'visibility';
     }
   }
 }
