@@ -16,19 +16,15 @@
     >{{'campusworks'| uppercase}}</a>
     <span class="spacer"></span>
 
-    <div [@toolBarAnimate]="displayMode"
-         *ngIf="(user|async)?.uid">
+    <div *ngIf="(!(isHandset$ | async)) && (user|async)?.uid"
+      [@toolBarAnimate]="displayMode">
       <a mat-button
          [routerLink]="['/gallery']"
          [routerLinkActive]="['mat-accent']">Gallery</a>
       <a mat-button
          [routerLink]="['/upload']"
          [routerLinkActive]="['mat-accent']">Upload</a>
-    </div>
-
-    <div [@toolBarAnimate]="displayMode">
       <button mat-icon-button
-              *ngIf="(user|async)?.uid"
               [matMenuTriggerFor]="menu"
               (menuOpened)="menuState = 'open'"
               (menuClosed)="menuState = 'closed'"
@@ -111,7 +107,7 @@
         Gallery</a>
       <a mat-list-item
          [routerLink]="['/upload']"
-         [routerLinkActive]="['mat-primary']">
+         [routerLinkActive]="['active-list-item']">
         <mat-icon
           aria-label="Side nav icon"
           class="sidenav-icon">menu
