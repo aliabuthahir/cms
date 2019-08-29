@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, HostListener} from '@angular/core';
 import {MatSnackBar} from '@angular/material';
 
 @Component({

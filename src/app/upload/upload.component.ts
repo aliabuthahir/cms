@@ -11,6 +11,8 @@ import * as _ from 'lodash';
 export class UploadComponent implements OnInit {
   files: FileList;
   upload: UploadModel;
+// State for dropzone CSS toggling
+  isHovering: boolean;
 
   constructor(private uploadSvc: UploadService) {
   }
@@ -30,5 +32,9 @@ export class UploadComponent implements OnInit {
       this.upload = new UploadModel(filesToUpload[Idx]);
       this.uploadSvc.uploadFile(this.upload);
     });
+  }
+
+  toggleHover(event: boolean) {
+    this.isHovering = event;
   }
 }

@@ -41,6 +41,8 @@ form {
 
 $accentPalette: mat-palette($mat-cyan, A100);
 $hintValuePalette: mat-palette($mat-amber, 500);
+$primaryPalette: mat-palette($mat-purple, 700);
+
 
 .active-list-item {
   font-weight: bold;
@@ -56,8 +58,38 @@ $hintValuePalette: mat-palette($mat-amber, 500);
   color: mat-color($hintValuePalette) !important; /* Note: You could also use a custom theme */
 }
 
+.content {
+  color: mat-color($primaryPalette) !important; /* Note: You could also use a custom theme */
+}
+
 .inputfield-icon {
   margin: 2px 8px 2px 2px;
+}
+
+.dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 200px;
+  border: 2px dashed #f16624;
+  border-radius: 5px;
+  background: white;
+  margin: 10px 0;
+
+  &.hovering {
+    border: 2px solid #f16624;
+    color: #dadada !important;
+  }
+
+.file-input{
+  margin: 30%;
+  padding: 2%;
+}
+
+  progress::-webkit-progress-value {
+    transition: width 0.1s ease;
+  }
 }
 
 

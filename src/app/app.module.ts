@@ -33,6 +33,8 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from '../environments/environment';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import { Pagenotfound404Component } from './pagenotfound404/pagenotfound404.component';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import { DropDirective } from '../directives/drop.directive';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { Pagenotfound404Component } from './pagenotfound404/pagenotfound404.comp
     ImageDetailComponent,
     LoginComponent,
     UploadComponent,
-    Pagenotfound404Component
+    Pagenotfound404Component,
+    DropDirective
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ import { Pagenotfound404Component } from './pagenotfound404/pagenotfound404.comp
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFirestoreModule,
     AngularFireStorageModule
   ],
    providers: [AuthenticationGaurdService,

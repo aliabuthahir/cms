@@ -3,17 +3,19 @@
     <mat-card-title>
       <mat-card-title-group class="container-toolbar">
         <button mat-button
+                class="mat-primary"
                 type="button"
                 (click)="signInForm()">
-          <h2>SIGN IN</h2>
+          <p>Sign In</p>
         </button>
         <button mat-button
+                class="mat-primary"
                 type="button"
                 (click)="signUpForm()">
-          <h3>Sign Up</h3>
+          <h2>Sign Up</h2>
         </button>
       </mat-card-title-group>
-      <h5 class="mat-primary"
+      <h5 class="hint"
         *ngIf="newUser">Register New User
       </h5>
     </mat-card-title>
