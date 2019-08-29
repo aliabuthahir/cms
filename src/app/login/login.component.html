@@ -13,7 +13,9 @@
           <h3>Sign Up</h3>
         </button>
       </mat-card-title-group>
-      <h5 *ngIf="newUser">Register New User</h5>
+      <h5 class="hint"
+        *ngIf="newUser">Register New User
+      </h5>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
@@ -82,9 +84,10 @@
         </mat-hint>
       </mat-form-field>
       <mat-card-actions>
-        <span class="hint" *ngIf="isLoginFail">
+        <span class="mat-error" *ngIf="isLoginFail">
           Your Login Attempt Failed! Retry again!</span>
-
+        <span class="mat-error" *ngIf="isSignUpFail">
+          Your Login Attempt Failed! Retry again!</span>
         <mat-card-title-group class="container-toolbar">
           <button mat-button
                   [disabled]="!userForm.valid"

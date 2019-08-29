@@ -21,10 +21,6 @@ export class AuthenticationService {
   }
 
   signUp(user: UserModel) {
-    console.log('inside sign up..!!..');
-    console.log(user.email);
-    console.log(user.passWord);
-
     return this.afAuth
       .auth.createUserWithEmailAndPassword(user.email, user.passWord);
   }

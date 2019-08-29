@@ -5,6 +5,7 @@ import {AuthenticationGaurdService} from '../services/authenticationGaurd.servic
 import {UploadComponent} from './upload/upload.component';
 import {ImageDetailComponent} from './image-detail/image-detail.component';
 import {LoginComponent} from './login/login.component';
+import {Pagenotfound404Component} from "./pagenotfound404/pagenotfound404.component";
 
 const routes: Routes = [
   {
@@ -22,7 +23,9 @@ const routes: Routes = [
     canActivate: [AuthenticationGaurdService]},
   {path: 'image/:id',
     component: ImageDetailComponent,
-    canActivate: [AuthenticationGaurdService]}
+    canActivate: [AuthenticationGaurdService]},
+  {path: '**',
+    component: Pagenotfound404Component}
 ];
 
 @NgModule({

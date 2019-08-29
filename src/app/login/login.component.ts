@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   newUser = false; // to toggle login or signup form
   passReset = false;
   isLoginFail = false;
+  isSignUpFail = false;
 
   formErrors = {
     email: '',
@@ -75,13 +76,23 @@ export class LoginComponent implements OnInit, OnDestroy {
         })
         .catch(() => {
           this.isLoginFail = true;
-          setTimeout( ()=>{
+          setTimeout(() => {
             this.isLoginFail = false;
           }, 2000);
         });
     } else if (this.newUser) {
       console.log('inside sign up....');
-      this.authSvc.signUp(userModel);
+      this.authSvc.signUp(userModel)
+        .then(() => {
+          this.router.navigate(['/signupsuccess']);
+        })
+        .catch(() => {
+          this.isSignUpFail = true;
+          setTimeout(() => {
+            this.isSignUpFail = false;
+          }, 2000);
+        });
+      ;
     }
   }
 
