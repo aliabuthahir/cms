@@ -7,6 +7,10 @@
   max-width: 300px;
 }
 
+.right-sidenav {
+  width: 300px;
+}
+
 .sidenav .mat-toolbar {
   background: inherit;
 }

@@ -17,7 +17,7 @@
     <span class="spacer"></span>
 
     <div *ngIf="(!(isHandset$ | async)) && (user|async)?.uid"
-      [@toolBarAnimate]="displayMode">
+         [@toolBarAnimate]="displayMode">
       <a mat-button
          [routerLink]="['/gallery']"
          [routerLinkActive]="['mat-accent']">Gallery</a>
@@ -120,6 +120,24 @@
         Upload</a>
     </mat-nav-list>
   </mat-sidenav>
+  <!-- START: Right side side-nav -->
+  <mat-sidenav #rightDrawer
+               class="right-sidenav"
+               position="end"
+               [fixedInViewport]=false
+               [autoFocus]=true
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="(isRightSideNavOpen | async)">
+    <mat-toolbar>Right Side Tool Bar</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <!-- END: Right side side-nav -->
+
   <mat-sidenav-content>
     <!-- Add Content Here -->
     <router-outlet>

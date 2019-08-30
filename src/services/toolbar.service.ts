@@ -12,6 +12,8 @@ export class ToolbarService {
    separate from the backend. */
 
   private signInPageObserver: Subject<boolean> = new Subject<boolean>();
+  private rightSideNavObserver: Subject<boolean> = new Subject<boolean>();
+  private isRightsideNavOpen = false;
 
   constructor() {
   }
@@ -22,5 +24,14 @@ export class ToolbarService {
 
   getObserver() {
     return this.signInPageObserver;
+  }
+
+  getRightNavObserver() {
+    return this.rightSideNavObserver;
+  }
+
+  toggleRightSideNav() {
+    this.isRightsideNavOpen = !this.isRightsideNavOpen;
+    this.rightSideNavObserver.next(this.isRightsideNavOpen);
   }
 }

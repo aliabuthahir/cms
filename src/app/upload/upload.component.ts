@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UploadModel} from '../../models/upload.model';
 import {UploadService} from '../../services/upload.service';
 import * as _ from 'lodash';
+import {ToolbarService} from '../../services/toolbar.service';
 
 @Component({
   selector: 'app-upload',
@@ -14,7 +15,8 @@ export class UploadComponent implements OnInit {
 // State for dropzone CSS toggling
   isHovering: boolean;
 
-  constructor(private uploadSvc: UploadService) {
+  constructor(private uploadSvc: UploadService,
+              private toolBarSvc: ToolbarService) {
   }
 
   ngOnInit() {
@@ -36,5 +38,9 @@ export class UploadComponent implements OnInit {
 
   toggleHover(event: boolean) {
     this.isHovering = event;
+  }
+
+  toggleRightSideNav(){
+    this.toolBarSvc.toggleRightSideNav();
   }
 }

@@ -174,6 +174,9 @@ export class SideNavComponent implements OnInit, OnDestroy {
   description = 'test desccription';
   @ViewChild('drawer', {static: true})
   drawer;
+  @ViewChild('rightDrawer', {static: true})
+  rightSideDrawer;
+
   state = 'opened';
   displayMode = '';
   menuState = '';
@@ -181,6 +184,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   private user: Observable<firebase.User>;
   private isSignUpPage: Subject<boolean>;
+  private isRightSideNavOpen: Subject<boolean>;
 
   constructor(private breakpointObserver: BreakpointObserver,
               private authSvc: AuthenticationService,
@@ -198,6 +202,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isSignUpPage = this.toolBarSvc.getObserver();
+    this.isRightSideNavOpen = this.toolBarSvc.getRightNavObserver();
   }
 
   ngOnDestroy() {

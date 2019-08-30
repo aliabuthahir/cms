@@ -63,11 +63,10 @@ $darkTextPalette: mat-palette($mat-gray, 900);
   color: mat-color($primaryPalette) !important; /* Note: You could also use a custom theme */
 }
 
-.dark-text{
+.dark-text {
   font-weight: bold;
   color: mat-color($darkTextPalette) !important; /* Note: You could also use a custom theme */
 }
-
 
 
 .inputfield-icon {
@@ -95,14 +94,15 @@ $darkTextPalette: mat-palette($mat-gray, 900);
     }
   }
 
-.file-input{
-  margin: 30%;
-  padding: 2%;
-}
-/*
-  progress::-webkit-progress-value {
-    transition: width 0.1s ease;
-  }*/
+  .file-input {
+    margin: 30%;
+    padding: 2%;
+  }
+
+  /*
+    progress::-webkit-progress-value {
+      transition: width 0.1s ease;
+    }*/
 }
 
 .img-avatar {
@@ -110,9 +110,13 @@ $darkTextPalette: mat-palette($mat-gray, 900);
   background-size: cover;
 }
 
-.avatar-button{
+.avatar-button {
   width: 95%;
   height: 100%;
   overflow-x: hidden !important;
   overflow-y: hidden !important;
+}
+
+.bottom-spacer {
+  margin-bottom: 10px;
 }

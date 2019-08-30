@@ -3,11 +3,16 @@
     <mat-card-title>
       <p class="hint">Upload Images
       </p>
+      <button mat-button
+              (click)="toggleRightSideNav()"
+              class="mat-primary">
+        <mat-icon>settings</mat-icon>
+      </button>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-  <app-uploader>
-  </app-uploader>
+    <app-uploader>
+    </app-uploader>
   </mat-card-content>
   <mat-card-actions>
     <div *ngIf="upload">
@@ -17,7 +22,7 @@
       Complete
     </div>
     <button *ngIf="files"
-      mat-button
+            mat-button
             class="mat-primary avatar-button"
             (click)="uploadFiles()">
       <mat-icon>file_upload</mat-icon>
