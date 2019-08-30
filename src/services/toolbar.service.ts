@@ -12,8 +12,7 @@ export class ToolbarService {
    separate from the backend. */
 
   private signInPageObserver: Subject<boolean> = new Subject<boolean>();
-  private rightSideNavObserver: Subject<boolean> = new Subject<boolean>();
-  private isRightsideNavOpen = false;
+  private rightSideNavObserver: Subject<any> = new Subject<any>();
 
   constructor() {
   }
@@ -31,7 +30,10 @@ export class ToolbarService {
   }
 
   toggleRightSideNav() {
-    this.isRightsideNavOpen = !this.isRightsideNavOpen;
-    this.rightSideNavObserver.next(this.isRightsideNavOpen);
+    this.rightSideNavObserver.next(true);
+  }
+
+  openFilesToUpload(files: File[]) {
+    this.rightSideNavObserver.next(files);
   }
 }

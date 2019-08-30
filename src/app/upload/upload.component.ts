@@ -30,7 +30,7 @@ export class UploadComponent implements OnInit {
     const filesToUpload = this.files;
     const filesIdx = _.range(filesToUpload.length);
     _.each(filesIdx, (Idx) => {
-     // console.log(filesToUpload[Idx]);
+      // console.log(filesToUpload[Idx]);
       this.upload = new UploadModel(filesToUpload[Idx]);
       this.uploadSvc.uploadFile(this.upload);
     });
@@ -40,7 +40,7 @@ export class UploadComponent implements OnInit {
     this.isHovering = event;
   }
 
-  toggleRightSideNav(){
+  toggleRightSideNav() {
     this.toolBarSvc.toggleRightSideNav();
   }
 }

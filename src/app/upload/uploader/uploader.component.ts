@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import {ToolbarService} from '../../../services/toolbar.service';
 
 @Component({
   selector: 'app-uploader',
@@ -9,25 +10,28 @@ export class UploaderComponent implements OnInit {
 
   isHovering: boolean;
 
-  actualFiles: FileList;
-
-
-  files: File[] = [];
   @ViewChild('fileChooser', {static: true})
   fileChooser;
   statusMessage = 'No';
 
 
-  constructor() {
+  constructor(private toolBarSvc: ToolbarService) {
   }
 
   ngOnInit() {
   }
 
   handleFiles(event) {
-    this.actualFiles = event.target.files;
-    if (this.actualFiles.length > 0) {
-      this.statusMessage = `${this.actualFiles.length}`;
+    const files: File[] = [];
+    const filesSelected = event.target.files;
+
+    for (let i = 0; i < filesSelected.length; i++) {
+      files.push(filesSelected.item(i));
+    }
+
+    if (files.length > 0) {
+      this.statusMessage = `${files.length}`;
+      this.toolBarSvc.openFilesToUpload(files);
     } else {
       this.statusMessage = 'No';
     }
@@ -35,11 +39,5 @@ export class UploaderComponent implements OnInit {
 
   toggleHover(event: boolean) {
     this.isHovering = event;
-  }
-
-  onDrop(files: FileList) {
-    for (let i = 0; i < files.length; i++) {
-      this.files.push(files.item(i));
-    }
   }
 }

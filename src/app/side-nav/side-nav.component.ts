@@ -180,11 +180,12 @@ export class SideNavComponent implements OnInit, OnDestroy {
   state = 'opened';
   displayMode = '';
   menuState = '';
+  filesToUpload: File[];
 
   subscription: Subscription;
   private user: Observable<firebase.User>;
   private isSignUpPage: Subject<boolean>;
-  private isRightSideNavOpen: Subject<boolean>;
+  private isRightSideNavOpen: Subscription;
 
   constructor(private breakpointObserver: BreakpointObserver,
               private authSvc: AuthenticationService,
@@ -202,11 +203,24 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isSignUpPage = this.toolBarSvc.getObserver();
-    this.isRightSideNavOpen = this.toolBarSvc.getRightNavObserver();
+    this.isRightSideNavOpen = this.toolBarSvc
+      .getRightNavObserver()
+      .subscribe((value) => {
+        if (typeof value === 'boolean') {
+          this.rightSideDrawer.toggle();
+        } else {
+          this.filesToUpload = value;
+          this.rightSideDrawer.open();
+        }
+      });
+    // this.rightSideDrawer.openedChange.subscribe(() => {
+    // this.toolBarSvc.toggleRightSideNav();
+    // });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.isRightSideNavOpen.unsubscribe();
   }
 
   signOut() {

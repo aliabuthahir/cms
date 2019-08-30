@@ -127,13 +127,20 @@
                [fixedInViewport]=false
                [autoFocus]=true
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-               [mode]="(isHandset$ | async) ? 'over' : 'side'"
-               [opened]="(isRightSideNavOpen | async)">
-    <mat-toolbar>Right Side Tool Bar</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+               [mode]="'over'"
+               [opened]=false>
+    <mat-toolbar>
+      <button mat-icon-button
+              (click)="toolBarSvc.toggleRightSideNav()"
+              class="mat-primary">
+        <mat-icon>close</mat-icon>
+      </button>
+      Files to Upload
+    </mat-toolbar>
+    <mat-nav-list *ngFor="let file of filesToUpload">
+      <a mat-list-item>
+        <app-upload-task [file]="file"></app-upload-task>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <!-- END: Right side side-nav -->
