@@ -1,0 +1,66 @@
+* {
+  transition: .33s ease all;
+  box-sizing: border-box;
+}
+
+div.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+div.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+div.text-container {
+  margin: 0;
+  padding: 0;
+  justify-content: flex-start;
+}
+
+p {
+  text-overflow: ellipsis;
+  margin: 5px;
+}
+
+.flex-1{
+  flex: 1;
+}
+
+.flex-2{
+  flex: 2;
+}
+
+@media screen and (min-width: 768px) {
+  div.container {
+    flex-direction: row;
+    width: 100%;
+  }
+}
+
+@import "~@angular/material/theming";
+
+$accentPalette: mat-palette($mat-cyan, A100);
+$hintValuePalette: mat-palette($mat-amber, 500);
+$dropZonePalette: mat-palette($mat-gray, 700);
+
+.hint {
+  color: mat-color($accentPalette) !important;
+  text-shadow: 2px 2px mat-color($dropZonePalette);
+}
+
+.hint-value {
+  color: mat-color($hintValuePalette) !important;
+}
+
+

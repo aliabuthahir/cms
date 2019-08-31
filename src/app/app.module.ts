@@ -38,6 +38,13 @@ import { DropDirective } from '../directives/drop.directive';
 import { UploadTaskComponent } from './upload/upload-task/upload-task.component';
 import { UploaderComponent } from './upload/uploader/uploader.component';
 import { FileuploaderSideNavComponent } from './upload/fileuploader-side-nav/fileuploader-side-nav.component';
+import { FileSizePipe } from '../pipes/file-size.pipe';
+import { TextFirstpartPipe } from '../pipes/text-firstpart.pipe';
+import { TextLastpartPipe } from '../pipes/text-lastpart.pipe';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { InfoCardComponent } from './common/info-card/info-card.component';
+import { CardComponent } from './common/card/card.component';
+import { InfoTitleComponent } from './common/info-title/info-title.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +58,13 @@ import { FileuploaderSideNavComponent } from './upload/fileuploader-side-nav/fil
     DropDirective,
     UploadTaskComponent,
     UploaderComponent,
-    FileuploaderSideNavComponent
+    FileuploaderSideNavComponent,
+    FileSizePipe,
+    TextFirstpartPipe,
+    TextLastpartPipe,
+    InfoCardComponent,
+    CardComponent,
+    InfoTitleComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +84,7 @@ import { FileuploaderSideNavComponent } from './upload/fileuploader-side-nav/fil
     MatProgressBarModule,
     MatInputModule,
     MatMenuModule,
+    MatTooltipModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
