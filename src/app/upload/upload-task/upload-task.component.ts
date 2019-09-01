@@ -1,4 +1,3 @@
-
 import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {AngularFirestore} from '@angular/fire/firestore';
@@ -33,6 +32,9 @@ export class UploadTaskComponent implements OnInit {
   private fileName = 'Not Available';
   private fileType = 'Not Available';
   private fileSize = 'Not Available';
+  private play_pause_icon = 'cloud_upload';
+
+  private isFileUploadStarted = 'not started';
 
   constructor(private storage: AngularFireStorage, private db: AngularFirestore) {
   }
@@ -50,8 +52,12 @@ export class UploadTaskComponent implements OnInit {
       this.fileType = 'Not Available';
     }
     this.fileSize = this.getFileSize().toLocaleUpperCase();
-    this.startUpload();
   }
+
+  ngAfterViewInit(){
+    this.isUploadCompleted.next(false);
+  }
+
 
   ngDoCheck(): void {
     this.listenForProgressChange();
@@ -61,7 +67,7 @@ export class UploadTaskComponent implements OnInit {
     const path = `/uploads`;
     const ref = this.storage.ref(path);
     this.task = this.storage.upload(path, this.file);
-    this.percentage =this.task.percentageChanges();
+    this.percentage = this.task.percentageChanges();
     this.snapshot = this.task.snapshotChanges().pipe(
       tap(),
       finalize(async () => {
@@ -112,5 +118,22 @@ export class UploadTaskComponent implements OnInit {
     }
 
     return bytes.toFixed(+precision) + ' ' + this.units[unit];
+  }
+
+  handleFileUpload() {
+    if (this.isFileUploadStarted === 'not started') {
+      this.isFileUploadStarted = 'started';
+      this.play_pause_icon='paused'
+      this.startUpload();
+    } else if(this.isFileUploadStarted === 'started'){
+      this.isFileUploadStarted = 'paused';
+      this.play_pause_icon='play_arrow';
+      this.task.pause();
+    } else if(this.isFileUploadStarted === 'paused'){
+      this.isFileUploadStarted = 'started';
+      this.play_pause_icon='pause';
+      this.task.resume();
+    }
+    console.log(this.isFileUploadStarted);
   }
 }
