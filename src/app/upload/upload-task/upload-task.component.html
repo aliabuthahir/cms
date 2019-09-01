@@ -1,6 +1,9 @@
-<mat-card class="mat-elevation-z5 task">
+<mat-card class="mat-elevation-z1 card">
   <mat-card-header>
     <mat-card-title>
+      <span *ngIf="(isUploadCompleted|async)">
+        <mat-icon class="hint">cloud_done</mat-icon>
+      </span>
       <span class="hint-value">
         <small>{{fileName}}</small>
       </span>
@@ -16,13 +19,12 @@
           <!-- START: File Info Card -->
           <mat-card-header>
             <app-info-title [icon]="['info_circle']" [title]="['File Info']"></app-info-title>
-            <span class="white task info-card"></span>
           </mat-card-header>
           <mat-card-content>
             <mat-divider></mat-divider>
-            <app-info-card [title] = "['Name']" [msg] = "[fileName]"></app-info-card>
-            <app-info-card [title] = "['Type']" [msg] = "[fileType]"></app-info-card>
-            <app-info-card [title] = "['Size']" [msg] = "[fileSize]"></app-info-card>
+            <app-info-card [title]="['Name']" [msg]="[fileName]"></app-info-card>
+            <app-info-card [title]="['Type']" [msg]="[fileType]"></app-info-card>
+            <app-info-card [title]="['Size']" [msg]="[fileSize]"></app-info-card>
           </mat-card-content>
           <!-- END: File Info Card -->
         </mat-card>
@@ -31,12 +33,16 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
+    <span class="hint">
+  <mat-icon class="white">info</mat-icon>
+      {{isFileUploadStarted}}
+</span>
+
     <mat-progress-bar
       mode="determinate"
       [value]="percentage | async"
       #progress>
     </mat-progress-bar>
-
 
     <div *ngIf="!(isUploadCompleted | async)">
         <span>
@@ -44,7 +50,7 @@
                 <mat-icon>{{play_pause_icon}}</mat-icon>
         </a>
         <button mat-iocn-button (click)="task.cancel()" [disabled]="(isUploadCompleted | async)">
-          <mat-icon>close</mat-icon>
+          <mat-icon>cancel</mat-icon>
         </button>
         </span>
     </div>
@@ -56,7 +62,9 @@
            target="_blank"
            rel="noopener"
            mat-button
-           class="white"><mat-icon>visibility</mat-icon></a>
+           class="white">
+          <mat-icon>visibility</mat-icon>
+        </a>
       </div>
 
       <div *ngIf="percentage | async as pct" class="task">

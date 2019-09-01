@@ -186,6 +186,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
   private user: Observable<firebase.User>;
   private isSignUpPage: Subject<boolean>;
   private isRightSideNavOpen: Subscription;
+  private isAutoUploadSubscription: Subscription;
+  private isAutoUploadEnabled = 'false';
 
   constructor(private breakpointObserver: BreakpointObserver,
               private authSvc: AuthenticationService,
@@ -210,17 +212,27 @@ export class SideNavComponent implements OnInit, OnDestroy {
           this.rightSideDrawer.toggle();
         } else {
           this.filesToUpload = value;
+          console.log("filesToIUpload"+ this.filesToUpload.length);
           this.rightSideDrawer.open();
         }
       });
     // this.rightSideDrawer.openedChange.subscribe(() => {
     // this.toolBarSvc.toggleRightSideNav();
     // });
+
+    this.isAutoUploadSubscription = this
+      .toolBarSvc
+      .getAutoUploadFilesObserver()
+      .subscribe(isAutoUploadEnabled => {
+        this.isAutoUploadEnabled = isAutoUploadEnabled ? 'true' : 'false';
+      });
+
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.isRightSideNavOpen.unsubscribe();
+    this.isAutoUploadSubscription.unsubscribe();
   }
 
   signOut() {

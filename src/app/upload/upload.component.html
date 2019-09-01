@@ -15,19 +15,10 @@
     </app-uploader>
   </mat-card-content>
   <mat-card-actions>
-    <div *ngIf="upload">
-      Progress:
-      <mat-progress-bar mode="determinate" value="{{upload?.progress}}">
-      </mat-progress-bar>
-      Complete
-    </div>
-    <button *ngIf="files"
-            mat-button
-            class="mat-primary avatar-button"
-            (click)="uploadFiles()">
-      <mat-icon>file_upload</mat-icon>
-      UPLOAD
-    </button>
+    <mat-checkbox #autoUpload
+                  checked=true
+                  (click)="enableAutoUpload()">Auto Upload Files
+    </mat-checkbox>
   </mat-card-actions>
 </mat-card>
 

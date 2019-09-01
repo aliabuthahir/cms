@@ -13,6 +13,7 @@ export class ToolbarService {
 
   private signInPageObserver: Subject<boolean> = new Subject<boolean>();
   private rightSideNavObserver: Subject<any> = new Subject<any>();
+  private autoUploadFilesObserver: Subject<boolean> = new Subject<boolean>();
 
   constructor() {
   }
@@ -27,6 +28,10 @@ export class ToolbarService {
 
   getRightNavObserver() {
     return this.rightSideNavObserver;
+  }
+
+  getAutoUploadFilesObserver(){
+    return this.autoUploadFilesObserver;
   }
 
   toggleRightSideNav() {

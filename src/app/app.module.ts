@@ -44,6 +44,7 @@ import { ProfileCardComponent } from './common/profile-card/profile-card.compone
 import {TextFirstpartPipe} from '../pipes/text-firstpart.pipe';
 import {FileSizePipe} from '../pipes/file-size.pipe';
 import {TextLastpartPipe} from '../pipes/text-lastpart.pipe';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import {TextLastpartPipe} from '../pipes/text-lastpart.pipe';
     MatInputModule,
     MatMenuModule,
     MatTooltipModule,
+    MatCheckboxModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

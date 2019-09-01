@@ -139,7 +139,7 @@
     </mat-toolbar>
     <div *ngFor="let file of filesToUpload">
       <div>
-        <app-upload-task [file]="file"></app-upload-task>
+        <app-upload-task [file]="file" [enableAutoUpload]="isAutoUploadEnabled"></app-upload-task>
       </div>
     </div>
   </mat-sidenav>

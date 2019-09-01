@@ -1,11 +1,12 @@
 <div class="dropzone"
      dropzone
+     (click)="fileChooser.click()"
      (hovered)="toggleHover($event)"
      (dropped)="handleFiles($event)"
      [class.hovering]="isHovering">
   <h3>Drop Zone</h3>
   <p class="dark-text">
-    Drag and drop files into this box !
+    Drag and drop files into this box ! (or) Click inside this box to choose files
   </p>
   <input type="file"
          (change)="handleFiles($event)"
@@ -13,16 +14,13 @@
          class="hidden"
          accept=".png,.jpg"
          multiple>
-  <button (click)="fileChooser.click()"
-          mat-button
+  <button mat-button
           class="hint-value">
     <mat-icon>attach_file</mat-icon>
     Choose Files
   </button>
   <mat-hint>
-    <span (click)="fileChooser.click()"
-      class="hint-value">{{statusMessage}}</span>
-    <span (click)="fileChooser.click()"
-      class="hint"> Files chosen.</span>
+    <span class="hint-value">{{statusMessage}}</span>
+    <span class="hint"> Files chosen.</span>
   </mat-hint>
 </div>
