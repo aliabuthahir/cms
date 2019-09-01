@@ -65,7 +65,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="side-nav-container">
   <mat-sidenav
       #drawer
       class="side-nav"
@@ -137,11 +137,11 @@
       </button>
       <span class="white task">FILES TO UPLOAD</span>
     </mat-toolbar>
-    <div *ngFor="let file of filesToUpload">
-      <div>
-        <app-upload-task [file]="file" [enableAutoUpload]="isAutoUploadEnabled"></app-upload-task>
-      </div>
-    </div>
+
+    <mat-nav-list class="side-nav-list">
+        <app-upload-task *ngFor="let file of filesToUpload"
+          [file]="file" [enableAutoUpload]="isAutoUploadEnabled"></app-upload-task>
+    </mat-nav-list>
   </mat-sidenav>
   <!-- END: Right side side-nav -->
 

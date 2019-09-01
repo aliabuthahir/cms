@@ -1,5 +1,7 @@
-.sidenav-container {
+.side-nav-container{
   height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
 }
 
 .side-nav {
@@ -10,6 +12,16 @@
 .right-side-nav {
   min-width: 40vw !important;
   max-width: 40vw !important;
+  min-height: 90vh !important;
+  max-height: 90vh !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+
+.side-nav-list{
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
 }
 
 .sidenav .mat-toolbar {

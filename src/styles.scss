@@ -6,11 +6,12 @@ html {
 html, body {
   height: 100%;
   /* Hide vertical scroll-bars in html and body.*/
-  overflow-y: hidden;
+  overflow-y: hidden !important;
 }
 
 body {
   margin: 0;
+  padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -67,7 +68,7 @@ $darkTextPalette: mat-palette($mat-gray, 900);
   color: mat-color($primaryPalette) !important;
 }
 
-.white{
+.white {
   color: white !important;
 }
 
@@ -100,10 +101,11 @@ $darkTextPalette: mat-palette($mat-gray, 900);
   margin-bottom: 10px;
 }
 
-.task{
+.task {
   padding: 5px !important;
 }
-.no-padding{
+
+.no-padding {
   padding: 0px !important;
 }
 
