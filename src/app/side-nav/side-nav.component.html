@@ -33,7 +33,7 @@
         <mat-icon>arrow_drop_up</mat-icon>
       </button>
       <mat-menu #menu="matMenu"
-                class="avatar-button">
+                class="menu-settings">
         <mat-card class="mat-elevation-z0">
           <!-- START: Profile Card -->
           <mat-card-header>
@@ -68,7 +68,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
       #drawer
-      class="sidenav"
+      class="side-nav"
       [@sidenavAnimate]="state"
       [fixedInViewport]=false
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
@@ -122,7 +122,7 @@
   </mat-sidenav>
   <!-- START: Right side side-nav -->
   <mat-sidenav #rightDrawer
-               class="right-sidenav"
+               class="right-side-nav"
                position="end"
                [fixedInViewport]=false
                [autoFocus]=true
@@ -135,13 +135,13 @@
               class="mat-primary">
         <mat-icon>close</mat-icon>
       </button>
-      Files to Upload
+      <span class="white task">FILES TO UPLOAD</span>
     </mat-toolbar>
-    <mat-nav-list *ngFor="let file of filesToUpload">
-      <a mat-list-item>
+    <div *ngFor="let file of filesToUpload">
+      <div>
         <app-upload-task [file]="file"></app-upload-task>
-      </a>
-    </mat-nav-list>
+      </div>
+    </div>
   </mat-sidenav>
   <!-- END: Right side side-nav -->
 

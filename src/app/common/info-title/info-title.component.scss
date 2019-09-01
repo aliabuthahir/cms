@@ -9,8 +9,6 @@ div.main {
   justify-content: center;
   flex-wrap: wrap;
   margin: 0;
-  height: 10vh;
-  border: 1px solid white;
   padding: 10px;
 }
 
@@ -21,7 +19,6 @@ div.container {
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
-  border: 1px solid red;
   width: 100%;
 }
 
@@ -30,8 +27,6 @@ div.item-container {
   padding: 0;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 1px solid yellow;
-
 }
 
 .flex-1 {
@@ -40,19 +35,6 @@ div.item-container {
 
 .flex-7 {
   flex: 7;
-}
-
-/*
-.align-item-left {
-  justify-content: flex-start;
-}
-
-.align-item-right {
-  justify-content: flex-end;
-}*/
-
-.full-width {
-  width: 100%;
 }
 
 @media screen and (min-width: 768px) {

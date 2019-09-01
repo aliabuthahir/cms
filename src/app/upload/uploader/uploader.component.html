@@ -1,7 +1,7 @@
 <div class="dropzone"
      dropzone
      (hovered)="toggleHover($event)"
-     (dropped)="onDrop($event)"
+     (dropped)="handleFiles($event)"
      [class.hovering]="isHovering">
   <h3>Drop Zone</h3>
   <p class="dark-text">
@@ -19,9 +19,10 @@
     <mat-icon>attach_file</mat-icon>
     Choose Files
   </button>
-  <mat-hint
-    align="end">
-    <span class="hint-value">{{statusMessage}}</span>
-    <span class="hint"> Files chosen.</span>
+  <mat-hint>
+    <span (click)="fileChooser.click()"
+      class="hint-value">{{statusMessage}}</span>
+    <span (click)="fileChooser.click()"
+      class="hint"> Files chosen.</span>
   </mat-hint>
 </div>

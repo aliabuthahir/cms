@@ -2,13 +2,14 @@
   height: 100%;
 }
 
-.sidenav {
-  width: 60px;
-  max-width: 300px;
+.side-nav {
+  min-width: 10vw !important;
+  max-width: 40vw !important;
 }
 
-.right-sidenav {
-  width: 300px;
+.right-side-nav {
+  min-width: 40vw !important;
+  max-width: 40vw !important;
 }
 
 .sidenav .mat-toolbar {

@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   height: 100%;
   /* Hide vertical scroll-bars in html and body.*/
@@ -47,25 +51,29 @@ $darkTextPalette: mat-palette($mat-gray, 900);
 
 .active-list-item {
   font-weight: bold;
-  color: mat-color($accentPalette) !important; /* Note: You could also use a custom theme */
+  color: mat-color($accentPalette) !important;
 }
 
 .hint {
-  color: mat-color($accentPalette) !important; /* Note: You could also use a custom theme */
+  color: mat-color($accentPalette) !important;
 }
 
 .hint-value {
   margin: 0px 0px 0px 3px;
-  color: mat-color($hintValuePalette) !important; /* Note: You could also use a custom theme */
+  color: mat-color($hintValuePalette) !important;
 }
 
 .content {
-  color: mat-color($primaryPalette) !important; /* Note: You could also use a custom theme */
+  color: mat-color($primaryPalette) !important;
+}
+
+.white{
+  color: white !important;
 }
 
 .dark-text {
   font-weight: bold;
-  color: mat-color($darkTextPalette) !important; /* Note: You could also use a custom theme */
+  color: mat-color($darkTextPalette) !important;
 }
 
 
@@ -73,46 +81,17 @@ $darkTextPalette: mat-palette($mat-gray, 900);
   margin: 2px 8px 2px 2px;
 }
 
-.dropzone {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 200px;
-  border: 2px dashed #eeeeee;
-  border-radius: 5px;
-  margin: 10px 0;
-  color: #eeeeee;
-  background: mat-color($dropZonePalette) !important; /* Note: You could also use a custom theme */
-
-  &.hovering {
-    border: 2px solid #f16624;
-    color: #dadada !important;
-
-    .file-label {
-      font-size: 1.2em;
-    }
-  }
-
-  .file-input {
-    margin: 30%;
-    padding: 2%;
-  }
-
-  /*
-    progress::-webkit-progress-value {
-      transition: width 0.1s ease;
-    }*/
-}
-
 .img-avatar {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
 
-.avatar-button {
-  width: 95%;
-  height: 100%;
+.menu-settings {
+  display: flex;
+  min-width: 12vw !important;
+  min-height: 12vh !important;
+  max-width: 80vw !important;
+  max-height: 80vh !important;
   overflow-x: hidden !important;
   overflow-y: hidden !important;
 }
@@ -120,3 +99,11 @@ $darkTextPalette: mat-palette($mat-gray, 900);
 .bottom-spacer {
   margin-bottom: 10px;
 }
+
+/*.task{
+  padding: 5px !important;
+}*/
+.no-padding{
+  padding: 0px !important;
+}
+

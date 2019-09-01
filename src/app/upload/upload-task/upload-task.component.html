@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title>
       <span class="hint-value">
-        <small>{{file.name | textFirstpart | uppercase}}</small>
+        <small>{{fileName}}</small>
       </span>
       <!-- START: File Info Menu -->
       <button mat-icon-button
@@ -16,7 +16,8 @@
           <!-- START: File Info Card -->
           <mat-card-header>
             <app-info-title [icon]="['info_circle']" [title]="['File Info']"></app-info-title>
-           </mat-card-header>
+            <span class="white task info-card"></span>
+          </mat-card-header>
           <mat-card-content>
             <mat-divider></mat-divider>
             <app-info-card [title] = "['Name']" [msg] = "[fileName]"></app-info-card>
@@ -30,16 +31,24 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
+    <mat-progress-bar
+      mode="determinate"
+      [value]="percentage | async"
+      #progress>
+    </mat-progress-bar>
+
     <div *ngIf="snapshot | async as snap">
       <div *ngIf="downloadURL as url">
         <a [href]="url"
+           mat-icon-button
            target="_blank"
            rel="noopener"
            mat-button
-           class="mat-primary">View</a>
+           class="white"><mat-icon>visibility</mat-icon></a>
       </div>
 
-      <div *ngIf="(isUploadCompleted | async)">
+
+      <div *ngIf="!(isUploadCompleted | async)">
         <span>
         <button mat-button (click)="task.pause()" [disabled]="!isActive(snap)">Pause</button>
         <button mat-button (click)="task.resume()"
@@ -47,12 +56,9 @@
         <button mat-button (click)="task.cancel()" [disabled]="!isActive(snap)">Cancel</button>
         </span>
       </div>
+
+
       <div *ngIf="percentage | async as pct" class="task">
-        <mat-progress-bar
-          mode="determinate"
-          [value]="pct"
-          #progress>
-        </mat-progress-bar>
         <div class="task">
           <span class="hint-value">{{ pct |number }} %</span>
           <span class="hint"> Completed</span>

@@ -37,14 +37,13 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import { DropDirective } from '../directives/drop.directive';
 import { UploadTaskComponent } from './upload/upload-task/upload-task.component';
 import { UploaderComponent } from './upload/uploader/uploader.component';
-import { FileuploaderSideNavComponent } from './upload/fileuploader-side-nav/fileuploader-side-nav.component';
-import { FileSizePipe } from '../pipes/file-size.pipe';
-import { TextFirstpartPipe } from '../pipes/text-firstpart.pipe';
-import { TextLastpartPipe } from '../pipes/text-lastpart.pipe';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { InfoCardComponent } from './common/info-card/info-card.component';
-import { CardComponent } from './common/card/card.component';
 import { InfoTitleComponent } from './common/info-title/info-title.component';
+import { ProfileCardComponent } from './common/profile-card/profile-card.component';
+import {TextFirstpartPipe} from '../pipes/text-firstpart.pipe';
+import {FileSizePipe} from '../pipes/file-size.pipe';
+import {TextLastpartPipe} from '../pipes/text-lastpart.pipe';
 
 @NgModule({
   declarations: [
@@ -58,13 +57,12 @@ import { InfoTitleComponent } from './common/info-title/info-title.component';
     DropDirective,
     UploadTaskComponent,
     UploaderComponent,
-    FileuploaderSideNavComponent,
     FileSizePipe,
     TextFirstpartPipe,
     TextLastpartPipe,
     InfoCardComponent,
-    CardComponent,
-    InfoTitleComponent
+    InfoTitleComponent,
+    ProfileCardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,30 @@
+@import "~@angular/material/theming";
+
+$dropZonePalette: mat-palette($mat-gray, 700);
+
+.dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 200px;
+  border: 2px dashed #eeeeee;
+  border-radius: 5px;
+  margin: 10px 0;
+  color: #eeeeee;
+  background: mat-color($dropZonePalette) !important;
+
+  &.hovering {
+    border: 2px solid #f16624;
+    color: #dadada !important;
+
+    .file-label {
+      font-size: 1.2em;
+    }
+  }
+
+  .file-input {
+    margin: 30%;
+    padding: 2%;
+  }
+}

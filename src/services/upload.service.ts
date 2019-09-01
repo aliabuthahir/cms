@@ -17,24 +17,27 @@ export class UploadService {
 
   constructor(private ngFire: AngularFireModule,
               private db: AngularFireDatabase,
-              private afs: AngularFireStorage) {
+              private storage: AngularFireStorage) {
   }
 
   uploadFile(upload: UploadModel) {
 //    const storageRef = firebase.storage;
-    const storageRef = this.afs.ref(`${this.basePath}`);
+    const storageRef = this.storage.ref(`${this.basePath}`);
     const uploadTask = storageRef
       .child(`/${upload.file.name}`)
       .put(upload.file);
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       snapshot => {
         // state changed observer.
-        upload.progress = (uploadTask
+        const percentage = (uploadTask
           .snapshot
           .bytesTransferred / uploadTask
           .snapshot
           .totalBytes) * 100;
-        console.log(`${upload.progress}%`);
+
+        console.log(percentage);
+
+        upload.progress.next(percentage);
       },
       // error observer.
       error => {

@@ -1,8 +1,10 @@
+import {Subject} from "rxjs";
+
 export class UploadModel {
   $key: string;
   file: File;
   url: string;
-  progress: number;
+  progress: Subject<any>;
   createdOn: Date = new Date();
   name: string;
 
