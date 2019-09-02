@@ -55,6 +55,15 @@ $hintValuePalette: mat-palette($mat-amber, 500);
 $dropZonePalette: mat-palette($mat-gray, 700);
 $darkTextPalette: mat-palette($mat-gray, 900);
 
+.mat-app-hint {
+  color: mat-color($accentPalette) !important;
+}
+
+.mat-app-hint-value {
+  margin: 0px 0px 0px 3px;
+  color: mat-color($hintValuePalette) !important;
+}
+
 .active-list-item {
   font-weight: bold;
   color: mat-color($accentPalette) !important;
