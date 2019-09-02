@@ -22,16 +22,18 @@ export class UploaderComponent implements OnInit {
   }
 
   handleFiles(event) {
-    const files: File[] = [];
     const filesSelected = event.target.files;
-
+    const files = new Array();
     for (let i = 0; i < filesSelected.length; i++) {
       files.push(filesSelected.item(i));
     }
-
+    console.log(filesSelected);
+    console.log(files);
     if (files.length > 0) {
       this.statusMessage = `${files.length}`;
-      this.toolBarSvc.openFilesToUpload(files);
+      this.toolBarSvc
+        .rightSideNavObserver
+        .next(files);
     } else {
       this.statusMessage = 'No';
     }

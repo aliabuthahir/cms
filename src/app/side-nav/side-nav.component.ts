@@ -180,7 +180,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   state = 'opened';
   displayMode = '';
   menuState = '';
-  filesToUpload: File[];
+  filesToUpload = new Array();
 
   subscription: Subscription;
   private user: Observable<firebase.User>;
@@ -212,7 +212,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
           this.rightSideDrawer.toggle();
         } else {
           this.filesToUpload = value;
-          console.log("filesToIUpload"+ this.filesToUpload.length);
+          console.log('filesToIUpload' + this.filesToUpload.length);
           this.rightSideDrawer.open();
         }
       });

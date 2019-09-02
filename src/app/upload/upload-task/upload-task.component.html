@@ -1,24 +1,40 @@
-<mat-card class="mat-elevation-z1 card">
+<mat-card class="md-app-card mat-elevation-z0 card">
   <mat-card-header>
     <mat-card-title>
-      <span *ngIf="(isUploadCompleted|async)">
-        <mat-icon class="hint">cloud_done</mat-icon>
-      </span>
-      <span class="hint-value">
-        <small>{{fileName}}</small>
-      </span>
-      <!-- START: File Info Menu -->
-      <button mat-icon-button
-              [matMenuTriggerFor]="fileInfoMenu"
-              aria-label="file info menu trigger">
-        <mat-icon class="mat-primary">info_circle</mat-icon>
-      </button>
+      <div class="row" *ngIf="(isUploadCompleted|async)">
+        <div class="col-xsm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <mat-icon class="hint">cloud_done</mat-icon>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xsm-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+          <p class="hint-value">{{fileName}}</p>
+        </div>
+        <!-- START: File Info Menu -->
+        <div class="col-xsm-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+          <button mat-icon-button
+                  [matMenuTriggerFor]="fileInfoMenu"
+                  aria-label="file info menu trigger">
+            <mat-icon class="mat-primary">info_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+
       <mat-menu #fileInfoMenu="matMenu"
                 class="avatar-button">
         <mat-card class="mat-elevation-z0">
           <!-- START: File Info Card -->
           <mat-card-header>
-            <app-info-title [icon]="['info_circle']" [title]="['File Info']"></app-info-title>
+            <div class="container">
+              <div class="row">
+                <div class="col-xsm-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                  <mat-icon class="mat-primary float-md-left float-lg-left float-xl-left">info_circle</mat-icon>
+                </div>
+                <div class="col-xsm-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                  <p>File Info</p>
+                </div>
+              </div>
+            </div>
           </mat-card-header>
           <mat-card-content>
             <mat-divider></mat-divider>
@@ -33,11 +49,12 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <span class="hint">
-  <mat-icon class="white">info</mat-icon>
-      {{isFileUploadStarted}}
-</span>
-
+    <div class="row">
+      <div class="col-xsm-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+        <span class="hint"><mat-icon class="mat-app-white">info</mat-icon>
+          {{isFileUploadStarted}}</span>
+      </div>
+    </div>
     <mat-progress-bar
       mode="determinate"
       [value]="percentage | async"
@@ -45,14 +62,12 @@
     </mat-progress-bar>
 
     <div *ngIf="!(isUploadCompleted | async)">
-        <span>
-        <a mat-icon-button (click)="handleFileUpload()" [disabled]="(isUploadCompleted | async)">
-                <mat-icon>{{play_pause_icon}}</mat-icon>
-        </a>
-        <button mat-iocn-button (click)="task.cancel()" [disabled]="(isUploadCompleted | async)">
-          <mat-icon>cancel</mat-icon>
-        </button>
-        </span>
+      <a mat-icon-button (click)="handleFileUpload()" [disabled]="(isUploadCompleted | async)">
+        <mat-icon>{{play_pause_icon}}</mat-icon>
+      </a>
+      <button mat-iocn-button (click)="task.cancel()" [disabled]="(isUploadCompleted | async)">
+        <mat-icon>cancel</mat-icon>
+      </button>
     </div>
     <div *ngIf="snapshot | async as snap">
       <div *ngIf="(isUploadCompleted | async)">

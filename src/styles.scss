@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
 html {
   scroll-behavior: smooth;
 }
@@ -15,6 +16,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+p {
+  text-overflow: ellipsis;
+  margin: 5px;
+}
+
 .hidden {
   display: none;
 }
@@ -23,11 +29,10 @@ body {
   flex: 1 1 auto;
 }
 
-.container {
-  margin: 2% 20% 2% 20%;
-  height: 72%;
+.md-app-card {
   background-color: inherit;
 }
+
 
 .container-toolbar {
   width: 90%;
@@ -68,7 +73,7 @@ $darkTextPalette: mat-palette($mat-gray, 900);
   color: mat-color($primaryPalette) !important;
 }
 
-.white {
+.mat-app-white {
   color: white !important;
 }
 

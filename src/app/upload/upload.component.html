@@ -1,13 +1,19 @@
-<mat-card class="container mat-elevation-z0" cdkTrapFocus>
+<mat-card class="md-app-card mat-elevation-z0" cdkTrapFocus>
   <mat-card-header>
     <mat-card-title class="tool-bar">
-      <p class="card-left hint">Upload Images
-      </p>
-      <button mat-icon-button
-              (click)="toggleRightSideNav()"
-              class="card-right mat-primary">
-        <mat-icon>settings</mat-icon>
-      </button>
+      <div class="row">
+        <div class="col-xsm-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+          <p class="hint">Upload Images
+          </p>
+        </div>
+        <div class="col-xsm-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+          <button mat-icon-button
+                  (click)="toggleRightSideNav()"
+                  class="mat-primary">
+            <mat-icon>settings</mat-icon>
+          </button>
+        </div>
+      </div>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>

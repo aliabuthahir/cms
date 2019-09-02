@@ -11,9 +11,9 @@ export class ToolbarService {
    the app behavior/UI animations and keep them
    separate from the backend. */
 
-  private signInPageObserver: Subject<boolean> = new Subject<boolean>();
-  private rightSideNavObserver: Subject<any> = new Subject<any>();
-  private autoUploadFilesObserver: Subject<boolean> = new Subject<boolean>();
+  signInPageObserver: Subject<boolean> = new Subject<boolean>();
+  rightSideNavObserver: Subject<any> = new Subject<any>();
+  autoUploadFilesObserver: Subject<boolean> = new Subject<boolean>();
 
   constructor() {
   }
@@ -30,15 +30,11 @@ export class ToolbarService {
     return this.rightSideNavObserver;
   }
 
-  getAutoUploadFilesObserver(){
+  getAutoUploadFilesObserver() {
     return this.autoUploadFilesObserver;
   }
 
   toggleRightSideNav() {
     this.rightSideNavObserver.next(true);
-  }
-
-  openFilesToUpload(files: File[]) {
-    this.rightSideNavObserver.next(files);
   }
 }
