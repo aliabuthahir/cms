@@ -1,14 +1,14 @@
-<mat-card class="md-app-card mat-elevation-z0 card">
+<mat-card class="mat-app-card mat-elevation-z0">
   <mat-card-header>
     <mat-card-title>
       <div class="row" *ngIf="(isUploadCompleted|async)">
         <div class="col-xsm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <mat-icon class="hint">cloud_done</mat-icon>
+          <mat-icon class="md-app-hint">cloud_done</mat-icon>
         </div>
       </div>
       <div class="row">
         <div class="col-xsm-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
-          <p class="hint-value">{{fileName}}</p>
+          <p class="md-app-hint-value">{{fileName}}</p>
         </div>
         <!-- START: File Info Menu -->
         <div class="col-xsm-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
@@ -50,7 +50,7 @@
   <mat-card-content>
     <div class="row">
       <div class="col-xsm-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
-        <span class="hint"><mat-icon class="mat-app-white">info</mat-icon>
+        <span class="md-app-hint"><mat-icon class="md-app-white">info</mat-icon>
           {{isFileUploadStarted}}</span>
       </div>
     </div>
@@ -80,21 +80,21 @@
            target="_blank"
            rel="noopener"
            mat-button
-           class="white">
+           class="md-app-white">
           <mat-icon>visibility</mat-icon>
         </a>
       </div>
 
       <div *ngIf="percentage | async as pct" class="task">
         <div class="task">
-          <span class="hint-value">{{ pct |number }} %</span>
-          <span class="hint"> Completed</span>
+          <span class="md-app-hint-value">{{ pct |number }} %</span>
+          <span class="md-app-hint"> Completed</span>
         </div>
         <div class="task">
-          <span class="hint-value">{{ (snap.bytesTransferred | fileSize) }}</span>
-          <span class="hint"> of </span>
-          <span class="hint-value">{{ (snap.totalBytes | fileSize)}}</span>
-          <span class="hint"> Transferred</span>
+          <span class="md-app-hint-value">{{ (snap.bytesTransferred | fileSize) }}</span>
+          <span class="md-app-hint"> of </span>
+          <span class="md-app-hint-value">{{ (snap.totalBytes | fileSize)}}</span>
+          <span class="md-app-hint"> Transferred</span>
         </div>
       </div>
     </div>

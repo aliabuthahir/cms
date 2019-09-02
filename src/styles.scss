@@ -55,13 +55,17 @@ $hintValuePalette: mat-palette($mat-amber, 500);
 $dropZonePalette: mat-palette($mat-gray, 700);
 $darkTextPalette: mat-palette($mat-gray, 900);
 
-.mat-app-hint {
+.md-app-hint {
   color: mat-color($accentPalette) !important;
 }
 
-.mat-app-hint-value {
+.md-app-hint-value {
   margin: 0px 0px 0px 3px;
   color: mat-color($hintValuePalette) !important;
+}
+
+.md-app-white {
+  color: white !important;
 }
 
 .active-list-item {
@@ -80,10 +84,6 @@ $darkTextPalette: mat-palette($mat-gray, 900);
 
 .content {
   color: mat-color($primaryPalette) !important;
-}
-
-.mat-app-white {
-  color: white !important;
 }
 
 .dark-text {

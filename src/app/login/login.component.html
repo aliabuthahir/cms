@@ -15,7 +15,7 @@
           <h2>Sign Up</h2>
         </button>
       </mat-card-title-group>
-      <h5 class="hint"
+      <h5 class="md-app-hint"
           *ngIf="newUser">Register New User
       </h5>
     </mat-card-title>
@@ -50,9 +50,9 @@
         <mat-hint
           align="end"
           *ngIf="email.value">
-          <span class="hint">Total characters typed </span>
-          <span class="hint-value">{{email.value.length}}</span>
-          <span class="hint"> / 70</span>
+          <span class="md-app-hint">Total characters typed </span>
+          <span class="md-app-hint-value">{{email.value.length}}</span>
+          <span class="md-app-hint"> / 70</span>
         </mat-hint>
       </mat-form-field>
 
@@ -92,9 +92,9 @@
         <mat-hint
           align="end"
           *ngIf="pwd.value">
-          <span class="hint">Total characters typed </span>
-          <span class="hint-value">{{pwd.value.length}}</span>
-          <span class="hint"> / 40</span>
+          <span class="md-app-hint">Total characters typed </span>
+          <span class="md-app-hint-value">{{pwd.value.length}}</span>
+          <span class="md-app-hint"> / 40</span>
         </mat-hint>
       </mat-form-field>
       <mat-card-actions>
