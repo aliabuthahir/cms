@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ToolbarService} from '../../services/toolbar.service';
+import {AppMessageModel} from '../../models/app-message.model';
 
 @Component({
   selector: 'app-pagenotfound404',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Pagenotfound404Component implements OnInit {
 
-  constructor() { }
+  constructor(private toolBarSvc: ToolbarService) { }
 
   ngOnInit() {
+    const message = new AppMessageModel(
+      'The Page your are looking for could not be found!',
+      'error');
+    this.toolBarSvc
+      .appMessageCommunicator
+      .next(message);
     }
 
 }

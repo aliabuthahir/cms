@@ -1,20 +1,24 @@
 <mat-card class="md-app-card mat-elevation-z0" cdkTrapFocus>
   <mat-card-header>
     <mat-card-title>
-      <p class="md-app-hint">Latest Photos</p>
+      <p class="mat-subheading-1
+      md-app-hint">Latest Photos</p>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-     <ul id="thumbnailsList"
+    <ul id="thumbnailsList"
         *ngIf="(images | async); else noImages">
       <li *ngFor="let image of images | async" class="img">
-        <a routerLink="['/images', image.key]">
+        <a
+          routerLink="['/images', image.key]"
+          class="mat-button">
           <img src="{{image.url}}" class="tn"/>
         </a>
       </li>
     </ul>
     <ng-template #noImages>
-      <span class="md-app-hint-value">No Images to show.</span>
+      <span class="mat-body
+      md-app-hint-value">No Images to show.</span>
     </ng-template>
   </mat-card-content>
 </mat-card>

@@ -1,29 +1,39 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {UploadModel} from '../../models/upload.model';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {UploadService} from '../../services/upload.service';
-import * as _ from 'lodash';
 import {ToolbarService} from '../../services/toolbar.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss']
 })
-export class UploadComponent implements OnInit {
+export class UploadComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('autoUpload', {static: true})
-  autoUpload
+  autoUpload;
+
+  autoUploadSubscription: Subscription;
 
   constructor(private uploadSvc: UploadService,
               private toolBarSvc: ToolbarService) {
   }
 
   ngOnInit(): void {
+    this.autoUploadSubscription = this.toolBarSvc
+      .autoUploadCommunicator
+      .subscribe(autoUploadStatus => {
+        this.autoUpload.checked = autoUploadStatus;
+      });
   }
 
   ngAfterViewInit() {
     this.toolBarSvc
-      .getAutoUploadFilesObserver()
+      .autoUploadFilesObserver
       .next(this.autoUpload.checked);
+  }
+
+  ngOnDestroy(): void {
+    this.autoUploadSubscription.unsubscribe();
   }
 
   toggleRightSideNav() {
@@ -32,7 +42,7 @@ export class UploadComponent implements OnInit {
 
   enableAutoUpload() {
     this.toolBarSvc
-      .getAutoUploadFilesObserver()
+      .autoUploadFilesObserver
       .next(!this.autoUpload.checked);
   }
 }

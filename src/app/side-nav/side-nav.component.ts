@@ -7,6 +7,8 @@ import {NavigationStart, Router} from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
 import * as firebase from 'firebase/app';
 import {ToolbarService} from '../../services/toolbar.service';
+import {AppMessageModel} from '../../models/app-message.model';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 
 const toDesktop = keyframes([
   style({
@@ -176,23 +178,31 @@ export class SideNavComponent implements OnInit, OnDestroy {
   drawer;
   @ViewChild('rightDrawer', {static: true})
   rightSideDrawer;
+  @ViewChild('autoUpload', {static: true})
+  autoUpload;
 
   state = 'opened';
   displayMode = '';
   menuState = '';
-  filesToUpload = new Array();
+  private filesToUpload = new Array();
+  private fileUploadStatusMsg = 'No files selected for Upload';
+  private fileUploadStatusIcon = 'info';
 
-  subscription: Subscription;
+  private subscription: Subscription;
   private user: Observable<firebase.User>;
   private isSignUpPage: Subject<boolean>;
   private isRightSideNavOpen: Subscription;
   private isAutoUploadSubscription: Subscription;
+  private totalFilesUploadedObserver: Subscription;
   private isAutoUploadEnabled = 'false';
+  private totalFilesUploaded = 0;
+  private isRightDrawerAlreadyOpen = false;
 
   constructor(private breakpointObserver: BreakpointObserver,
               private authSvc: AuthenticationService,
               private router: Router,
-              private toolBarSvc: ToolbarService) {
+              private toolBarSvc: ToolbarService,
+              private bottomSheet: MatBottomSheet) {
     this.user = authSvc.currentUser();
     this.subscription = router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -206,33 +216,104 @@ export class SideNavComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isSignUpPage = this.toolBarSvc.getObserver();
     this.isRightSideNavOpen = this.toolBarSvc
-      .getRightNavObserver()
+      .rightSideNavObserver
       .subscribe((value) => {
-        if (typeof value === 'boolean') {
-          this.rightSideDrawer.toggle();
-        } else {
-          this.filesToUpload = value;
-          console.log('filesToIUpload' + this.filesToUpload.length);
-          this.rightSideDrawer.open();
+          if (typeof value === 'boolean') {
+            this.rightSideDrawer.toggle();
+          } else {
+            console.log('33333START: Inside file reciever');
+
+            this.totalFilesUploaded = 0;
+            this.filesToUpload = value;
+            this.fileUploadStatusMsg
+              = `${this.filesToUpload.length} Files have been selected for Upload`;
+            this.rightSideDrawer.open();
+
+            const message = new AppMessageModel(this.fileUploadStatusMsg,
+              this.fileUploadStatusIcon);
+            this.toolBarSvc
+              .appMessageCommunicator
+              .next(message);
+            console.log(this.isAutoUploadEnabled);
+
+            console.log(this.filesToUpload);
+            console.log(this.rightSideDrawer.opened);
+
+            console.log('3333END: Inside file reciever');
+
+          }
         }
-      });
-    // this.rightSideDrawer.openedChange.subscribe(() => {
-    // this.toolBarSvc.toggleRightSideNav();
-    // });
+      );
+    this.rightSideDrawer.openedChange.subscribe(() => {
+      if (this.rightSideDrawer.opened) {
+        this.isRightDrawerAlreadyOpen = false;
+      }
+    });
+
+    // Auto open or close right side drawer.
+    this.drawer.openedChange.subscribe(() => {
+      if (this.drawer.opened) {
+        if (this.rightSideDrawer.opened) {
+          this.isRightDrawerAlreadyOpen = true;
+        }
+        this.rightSideDrawer.close();
+      } else if (this.isRightDrawerAlreadyOpen) {
+        if (this.totalFilesUploaded < this.filesToUpload.length) {
+          this.rightSideDrawer.open();
+          const message = new AppMessageModel(
+            this.fileUploadStatusMsg,
+            this.fileUploadStatusIcon);
+          this.toolBarSvc
+            .appMessageCommunicator
+            .next(message);
+        } else {
+          this.fileUploadStatusMsg = 'No files selected for Upload';
+        }
+      }
+    });
+
 
     this.isAutoUploadSubscription = this
       .toolBarSvc
-      .getAutoUploadFilesObserver()
+      .autoUploadFilesObserver
       .subscribe(isAutoUploadEnabled => {
+        console.log('6666666TART: Inside Auto upload');
+
         this.isAutoUploadEnabled = isAutoUploadEnabled ? 'true' : 'false';
+        this.autoUpload.checked = isAutoUploadEnabled;
+        console.log(this.isAutoUploadEnabled);
+        console.log('6666666End: Inside Auto upload');
       });
 
+    this.totalFilesUploadedObserver = this.toolBarSvc
+      .totalFilesStatusObserver
+      .subscribe(isFileUploadCompleted => {
+        this.totalFilesUploaded++;
+        this.fileUploadStatusMsg
+          = 'File Upload in Progress...';
+
+        if (this.totalFilesUploaded >= this.filesToUpload.length) {
+          this.filesToUpload = new Array();
+
+          this.fileUploadStatusMsg
+            = 'All Files have been Succesfully Uploaded to Cloud';
+
+          const message = new AppMessageModel(this.fileUploadStatusMsg,
+            'success');
+          this.toolBarSvc
+            .appMessageCommunicator
+            .next(message);
+          this.rightSideDrawer.close();
+        }
+        // TODO: add code to show bottom up slider message.
+      });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.isRightSideNavOpen.unsubscribe();
     this.isAutoUploadSubscription.unsubscribe();
+    this.totalFilesUploadedObserver.unsubscribe();
   }
 
   signOut() {
@@ -241,7 +322,20 @@ export class SideNavComponent implements OnInit, OnDestroy {
       .then(onResolve => {
         this.drawer.close();
         this.router.navigate(['/signin']);
+        const message = new AppMessageModel(
+          'You have been successfully Signed Out!',
+          'success'
+        );
+        this.toolBarSvc
+          .appMessageCommunicator
+          .next(message);
       });
+  }
+
+  changeAutoUploadStatus() {
+    this.isAutoUploadEnabled = !this.autoUpload.checked ? 'true' : 'false';
+    console.log('this.isAutoUploadEnabled' + this.isAutoUploadEnabled);
+    this.toolBarSvc.autoUploadCommunicator.next(!this.autoUpload.checked);
   }
 
   toggleNavBarState() {

@@ -15,7 +15,8 @@ import {
   MatListModule,
   MatSnackBarModule,
   MatCardModule,
-  MatMenuModule
+  MatMenuModule,
+  MatBottomSheetModule
 } from '@angular/material';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatInputModule} from '@angular/material/input';
@@ -40,7 +41,6 @@ import { UploaderComponent } from './upload/uploader/uploader.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { InfoCardComponent } from './common/info-card/info-card.component';
 import { InfoTitleComponent } from './common/info-title/info-title.component';
-import { ProfileCardComponent } from './common/profile-card/profile-card.component';
 import {TextFirstpartPipe} from '../pipes/text-firstpart.pipe';
 import {FileSizePipe} from '../pipes/file-size.pipe';
 import {TextLastpartPipe} from '../pipes/text-lastpart.pipe';
@@ -63,8 +63,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     TextFirstpartPipe,
     TextLastpartPipe,
     InfoCardComponent,
-    InfoTitleComponent,
-    ProfileCardComponent
+    InfoTitleComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +86,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatMenuModule,
     MatTooltipModule,
     MatCheckboxModule,
+    MatBottomSheetModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

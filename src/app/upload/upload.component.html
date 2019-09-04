@@ -11,6 +11,7 @@
                   (click)="toggleRightSideNav()"
                   class="mat-primary">
             <mat-icon>settings</mat-icon>
+            <mat-tooltip-component>Open Files To Upload</mat-tooltip-component>
           </button>
         </div>
       </div>
@@ -23,6 +24,7 @@
   <mat-card-actions>
     <mat-checkbox #autoUpload
                   checked=true
+
                   (click)="enableAutoUpload()">Auto Upload Files
     </mat-checkbox>
   </mat-card-actions>

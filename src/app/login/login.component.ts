@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {UserModel} from '../../models/user.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToolbarService} from '../../services/toolbar.service';
+import {AppMessageModel} from '../../models/app-message.model';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   newUser = false; // to toggle login or signup form
   passReset = false;
   errorMsg = '';
+  signInMsg = 'Sign In Existing User';
   signUpButtonText = 'SIGN IN';
   @ViewChild('pwd', {static: true})
   passwordField;
@@ -56,11 +58,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   signUpForm(): void {
     this.newUser = true;
+    this.signInMsg = 'Register New User';
+
     this.signUpButtonText = 'SIGN UP';
   }
 
   signInForm(): void {
     this.newUser = false;
+    this.signInMsg = 'Sign In Existing User';
     this.signUpButtonText = 'SIGN IN';
   }
 
@@ -76,6 +81,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         })
         .catch(() => {
           this.errorMsg = 'Your Login Attempt Failed! Retry again!';
+          const message = new AppMessageModel(this.errorMsg, 'error');
+          this.toolBarSvc
+            .appMessageCommunicator
+            .next(message);
           setTimeout(() => {
             this.errorMsg = '';
           }, 2000);
@@ -87,6 +96,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         })
         .catch(() => {
           this.errorMsg = 'Your Attempt to sign up a new user Failed! Retry again!';
+          const message = new AppMessageModel(this.errorMsg, 'error');
+          this.toolBarSvc
+            .appMessageCommunicator
+            .next(message);
           setTimeout(() => {
             this.errorMsg = '';
           }, 2000);

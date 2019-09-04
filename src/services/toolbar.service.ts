@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
+import {AppMessageModel} from '../models/app-message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class ToolbarService {
   signInPageObserver: Subject<boolean> = new Subject<boolean>();
   rightSideNavObserver: Subject<any> = new Subject<any>();
   autoUploadFilesObserver: Subject<boolean> = new Subject<boolean>();
+  autoUploadCommunicator: Subject<boolean> = new Subject<boolean>();
+  totalFilesStatusObserver: Subject<boolean> = new Subject<boolean>();
+  appMessageCommunicator: Subject<AppMessageModel> = new Subject<AppMessageModel>();
 
   constructor() {
   }
@@ -26,13 +30,6 @@ export class ToolbarService {
     return this.signInPageObserver;
   }
 
-  getRightNavObserver() {
-    return this.rightSideNavObserver;
-  }
-
-  getAutoUploadFilesObserver() {
-    return this.autoUploadFilesObserver;
-  }
 
   toggleRightSideNav() {
     this.rightSideNavObserver.next(true);

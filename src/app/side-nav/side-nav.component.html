@@ -6,6 +6,7 @@
       mat-icon-button
       (click)="toggleNavBarState()"
       [@navButtonAnimate]="displayMode"
+      class="mat-body"
       *ngIf="(isHandset$ | async) && (!(isSignUpPage|async))">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
@@ -13,6 +14,7 @@
        [routerLink]="['/gallery']"
        [routerLinkActive]="['mat-accent']"
        [routerLinkActiveOptions]="{ exact: true }"
+       class="mat-body"
     >{{'campusworks'| uppercase}}</a>
     <span class="spacer"></span>
 
@@ -20,15 +22,18 @@
          [@toolBarAnimate]="displayMode">
       <a mat-button
          [routerLink]="['/gallery']"
-         [routerLinkActive]="['mat-accent']">Gallery</a>
+         [routerLinkActive]="['mat-accent']"
+      class="mat-body">Gallery</a>
       <a mat-button
          [routerLink]="['/upload']"
-         [routerLinkActive]="['mat-accent']">Upload</a>
+         [routerLinkActive]="['mat-accent']"
+         class="mat-body">Upload</a>
       <button mat-icon-button
               [matMenuTriggerFor]="menu"
               (menuOpened)="menuState = 'open'"
               (menuClosed)="menuState = 'closed'"
               [@menuAnimate]="menuState"
+              class="mat-body"
               aria-label="drop down menu trigger">
         <mat-icon>arrow_drop_up</mat-icon>
       </button>
@@ -37,27 +42,42 @@
         <mat-card class="mat-elevation-z0">
           <!-- START: Profile Card -->
           <mat-card-header>
-            <div mat-card-avatar class="img-avatar">
-              <mat-icon class="md-app-hint-value">account_circle</mat-icon>
+            <div class="row">
+              <div class="col-xsm-12">
+                <div mat-card-avatar class="md-app-profile-pic-icon">
+                  <mat-icon class="md-app-hint-value">account_circle</mat-icon>
+                </div>
+              </div>
             </div>
-            <mat-card-title>{{(user|async)?.uid}}</mat-card-title>
-            <mat-card-subtitle>User</mat-card-subtitle>
+            <div class="row">
+              <div class="col-xsm-12">
+                <mat-card-title >{{(user|async)?.uid}}</mat-card-title>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xsm-12">
+                <mat-card-subtitle>User</mat-card-subtitle>
+              </div>
+            </div>
           </mat-card-header>
-          <mat-card-content>
-          </mat-card-content>
           <mat-card-actions>
-            <mat-divider>
-            </mat-divider>
-            <button mat-button
-                    class="mat-primary avatar-button"
-                    (click)="signOut()">
-              <mat-icon
-                aria-label="Sign out icon"
-                class="sidenav-icon">power_settings_new
-              </mat-icon>
-              Sign Out
-            </button>
+            <div class="row">
+              <div class="col-12">
+                <button mat-button
+                        class="mat-primary
+                      md-app-inherit-parent-width"
+                        (click)="signOut()">
+                  <mat-icon
+                    aria-label="Sign out icon"
+                    class="sidenav-icon">power_settings_new
+                  </mat-icon>
+                  Sign Out
+                </button>
+              </div>
+            </div>
           </mat-card-actions>
+          <mat-divider>
+          </mat-divider>
           <!-- END: Profile Card -->
         </mat-card>
       </mat-menu>
@@ -79,24 +99,39 @@
       <mat-card class="mat-elevation-z0">
         <!-- START: Profile Card -->
         <mat-card-header>
-          <div mat-card-avatar class="img-avatar">
-            <mat-icon class="md-app-hint-value">account_circle</mat-icon>
+          <div class="row">
+            <div class="col-xsm-12">
+              <div mat-card-avatar class="md-app-profile-pic-icon">
+                <mat-icon class="md-app-hint-value">account_circle</mat-icon>
+              </div>
+            </div>
           </div>
-          <mat-card-title>{{(user|async)?.uid}}</mat-card-title>
-          <mat-card-subtitle>User</mat-card-subtitle>
+          <div class="row">
+            <div class="col-xsm-12">
+              <mat-card-title>{{(user|async)?.uid}}</mat-card-title>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xsm-12">
+              <mat-card-subtitle>User</mat-card-subtitle>
+            </div>
+          </div>
         </mat-card-header>
-        <mat-card-content>
-        </mat-card-content>
         <mat-card-actions>
-          <button mat-button
-                  class="mat-primary"
-                  (click)="signOut()">
-            <mat-icon
-              aria-label="Sign out icon"
-              class="sidenav-icon">power_settings_new
-            </mat-icon>
-            Sign Out
-          </button>
+          <div class="row">
+            <div class="col-12">
+              <button mat-button
+                      class="mat-primary
+                      md-app-inherit-parent-width"
+                      (click)="signOut()">
+                <mat-icon
+                  aria-label="Sign out icon"
+                  class="sidenav-icon">power_settings_new
+                </mat-icon>
+                Sign Out
+              </button>
+            </div>
+          </div>
         </mat-card-actions>
         <mat-divider>
         </mat-divider>
@@ -104,7 +139,8 @@
       </mat-card>
       <a mat-list-item
          [routerLink]="['/gallery']"
-         [routerLinkActive]="['active-list-item']">
+         [routerLinkActive]="['active-list-item']"
+         class="mat-body">
         <mat-icon
           aria-label="Side nav icon"
           class="sidenav-icon">menu
@@ -112,7 +148,8 @@
         Gallery</a>
       <a mat-list-item
          [routerLink]="['/upload']"
-         [routerLinkActive]="['active-list-item']">
+         [routerLinkActive]="['active-list-item']"
+         class="mat-body">
         <mat-icon
           aria-label="Side nav icon"
           class="sidenav-icon">menu
@@ -130,19 +167,111 @@
                [mode]="'over'"
                [opened]=false>
     <mat-toolbar>
-      <div class="row">
-        <div class="col-xsm-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
-          <button mat-icon-button
-                  (click)="toolBarSvc.toggleRightSideNav()"
-                  class="mat-primary">
-            <mat-icon>close</mat-icon>
-          </button>
+      <mat-toolbar-row>
+        <div class="row">
+          <div class="col-xsm-12
+          col-sm-12
+          col-md-2
+          col-lg-2
+          col-xl-2">
+            <button mat-icon-button
+                    (click)="toolBarSvc.toggleRightSideNav()"
+                    class="mat-primary mat-body">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <div class="md-app-white
+          md-app-padding-5
+          col-xsm-12">
+            FILES TO UPLOAD
+          </div>
         </div>
-        <div class="col-xsm-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
-          <span class="md-app-white task">FILES TO UPLOAD</span>
-        </div>
-      </div>
+      </mat-toolbar-row>
     </mat-toolbar>
+
+    <mat-menu #uploadStatusMenu="matMenu"
+              class="menu-settings">
+      <mat-card class="mat-elevation-z0">
+        <!-- START: Upload Status Card -->
+        <mat-card-header>
+          <div class="row">
+            <div class="md-app-hint-value
+             md-app-small-text
+             col-xsm-12">
+              <mat-icon>info_circle</mat-icon>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="md-app-hint-value
+                            md-app-small-text
+                            col-xsm-12">
+              Upload Status
+            </div>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-divider>
+          </mat-divider>
+
+          <div class="row">
+            <div class="md-app-hint
+                md-app-padding-5
+                col-xsm-12">
+              Selected
+            </div>
+            <div class="md-app-hint-value
+                md-app-padding-5
+                col-xsm-12">
+              {{filesToUpload.length}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="md-app-hint
+                md-app-padding-5
+                col-xsm-12">
+              Uploaded
+            </div>
+            <div class="md-app-hint-value
+                md-app-padding-5
+                col-xsm-12">
+              {{totalFilesUploaded}}
+            </div>
+          </div>
+        </mat-card-content>
+        <!-- END: Upload Status Card -->
+      </mat-card>
+    </mat-menu>
+
+    <mat-card class="mat-elevation-z0">
+      <!-- START: File Upload Inner ToolBar -->
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12">
+            <div class="md-app-padding-5
+          col-xsm-12">
+              <mat-checkbox #autoUpload
+                            (click)="changeAutoUploadStatus()"
+                            class="md-app-small-text">
+              </mat-checkbox>
+            </div>
+            <div *ngIf="filesToUpload.length>0"
+                 class="md-app-padding-5
+          col-xsm-12">
+              <button mat-icon-button
+                      [matMenuTriggerFor]="uploadStatusMenu"
+                      aria-label="file upload status drop down menu trigger">
+                <mat-icon>info_circle</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </mat-card-content>
+      <!-- END: File Upload Inner ToolBar -->
+    </mat-card>
+
+
 
     <mat-nav-list class="side-nav-list">
       <app-upload-task *ngFor="let file of filesToUpload"

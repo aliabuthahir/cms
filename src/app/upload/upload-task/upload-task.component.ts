@@ -1,16 +1,16 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {finalize, tap} from 'rxjs/operators';
 import {Observable, Subject, Subscription} from 'rxjs';
-import {ToolbarService} from "../../../services/toolbar.service";
+import {ToolbarService} from '../../../services/toolbar.service';
 
 @Component({
   selector: 'app-upload-task',
   templateUrl: './upload-task.component.html',
   styleUrls: ['./upload-task.component.scss']
 })
-export class UploadTaskComponent implements OnInit, OnDestroy {
+export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() file: File;
   private task: AngularFireUploadTask;
   private percentage: Observable<number>;
@@ -24,6 +24,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
   progressBar;
   private progressBarsubscription: Subscription;
   private isAutoUploadSubscription: Subscription;
+  private isStatusClosed: Subject<boolean> = new Subject<boolean>();
 
   private units = [
     'bytes',
@@ -36,7 +37,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
   private fileName = 'Not Available';
   private fileType = 'Not Available';
   private fileSize = 'Not Available';
-  private play_pause_icon = 'cloud_upload';
+  private playPauseIcon = 'cloud_upload';
 
   private isFileUploadStarted = 'Not Started';
 
@@ -48,33 +49,42 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isUploadCompleted.next(false);
 
+    console.log('4444444START: Inside file upload task');
+
     console.log(this.file);
-    console.log('enableAutoUpload'+this.enableAutoUpload);
+    console.log('enableAutoUpload' + this.enableAutoUpload);
+    console.log('4444444END: Inside file upload task');
 
     this.isAutoUploadSubscription = this
       .toolBarSvc
-      .getAutoUploadFilesObserver()
+      .autoUploadFilesObserver
       .subscribe(isAutoUploadEnabled => {
         this.enableAutoUpload = isAutoUploadEnabled ? 'true' : 'false';
+        console.log('555555START: Inside file upload task - Auto upload');
+        console.log(this.enableAutoUpload);
+        console.log('555555END: Inside file upload task - Auto upload');
 
         if (this.enableAutoUpload === 'true') {
           if (this.isFileUploadStarted === 'Not Started') {
+            this.isStatusClosed.next(false);
             this.startUpload();
             this.isFileUploadStarted = 'Started';
-            this.play_pause_icon = 'paused'
+            this.playPauseIcon = 'paused';
           } else if (this.isFileUploadStarted === 'Paused') {
             this.task.resume();
             this.isFileUploadStarted = 'Started';
-            this.play_pause_icon = 'pause';
+            this.playPauseIcon = 'pause';
           }
         } else if (this.enableAutoUpload === 'false') {
           if (this.isFileUploadStarted === 'Started') {
             this.task.pause();
             this.isFileUploadStarted = 'Paused';
-            this.play_pause_icon = 'play_arrow';
+            this.playPauseIcon = 'play_arrow';
           }
         }
       });
+
+    // this.isUploadCompleted.next(true);
 
     this.listenForProgressChange();
 
@@ -82,12 +92,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
     this.fileName = fileName
       .substr(0, fileName.indexOf('.'))
       .toLocaleUpperCase();
-    this.fileType = fileName
-      .substr(fileName.indexOf('.') + 1, fileName.length)
-      .toLocaleUpperCase();
-    if (!this.fileType) {
-      this.fileType = 'Not Available';
-    }
+    this.fileType = this.file.type.toLocaleUpperCase();
     this.fileSize = this.getFileSize().toLocaleUpperCase();
   }
 
@@ -110,8 +115,12 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
     this.snapshot = this.task.snapshotChanges().pipe(
       tap(),
       finalize(async () => {
-        this.downloadURL = await ref.getDownloadURL().toPromise();
-        this.db.collection('files').add({downloadURL: this.downloadURL, path});
+        this.downloadURL = await ref
+          .getDownloadURL()
+          .toPromise();
+        this.db
+          .collection('uploads')
+          .add({downloadURL: this.downloadURL, path});
       }),
     );
   }
@@ -135,10 +144,14 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
           if (percentage.value === 100) {
             this.isFileUploadStarted = 'Completed';
             this.isUploadCompleted.next(true);
+            this.file = undefined;
+            this.toolBarSvc
+              .totalFilesStatusObserver
+              .next(true);
 
             setTimeout(() => {
-              //   this.isUploadCompleted.next(false);
-            }, 2500);
+              this.isStatusClosed.next(true);
+            }, 5000);
           }
         });
     }
@@ -164,17 +177,23 @@ export class UploadTaskComponent implements OnInit, OnDestroy {
 
   handleFileUpload() {
     if (this.isFileUploadStarted === 'Not Started') {
+      this.isStatusClosed.next(false);
       this.startUpload();
       this.isFileUploadStarted = 'Started';
-      this.play_pause_icon = 'paused'
+      this.playPauseIcon = 'paused';
     } else if (this.isFileUploadStarted === 'Started') {
       this.task.pause();
       this.isFileUploadStarted = 'Paused';
-      this.play_pause_icon = 'play_arrow';
+      this.playPauseIcon = 'play_arrow';
     } else if (this.isFileUploadStarted === 'Paused') {
       this.task.resume();
       this.isFileUploadStarted = 'Started';
-      this.play_pause_icon = 'pause';
+      this.playPauseIcon = 'pause';
     }
+  }
+
+  handleFileUploadCancel() {
+    this.task.cancel();
+    this.isFileUploadStarted = 'Cancelled';
   }
 }

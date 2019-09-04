@@ -1,22 +1,38 @@
 <mat-card class="mat-app-card mat-elevation-z0">
   <mat-card-header>
     <mat-card-title>
-      <div class="row" *ngIf="(isUploadCompleted|async)">
-        <div class="col-xsm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <mat-icon class="md-app-hint">cloud_done</mat-icon>
+      <div class="row">
+        <div *ngIf="(isUploadCompleted|async)"
+             class="col-xsm-12
+        col-sm-12
+        col-md-12
+        col-lg-12
+        col-xl-12">
+          <mat-icon class="md-app-hint">cloud_done
+            <mat-tooltip-component>Upload to Cloud Server was successful</mat-tooltip-component>
+          </mat-icon>
         </div>
       </div>
       <div class="row">
-        <div class="col-xsm-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+        <div class="col-xsm-12
+        col-sm-12
+        col-md-10
+        col-lg-10
+        col-xl-10">
           <p class="md-app-hint-value">{{fileName}}</p>
         </div>
         <!-- START: File Info Menu -->
-        <div class="col-xsm-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+        <div class="col-xsm-12
+        col-sm-12
+        col-md-2
+        col-lg-2
+        col-xl-2">
           <button mat-icon-button
                   [matMenuTriggerFor]="fileInfoMenu"
                   class="border-0"
                   aria-label="file info menu trigger">
             <mat-icon class="mat-primary">info_circle</mat-icon>
+            <mat-tooltip-component>File Info</mat-tooltip-component>
           </button>
         </div>
       </div>
@@ -27,11 +43,20 @@
           <!-- START: File Info Card -->
           <mat-card-header>
             <div class="row">
-              <div class="col-xsm-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
-                <mat-icon class="mat-primary float-md-left float-lg-left float-xl-left">info_circle</mat-icon>
+              <div class="col-xsm-12
+              col-sm-2
+              col-md-2
+              col-lg-2
+              col-xl-2">
+                <mat-icon class="mat-primary
+                float-md-left
+                float-lg-left
+                float-xl-left">info_circle
+                </mat-icon>
               </div>
-              <div class="col-xsm-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
-                <p>File Info</p>
+              <div class="md-app-small-text
+              col-xsm-12">
+                File Info
               </div>
             </div>
           </mat-card-header>
@@ -41,6 +66,42 @@
             <app-info-card [title]="['Type']" [msg]="[fileType]"></app-info-card>
             <app-info-card [title]="['Size']" [msg]="[fileSize]"></app-info-card>
           </mat-card-content>
+          <mat-card-actions *ngIf="(isStatusClosed|async)">
+            <mat-divider></mat-divider>
+            <div class="row">
+              <div class="md-app-hint-value
+              md-app-small-text
+              md-app-padding-left-10
+              col-xsm-12">
+                Upload Status
+              </div>
+            </div>
+            <div class="row">
+              <div class="md-app-hint
+              md-app-small-text
+              md-app-padding-left-10
+              col-xsm-12">
+                Completed -
+              </div>
+              <div class="md-app-hint-value md-app-small-text col-xsm-12">
+                {{(percentage | async)}} %
+              </div>
+            </div>
+
+            <div *ngIf="snapshot | async as snap" class="row">
+              <div class="md-app-hint
+              md-app-small-text
+              md-app-padding-left-10
+              col-xsm-12">
+                Transferred -
+              </div>
+              <div class="md-app-hint-value
+               md-app-small-text
+               md-app-padding-left-10
+               col-xsm-12">{{ (snap.bytesTransferred| fileSize) }}
+              </div>
+            </div>
+          </mat-card-actions>
           <!-- END: File Info Card -->
         </mat-card>
       </mat-menu>
@@ -48,53 +109,102 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div class="row">
-      <div class="col-xsm-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
-        <span class="md-app-hint"><mat-icon class="md-app-white">info</mat-icon>
-          {{isFileUploadStarted}}</span>
+    <div *ngIf="!(isStatusClosed|async)" class="row">
+      <div class="md-app-hint
+      md-app-small-text
+      md-app-padding-5
+      col-xsm-12">
+        <mat-icon class="md-app-white">info_circle</mat-icon>
+        {{isFileUploadStarted}}
       </div>
     </div>
-    <mat-progress-bar
-      mode="determinate"
-      [value]="percentage | async"
-      #progress>
-    </mat-progress-bar>
-
+    <div *ngIf="fileType === 'png'
+    || fileType === 'jpg'
+    || fileType === 'jpeg'" class="row">
+      <div class="col-xsm-12">
+        <img [src]="['file.name']"/>
+      </div>
+    </div>
+    <div *ngIf="!(isStatusClosed|async)" class="row">
+      <div class="col-xsm-12">
+        <mat-progress-bar
+          mode="determinate"
+          [value]="percentage | async"
+          #progress>
+        </mat-progress-bar>
+      </div>
+    </div>
     <div *ngIf="!(isUploadCompleted | async)">
-      <a mat-icon-button
-         (click)="handleFileUpload()"
-         [disabled]="(isUploadCompleted | async)">
-        <mat-icon>{{play_pause_icon}}</mat-icon>
-      </a>
-      <button mat-iocn-button
-              (click)="task.cancel()"
-              [disabled]="(isUploadCompleted | async)">
-        <mat-icon>cancel</mat-icon>
-      </button>
+      <div class="row">
+        <div class="col-xsm-12">
+          <a mat-icon-button
+             (click)="handleFileUpload()"
+             [disabled]="(isUploadCompleted | async)">
+
+            <mat-icon>{{playPauseIcon}}</mat-icon>
+            <mat-tooltip-component>File Upload {{isFileUploadStarted}}</mat-tooltip-component>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xsm-12">
+          <button mat-iocn-button
+                  (click)="handleFileUploadCancel()">
+            <mat-icon>cancel</mat-icon>
+            <mat-tooltip-component>Cancel File Upload</mat-tooltip-component>
+          </button>
+        </div>
+      </div>
     </div>
     <div *ngIf="snapshot | async as snap">
-      <div *ngIf="(isUploadCompleted | async)">
-        <a [href]="downloadURL"
-           [disabled]="!downloadURL"
-           mat-icon-button
-           target="_blank"
-           rel="noopener"
-           mat-button
-           class="md-app-white">
-          <mat-icon>visibility</mat-icon>
-        </a>
+      <div *ngIf="(isUploadCompleted | async)" class="row">
+        <div class="col-xsm-12 col-sm-12">
+          <a [href]="downloadURL"
+             [disabled]="!downloadURL"
+             mat-icon-button
+             target="_blank"
+             rel="noopener"
+             mat-button
+             class="md-app-white">
+            <mat-icon>visibility</mat-icon>
+            <mat-tooltip-component>View uploaded file</mat-tooltip-component>
+          </a>
+        </div>
       </div>
 
-      <div *ngIf="percentage | async as pct" class="task">
-        <div class="task">
-          <span class="md-app-hint-value">{{ pct |number }} %</span>
-          <span class="md-app-hint"> Completed</span>
-        </div>
-        <div class="task">
-          <span class="md-app-hint-value">{{ (snap.bytesTransferred | fileSize) }}</span>
-          <span class="md-app-hint"> of </span>
-          <span class="md-app-hint-value">{{ (snap.totalBytes | fileSize)}}</span>
-          <span class="md-app-hint"> Transferred</span>
+      <div *ngIf="!(isStatusClosed|async)" class="md-app-padding-5">
+        <div *ngIf="percentage | async as pct" class="md-app-padding-5">
+          <div class="row">
+            <div class="col-xsm-12">
+              <span class="md-app-hint-value">{{ pct |number }} %</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xsm-12">
+              <span class="md-app-hint md-app-small-text"> Completed</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xsm-12">
+              <span class="md-app-hint-value">{{ (snap.bytesTransferred| fileSize) }}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xsm-12">
+              <span class="md-app-hint md-app-small-text"> of </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xsm-12">
+              <span class="md-app-hint-value">{{ (snap.totalBytes | fileSize)}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xsm-12">
+              <span class="md-app-hint md-app-small-text"> Transferred</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
