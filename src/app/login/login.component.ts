@@ -107,6 +107,24 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
+  signInWithGoogle() {
+    this.authSvc
+      .signInWithGoogle()
+      .then(() => {
+        this.router.navigate(['/gallery']);
+      })
+      .catch(() => {
+        this.errorMsg = 'Your Attempt to sign in with Google Id Failed! Retry again!';
+        const message = new AppMessageModel(this.errorMsg, 'error');
+        this.toolBarSvc
+          .appMessageCommunicator
+          .next(message);
+        setTimeout(() => {
+          this.errorMsg = '';
+        }, 2000);
+      })
+  }
+
 //  resetPassword() {
   // this.auth.resetPassword(this.userForm.value.email)
   //   .then(() => this.passReset = true);
