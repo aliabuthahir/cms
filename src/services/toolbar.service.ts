@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {AppMessageModel} from '../models/app-message.model';
+import {BottomSheetModel} from "../models/bottom-sheet.model";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class ToolbarService {
   autoUploadCommunicator: Subject<boolean> = new Subject<boolean>();
   totalFilesStatusObserver: Subject<boolean> = new Subject<boolean>();
   appMessageCommunicator: Subject<AppMessageModel> = new Subject<AppMessageModel>();
+  bottomSheetCommunicator: Subject<BottomSheetModel> = new Subject<BottomSheetModel>();
 
   constructor() {
   }

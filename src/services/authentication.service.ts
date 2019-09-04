@@ -57,9 +57,7 @@ export class AuthenticationService {
     return this.user;
   }
 
-  nameOfCurrentUser() {
-    console.log('curent user');
-    console.log(localStorage.getItem('user'));
+  currentUserDetails() {
     return JSON.parse(localStorage.getItem('user'));
   }
 }

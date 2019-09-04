@@ -22,6 +22,9 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('progress', {static: true})
   progressBar;
+
+  @ViewChild('preview', {static: true})
+  preview;
   private progressBarsubscription: Subscription;
   private isAutoUploadSubscription: Subscription;
   private isStatusClosed: Subject<boolean> = new Subject<boolean>();
@@ -47,23 +50,11 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    this.isUploadCompleted.next(false);
-
-    console.log('4444444START: Inside file upload task');
-
-    console.log(this.file);
-    console.log('enableAutoUpload' + this.enableAutoUpload);
-    console.log('4444444END: Inside file upload task');
-
     this.isAutoUploadSubscription = this
       .toolBarSvc
       .autoUploadFilesObserver
       .subscribe(isAutoUploadEnabled => {
         this.enableAutoUpload = isAutoUploadEnabled ? 'true' : 'false';
-        console.log('555555START: Inside file upload task - Auto upload');
-        console.log(this.enableAutoUpload);
-        console.log('555555END: Inside file upload task - Auto upload');
-
         if (this.enableAutoUpload === 'true') {
           if (this.isFileUploadStarted === 'Not Started') {
             this.isStatusClosed.next(false);
@@ -84,8 +75,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       });
 
-    // this.isUploadCompleted.next(true);
-
+    this.isUploadCompleted.next(true);
     this.listenForProgressChange();
 
     const fileName = this.file.name;
@@ -102,6 +92,26 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.isUploadCompleted.next(false);
+
+    // FileReader support
+    if (FileReader && this.file && this.file.size) {
+      let image = new Image();
+      var fr = new FileReader();
+      fr.onload = function () {
+        // @ts-ignore
+
+        document.getElementById('preview').src = fr.result;
+      }
+      fr.readAsDataURL(this.file);
+    }
+
+    // Not supported
+    else {
+      // fallback -- perhaps submit the input to an iframe and temporarily store
+      // them on the server until the user's session ends.
+    }
+    this.isUploadCompleted.next(false);
+
     if (this.enableAutoUpload === 'true') {
       this.handleFileUpload();
     }

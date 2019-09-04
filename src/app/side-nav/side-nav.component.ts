@@ -9,6 +9,8 @@ import * as firebase from 'firebase/app';
 import {ToolbarService} from '../../services/toolbar.service';
 import {AppMessageModel} from '../../models/app-message.model';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {BottomMessageComponent} from "../upload/bottom-message/bottom-message.component";
+import {BottomSheetModel} from "../../models/bottom-sheet.model";
 
 const toDesktop = keyframes([
   style({
@@ -197,6 +199,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
   private isAutoUploadEnabled = 'false';
   private totalFilesUploaded = 0;
   private isRightDrawerAlreadyOpen = false;
+//  private bottomSheetMsg = new BottomSheetModel();
+
 
   constructor(private breakpointObserver: BreakpointObserver,
               private authSvc: AuthenticationService,
@@ -228,12 +232,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
             this.fileUploadStatusMsg
               = `${this.filesToUpload.length} Files have been selected for Upload`;
             this.rightSideDrawer.open();
-
-            const message = new AppMessageModel(this.fileUploadStatusMsg,
-              this.fileUploadStatusIcon);
-            this.toolBarSvc
-              .appMessageCommunicator
-              .next(message);
             console.log(this.isAutoUploadEnabled);
 
             console.log(this.filesToUpload);
@@ -244,34 +242,25 @@ export class SideNavComponent implements OnInit, OnDestroy {
           }
         }
       );
-    this.rightSideDrawer.openedChange.subscribe(() => {
-      if (this.rightSideDrawer.opened) {
-        this.isRightDrawerAlreadyOpen = false;
-      }
+    this.rightSideDrawer.openedStart.subscribe(() => {
+      this.isRightDrawerAlreadyOpen = false;
     });
 
-    // Auto open or close right side drawer.
-    this.drawer.openedChange.subscribe(() => {
-      if (this.drawer.opened) {
-        if (this.rightSideDrawer.opened) {
-          this.isRightDrawerAlreadyOpen = true;
-        }
-        this.rightSideDrawer.close();
-      } else if (this.isRightDrawerAlreadyOpen) {
-        if (this.totalFilesUploaded < this.filesToUpload.length) {
-          this.rightSideDrawer.open();
-          const message = new AppMessageModel(
-            this.fileUploadStatusMsg,
-            this.fileUploadStatusIcon);
-          this.toolBarSvc
-            .appMessageCommunicator
-            .next(message);
-        } else {
-          this.fileUploadStatusMsg = 'No files selected for Upload';
-        }
+    // Auto close right side drawer.
+    this.drawer.openedStart.subscribe(() => {
+      if (this.rightSideDrawer.isOpen) {
+        this.isRightDrawerAlreadyOpen = true;
       }
+      this.rightSideDrawer.close();
     });
 
+    // Auto open right side drawer.
+    this.drawer.closedStart.subscribe(() => {
+      if (this.isRightDrawerAlreadyOpen
+        && this.totalFilesUploaded < this.filesToUpload.length) {
+        this.rightSideDrawer.open();
+      }
+    });
 
     this.isAutoUploadSubscription = this
       .toolBarSvc
@@ -289,8 +278,18 @@ export class SideNavComponent implements OnInit, OnDestroy {
       .totalFilesStatusObserver
       .subscribe(isFileUploadCompleted => {
         this.totalFilesUploaded++;
-        this.fileUploadStatusMsg
-          = 'File Upload in Progress...';
+
+        // this.bottomSheetMsg.totalFiles = this.filesToUpload.length;
+        // this.bottomSheetMsg.totalFilesUploaded = this.totalFilesUploaded;
+
+          this.bottomSheet.open(BottomMessageComponent, {
+            data: {'totalFiles': this.filesToUpload.length,
+            'totalFilesUploaded': this.totalFilesUploaded},
+            restoreFocus: true
+          });
+        // this.toolBarSvc
+        //   .bottomSheetCommunicator
+        //   .next(this.bottomSheetMsg);
 
         if (this.totalFilesUploaded >= this.filesToUpload.length) {
           this.filesToUpload = new Array();
@@ -305,7 +304,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
             .next(message);
           this.rightSideDrawer.close();
         }
-        // TODO: add code to show bottom up slider message.
       });
   }
 

@@ -19,7 +19,7 @@ export class ImageService {
         this.uid = auth.uid;
       }
     });
-  }
+   }
 
   getImages(): Observable<GalleryImageModel[]> {
     let result: Observable<GalleryImageModel[][]>;

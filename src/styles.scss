@@ -100,6 +100,18 @@ $darkTextPalette: mat-palette($mat-gray, 900);
   padding: 5px !important;
 }
 
+.md-app-black-bg{
+  background-color: mat-color($darkTextPalette) !important;
+}
+
+.md-app-grey-bg{
+background-color: mat-color($dropZonePalette) !important;
+}
+
+.md-app-rotate-90-deg{
+    transform: rotate(90deg);
+}
+
 .active-list-item {
   font-weight: bold;
   color: mat-color($accentPalette) !important;
