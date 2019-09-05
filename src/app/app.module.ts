@@ -45,6 +45,9 @@ import {TextLastpartPipe} from '../pipes/text-lastpart.pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FileTrimmerPipe } from '../pipes/file-trimmer.pipe';
+import {MatChipsModule} from '@angular/material/chips';
+import { ScrollListenerDirective } from '../directives/scroll-listener.directive';
+import { LoadSpinnerComponent } from './common/load-spinner/load-spinner.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +66,9 @@ import { FileTrimmerPipe } from '../pipes/file-trimmer.pipe';
     TextLastpartPipe,
     InfoCardComponent,
     InfoTitleComponent,
-    FileTrimmerPipe],
+    FileTrimmerPipe,
+    ScrollListenerDirective,
+    LoadSpinnerComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -86,6 +91,7 @@ import { FileTrimmerPipe } from '../pipes/file-trimmer.pipe';
     MatTooltipModule,
     MatCheckboxModule,
     MatBottomSheetModule,
+    MatChipsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

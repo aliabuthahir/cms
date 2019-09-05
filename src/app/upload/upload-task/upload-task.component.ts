@@ -130,13 +130,12 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
     const fr = new FileReader();
     fr.onload = (file => {
       return evt => {
-        console.log(evt.target.result);
-        console.log(file);
 // @ts-ignore
         document.getElementById(file).src = evt.target.result;
       };
     })(this.previewFieldName);
     fr.readAsDataURL(this.file);
+
 
     /*// Not supported
     else {

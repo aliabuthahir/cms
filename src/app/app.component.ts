@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
-  title = 'campusworks';
+  title = 'AutoGraph';
 
   private appMessageObserver: Subscription;
 

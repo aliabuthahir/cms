@@ -15,7 +15,7 @@
        [routerLinkActive]="['mat-accent']"
        [routerLinkActiveOptions]="{ exact: true }"
        class="mat-button"
-    >{{'campusworks'| uppercase}}</a>
+    >{{'AutoGraph'| uppercase}}</a>
     <span class="spacer"></span>
 
     <div *ngIf="(!(isHandset$ | async)) && (user|async)?.uid"
@@ -174,14 +174,10 @@
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="'over'"
                [opened]=false>
-    <mat-toolbar>
-      <mat-toolbar-row class="mat-t">
+    <mat-toolbar  color="primary">
+      <mat-toolbar-row>
         <div class="row">
-          <div class="col-xsm-12
-          col-sm-2
-          col-md-2
-          col-lg-2
-          col-xl-2">
+          <div class="col-3">
             <a mat-icon-button
                matTooltip="Close Files To Upload"
                     (click)="toolBarSvc.toggleRightSideNav()">
@@ -189,14 +185,14 @@
             </a>
           </div>
           <div class="mat-body
-           col-xsm-12">
+           col-9 align-items-center">
             FILES TO UPLOAD
           </div>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>
 
-    <mat-card class="mat-elevation-z0">
+    <mat-card color='accent' class="mat-elevation-z0">
       <!-- START: File Upload Inner ToolBar -->
       <mat-card-content>
         <div class="row">

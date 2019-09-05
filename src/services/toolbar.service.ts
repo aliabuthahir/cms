@@ -20,9 +20,10 @@ export class ToolbarService {
   autoUploadCommunicator: Subject<boolean> = new Subject<boolean>();
   appMessageCommunicator: Subject<AppMessageModel> = new Subject<AppMessageModel>();
   fileUploadCancelCommunicator: Subject<boolean> = new Subject<boolean>();
+  removeFromListCommunicator: Subject<boolean> = new Subject<boolean>();
 
   toolBarCommunicator: Subject<boolean> = new Subject<boolean>();
-  bottomSheetCommunicator: Subject<BottomSheetModel> = new Subject<BottomSheetModel>();
+//  bottomSheetCommunicator: Subject<BottomSheetModel> = new Subject<BottomSheetModel>();
 
   constructor() {
   }

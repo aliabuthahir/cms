@@ -1,8 +1,8 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
-import {AngularFireStorage} from "@angular/fire/storage";
-import {AngularFirestore} from "@angular/fire/firestore";
-import * as firebase from "firebase";
-import {ImageModel} from "../../models/image.model";
+import {AngularFireStorage} from '@angular/fire/storage';
+import {AngularFirestore} from '@angular/fire/firestore';
+import * as firebase from 'firebase';
+import {ImageModel} from '../../models/image.model';
 
 @Component({
   selector: 'app-gallery',
@@ -24,7 +24,8 @@ export class GalleryComponent implements OnInit, OnChanges {
     this.loadImages();
   }
 
-  loadImages(){
+  loadImages() {
+/*
     let storageRef = firebase.storage().ref('new_uploads');
     storageRef.listAll().then(function(result) {
       result.items.forEach(function(imageRef) {
@@ -35,12 +36,17 @@ export class GalleryComponent implements OnInit, OnChanges {
           imageModel.name =imageRef.name;
           imageModel.url=url;
           this.images.push(imageModel);
-        }).catch(function(error) {
+        }).catch((error)=> {
           // Handle any errors
         });
       });
-    }).catch(function(error) {
+    }).catch((error) =>{
       // Handle any errors
     });
+*/
+  }
+  scrollHandler(event) {
+    console.log('--------------');
+    console.log(event);
   }
 }
