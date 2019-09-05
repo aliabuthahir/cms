@@ -44,6 +44,7 @@ import {FileSizePipe} from '../pipes/file-size.pipe';
 import {TextLastpartPipe} from '../pipes/text-lastpart.pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FileTrimmerPipe } from '../pipes/file-trimmer.pipe';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     TextFirstpartPipe,
     TextLastpartPipe,
     InfoCardComponent,
-    InfoTitleComponent],
+    InfoTitleComponent,
+    FileTrimmerPipe],
   imports: [
     BrowserModule,
     FormsModule,

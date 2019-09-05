@@ -20,7 +20,9 @@ export class UploadComponent implements OnInit, AfterViewInit, OnDestroy {
     this.autoUploadSubscription = this.toolBarSvc
       .autoUploadCommunicator
       .subscribe(autoUploadStatus => {
+        console.log('sdfdsfdsf' + autoUploadStatus);
         this.autoUpload.checked = autoUploadStatus;
+        console.log('sdfdsfdsf' + this.autoUpload.checked);
       });
   }
 
@@ -41,6 +43,9 @@ export class UploadComponent implements OnInit, AfterViewInit, OnDestroy {
   enableAutoUpload() {
     this.toolBarSvc
       .autoUploadFilesObserver
+      .next(!this.autoUpload.checked);
+    this.toolBarSvc
+      .toolBarCommunicator
       .next(!this.autoUpload.checked);
   }
 }

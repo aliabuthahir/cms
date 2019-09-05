@@ -194,9 +194,12 @@ export class SideNavComponent implements OnInit, OnDestroy {
   private isRightSideNavOpen: Subscription;
   private isAutoUploadSubscription: Subscription;
   private totalFilesUploadedObserver: Subscription;
+  private toolBarObserver: Subscription;
+
   private isAutoUploadEnabled = 'false';
   private totalFilesUploaded = 0;
   private isRightDrawerAlreadyOpen = false;
+
 //  private bottomSheetMsg = new BottomSheetModel();
 
 
@@ -223,20 +226,9 @@ export class SideNavComponent implements OnInit, OnDestroy {
           if (typeof value === 'boolean') {
             this.rightSideDrawer.toggle();
           } else {
-            console.log('33333START: Inside file reciever');
-
             this.totalFilesUploaded = 0;
             this.filesToUpload = value;
-            this.fileUploadStatusMsg
-              = `${this.filesToUpload.length} Files have been selected for Upload`;
             this.rightSideDrawer.open();
-            console.log(this.isAutoUploadEnabled);
-
-            console.log(this.filesToUpload);
-            console.log(this.rightSideDrawer.opened);
-
-            console.log('3333END: Inside file reciever');
-
           }
         }
       );
@@ -264,13 +256,9 @@ export class SideNavComponent implements OnInit, OnDestroy {
       .toolBarSvc
       .autoUploadFilesObserver
       .subscribe(isAutoUploadEnabled => {
-        console.log('6666666TART: Inside Auto upload');
-
         this.isAutoUploadEnabled = isAutoUploadEnabled ? 'true' : 'false';
-        this.autoUpload.checked = isAutoUploadEnabled;
-        console.log(this.isAutoUploadEnabled);
-        console.log('6666666End: Inside Auto upload');
       });
+
 
     this.totalFilesUploadedObserver = this.toolBarSvc
       .totalFilesStatusObserver
@@ -279,12 +267,12 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
         // this.bottomSheetMsg.totalFiles = this.filesToUpload.length;
         // this.bottomSheetMsg.totalFilesUploaded = this.totalFilesUploaded;
-/*
-          this.bottomSheet.open(BottomMessageComponent, {
-            data: {'totalFiles': this.filesToUpload.length,
-            'totalFilesUploaded': this.totalFilesUploaded},
-            restoreFocus: true
-          });*/
+        /*
+                  this.bottomSheet.open(BottomMessageComponent, {
+                    data: {'totalFiles': this.filesToUpload.length,
+                    'totalFilesUploaded': this.totalFilesUploaded},
+                    restoreFocus: true
+                  });*/
         // this.toolBarSvc
         //   .bottomSheetCommunicator
         //   .next(this.bottomSheetMsg);
@@ -303,6 +291,13 @@ export class SideNavComponent implements OnInit, OnDestroy {
           this.rightSideDrawer.close();
         }
       });
+
+    this.toolBarObserver = this.toolBarSvc
+      .toolBarCommunicator
+      .subscribe(autoUploadStatus => {
+        this.autoUpload.checked = autoUploadStatus;
+      });
+
   }
 
   ngOnDestroy() {
@@ -329,9 +324,14 @@ export class SideNavComponent implements OnInit, OnDestroy {
   }
 
   changeAutoUploadStatus() {
-    this.isAutoUploadEnabled = !this.autoUpload.checked ? 'true' : 'false';
-    console.log('this.isAutoUploadEnabled' + this.isAutoUploadEnabled);
-    this.toolBarSvc.autoUploadCommunicator.next(!this.autoUpload.checked);
+    this.toolBarSvc
+      .autoUploadFilesObserver
+      .next(!this.autoUpload.checked);
+    this.toolBarSvc
+      .autoUploadCommunicator.next(!this.autoUpload.checked);
+
+    // this.isAutoUploadEnabled = !this.autoUpload.checked ? 'true' : 'false';
+    // this.toolBarSvc.autoUploadCommunicator.next(!this.autoUpload.checked);
   }
 
   toggleNavBarState() {

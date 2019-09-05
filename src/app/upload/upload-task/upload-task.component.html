@@ -6,6 +6,10 @@ mat-elevation-z1" cdkTrapFocus>
                 matTooltip="Upload to Cloud Server was successful"
                 class="md-app-hint">cloud_done
       </mat-icon>
+      <mat-icon *ngIf="(isUploadCancelled|async)"
+                matTooltip="Upload to Cloud Server was successful"
+                class="mat-warn">cloud_off
+      </mat-icon>
     </div>
     <mat-card-title class="mat-body">UPLOAD STATUS</mat-card-title>
     <mat-card-subtitle class="mat-small">{{isFileUploadStarted}}</mat-card-subtitle>
@@ -31,7 +35,7 @@ mat-elevation-z1" cdkTrapFocus>
   <mat-card-actions>
     <div class="row">
       <div class="col-6">
-        <p class="mat-body">{{fileName}}</p>
+        <p class="mat-body">{{fileName|fileTrimmer}}</p>
       </div>
       <div class="col-2">
         <a [href]="downloadURL"
@@ -46,18 +50,20 @@ mat-elevation-z1" cdkTrapFocus>
       </div>
       <div class="col-2">
         <a mat-icon-button
-           matTooltip="Cancel File Upload"
+           matTooltip="Cancel Upload"
            (click)="handleFileUploadCancel()"
-           [disabled]="(isUploadCompleted | async)
-|| (isUploadCancelled | async)">
+           [disabled]="((isUploadCompleted | async)
+|| (isUploadCancelled | async))">
           <mat-icon>cancel</mat-icon>
         </a>
       </div>
       <div class="col-2">
         <a mat-icon-button
+           class="mat-icon-button"
+           matTooltip="{{playPauseToolTip}}"
            (click)="handleFileUpload()"
-           [disabled]="(isUploadCompleted | async)
-|| (isUploadCancelled | async)">
+           [disabled]="((isUploadCompleted | async)
+|| (isUploadCancelled | async))">
           <mat-icon>{{playPauseIcon}}</mat-icon>
         </a>
       </div>

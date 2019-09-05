@@ -33,7 +33,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private progressBarsubscription: Subscription;
   private isAutoUploadSubscription: Subscription;
-  private isStatusClosed: Subject<boolean> = new Subject<boolean>();
+//  private isStatusClosed: Subject<boolean> = new Subject<boolean>();
 
   previewFieldName = 'preview';
 
@@ -80,12 +80,12 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
 //            this.isStatusClosed.next(false);
             this.startUpload();
             this.isFileUploadStarted = this.STARTED;
-            this.playPauseIcon = 'paused';
+            this.playPauseIcon = 'pause';
             this.playPauseToolTip = this.PAUSE;
           } else if (this.isFileUploadStarted === this.PAUSED) {
             this.task.resume();
             this.isFileUploadStarted = this.STARTED;
-            this.playPauseIcon = 'paused';
+            this.playPauseIcon = 'pause';
             this.playPauseToolTip = this.PAUSE;
           }
         } else if (this.enableAutoUpload === 'false') {
@@ -143,11 +143,6 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  createListItem(evt, file) {
-    console.log(evt.target.result);
-    console.log(file);
-  }
-
   startUpload() {
     // const path = `new_uploads/${Date.now()}_${this.file.name}`;
     const path = `new_uploads/${this.file.name}`;
@@ -191,9 +186,11 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
               .totalFilesStatusObserver
               .next(true);
 
-            setTimeout(() => {
-              this.isStatusClosed.next(true);
-            }, 5000);
+            /*
+                        setTimeout(() => {
+                          this.isStatusClosed.next(true);
+                        }, 5000);
+            */
           }
         });
     }
@@ -219,10 +216,10 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
 
   handleFileUpload() {
     if (this.isFileUploadStarted === this.NOT_STARTED) {
-      this.isStatusClosed.next(false);
+//      this.isStatusClosed.next(false);
       this.startUpload();
       this.isFileUploadStarted = this.STARTED;
-      this.playPauseIcon = 'paused';
+      this.playPauseIcon = 'pause';
       this.playPauseToolTip = this.PAUSE;
     } else if (this.isFileUploadStarted === this.STARTED) {
       this.task.pause();
@@ -232,13 +229,15 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
     } else if (this.isFileUploadStarted === this.PAUSED) {
       this.task.resume();
       this.isFileUploadStarted = this.STARTED;
-      this.playPauseIcon = 'paused';
+      this.playPauseIcon = 'pause';
       this.playPauseToolTip = this.PAUSE;
     }
   }
 
   handleFileUploadCancel() {
-    this.task.cancel();
+    if (this.task) {
+      this.task.cancel();
+    }
     this.isFileUploadStarted = this.CANCELLED;
     this.playPauseToolTip = this.START;
     this.isUploadCancelled.next(true);

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {AppMessageModel} from '../models/app-message.model';
-import {BottomSheetModel} from "../models/bottom-sheet.model";
+import {BottomSheetModel} from '../models/bottom-sheet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +16,10 @@ export class ToolbarService {
   signInPageObserver: Subject<boolean> = new Subject<boolean>();
   rightSideNavObserver: Subject<any> = new Subject<any>();
   autoUploadFilesObserver: Subject<boolean> = new Subject<boolean>();
-  autoUploadCommunicator: Subject<boolean> = new Subject<boolean>();
   totalFilesStatusObserver: Subject<boolean> = new Subject<boolean>();
+  autoUploadCommunicator: Subject<boolean> = new Subject<boolean>();
   appMessageCommunicator: Subject<AppMessageModel> = new Subject<AppMessageModel>();
+  toolBarCommunicator: Subject<boolean> = new Subject<boolean>();
   bottomSheetCommunicator: Subject<BottomSheetModel> = new Subject<BottomSheetModel>();
 
   constructor() {
