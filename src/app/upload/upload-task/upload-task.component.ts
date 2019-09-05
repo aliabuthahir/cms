@@ -35,6 +35,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
   private isAutoUploadSubscription: Subscription;
 //  private isStatusClosed: Subject<boolean> = new Subject<boolean>();
 
+  private uploadCancelObserver: Subscription;
   previewFieldName = 'preview';
 
   private units = [
@@ -110,10 +111,17 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
       .toLocaleUpperCase();
     this.fileType = this.file.type.toLocaleUpperCase();
     this.fileSize = this.getFileSize().toLocaleUpperCase();
+
+    this.uploadCancelObserver = this.toolBarSvc
+      .fileUploadCancelCommunicator
+      .subscribe(isFileCancelled => {
+        this.handleFileUploadCancel();
+      });
   }
 
   ngOnDestroy() {
     this.isAutoUploadSubscription.unsubscribe();
+    this.uploadCancelObserver.unsubscribe();
   }
 
   ngAfterViewInit() {

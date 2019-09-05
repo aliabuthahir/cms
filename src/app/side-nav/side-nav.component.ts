@@ -305,6 +305,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
     this.isRightSideNavOpen.unsubscribe();
     this.isAutoUploadSubscription.unsubscribe();
     this.totalFilesUploadedObserver.unsubscribe();
+    this.toolBarObserver.unsubscribe();
   }
 
   signOut() {
@@ -332,6 +333,12 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
     // this.isAutoUploadEnabled = !this.autoUpload.checked ? 'true' : 'false';
     // this.toolBarSvc.autoUploadCommunicator.next(!this.autoUpload.checked);
+  }
+
+  cancelUploadOfAllFiles() {
+    this.toolBarSvc
+      .fileUploadCancelCommunicator
+      .next(true);
   }
 
   toggleNavBarState() {

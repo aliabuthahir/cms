@@ -30,6 +30,9 @@ export class UploadComponent implements OnInit, AfterViewInit, OnDestroy {
     this.toolBarSvc
       .autoUploadFilesObserver
       .next(this.autoUpload.checked);
+    this.toolBarSvc
+      .toolBarCommunicator
+      .next(this.autoUpload.checked);
   }
 
   ngOnDestroy(): void {
@@ -47,5 +50,11 @@ export class UploadComponent implements OnInit, AfterViewInit, OnDestroy {
     this.toolBarSvc
       .toolBarCommunicator
       .next(!this.autoUpload.checked);
+  }
+
+  cancelUploadOfAllFiles() {
+    this.toolBarSvc
+      .fileUploadCancelCommunicator
+      .next(true);
   }
 }

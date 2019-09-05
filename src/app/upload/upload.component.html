@@ -7,12 +7,11 @@
           </p>
         </div>
         <div class="col-xsm-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
-          <button mat-icon-button
-                  (click)="toggleRightSideNav()"
-                  class="mat-primary">
+          <a mat-icon-button
+             matTooltip="Open Files To Upload"
+             (click)="toggleRightSideNav()">
             <mat-icon>settings</mat-icon>
-            <mat-tooltip-component>Open Files To Upload</mat-tooltip-component>
-          </button>
+          </a>
         </div>
       </div>
     </mat-card-title>
@@ -22,9 +21,21 @@
     </app-uploader>
   </mat-card-content>
   <mat-card-actions>
+  <div class="row">
+    <div class="col-xsm-12">
     <mat-checkbox #autoUpload
                   checked=true
+                  matTooltip="Auto Upload All Selected Files"
                   (click)="enableAutoUpload()">Auto Upload Files
     </mat-checkbox>
+    </div>
+    <div class="col-xsm-12">
+      <a mat-icon-button
+         matTooltip="Cancel Upload of All Files"
+         (click)="cancelUploadOfAllFiles()">
+        <mat-icon>cancel</mat-icon>
+      </a>
+    </div>
+  </div>
   </mat-card-actions>
 </mat-card>

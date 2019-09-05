@@ -19,6 +19,8 @@ export class ToolbarService {
   totalFilesStatusObserver: Subject<boolean> = new Subject<boolean>();
   autoUploadCommunicator: Subject<boolean> = new Subject<boolean>();
   appMessageCommunicator: Subject<AppMessageModel> = new Subject<AppMessageModel>();
+  fileUploadCancelCommunicator: Subject<boolean> = new Subject<boolean>();
+
   toolBarCommunicator: Subject<boolean> = new Subject<boolean>();
   bottomSheetCommunicator: Subject<BottomSheetModel> = new Subject<BottomSheetModel>();
 

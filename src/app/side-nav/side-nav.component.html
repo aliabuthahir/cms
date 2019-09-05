@@ -182,17 +182,14 @@
           col-md-2
           col-lg-2
           col-xl-2">
-            <button mat-icon-button
-                    (click)="toolBarSvc.toggleRightSideNav()"
-                    class="mat-button
-                    mat-primary">
+            <a mat-icon-button
+               matTooltip="Close Files To Upload"
+                    (click)="toolBarSvc.toggleRightSideNav()">
               <mat-icon>close</mat-icon>
-            </button>
+            </a>
           </div>
           <div class="mat-body
-          md-app-white
-          md-app-padding-5
-          col-xsm-12">
+           col-xsm-12">
             FILES TO UPLOAD
           </div>
         </div>
@@ -205,14 +202,23 @@
         <div class="row">
           <div class="col-xsm-12">
             <mat-checkbox #autoUpload
+                          matTooltip="Auto Upload All Selected Files"
                           (click)="changeAutoUploadStatus()"
                           class="mat-body">Auto Upload Files
             </mat-checkbox>
           </div>
+          <div class="col-xsm-12">
+          <a mat-icon-button
+             matTooltip="Cancel Upload of All Files"
+          (click)="cancelUploadOfAllFiles()">
+            <mat-icon>cancel</mat-icon>
+          </a>
+          </div>
+
           <div
                class="col-xsm-12">
             <a mat-icon-button
-               [disabled]="(totalFilesUploaded<1)
+               [disabled]="(totalFilesUploaded<filesToUpload.length)
                || (totalFilesUploaded>=filesToUpload.length)"
                matTooltip=""
                     [matMenuTriggerFor]="uploadStatusMenu"
