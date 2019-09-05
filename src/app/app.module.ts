@@ -26,8 +26,6 @@ import {LoginComponent} from './login/login.component';
 import {UploadComponent} from './upload/upload.component';
 import {AuthenticationGaurdService} from '../services/authenticationGaurd.service';
 import {AuthenticationService} from '../services/authentication.service';
-import {ImageService} from '../services/image.service';
-import {UploadService} from '../services/upload.service';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
@@ -96,9 +94,7 @@ import { BottomMessageComponent } from './upload/bottom-message/bottom-message.c
     AngularFireStorageModule
   ],
    providers: [AuthenticationGaurdService,
-    AuthenticationService,
-    ImageService,
-    UploadService],
+    AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

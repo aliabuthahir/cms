@@ -21,6 +21,7 @@ export class UploaderComponent implements OnInit {
   }
 
   handleFiles(event) {
+    event.preventDefault();
     const filesSelected = event.target.files;
     const files = new Array();
     for (let i = 0; i < filesSelected.length; i++) {

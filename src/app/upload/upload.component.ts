@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {UploadService} from '../../services/upload.service';
 import {ToolbarService} from '../../services/toolbar.service';
 import {Subscription} from 'rxjs';
 
@@ -14,8 +13,7 @@ export class UploadComponent implements OnInit, AfterViewInit, OnDestroy {
 
   autoUploadSubscription: Subscription;
 
-  constructor(private uploadSvc: UploadService,
-              private toolBarSvc: ToolbarService) {
+  constructor(private toolBarSvc: ToolbarService) {
   }
 
   ngOnInit(): void {

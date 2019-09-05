@@ -6,16 +6,11 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <ul id="thumbnailsList"
-        *ngIf="(images | async); else noImages">
-      <li *ngFor="let image of images | async" class="img">
-        <a
-          routerLink="['/images', image.key]"
-          class="mat-button">
-          <img src="{{image.url}}" class="tn"/>
-        </a>
-      </li>
-    </ul>
+    <div *ngIf="images; else noImages">
+      <app-image-detail *ngFor="let image of images"
+                       [imageModel]="image"></app-image-detail>
+    </div>
+
     <ng-template #noImages>
       <span class="mat-body
       md-app-hint-value">No Images to show.</span>

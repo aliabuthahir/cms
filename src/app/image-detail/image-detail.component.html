@@ -1,10 +1,124 @@
-<mat-card class="md-app-card mat-elevation-z0" cdkTrapFocus>
+<mat-card class="md-app-card
+mat-elevation-z1" cdkTrapFocus>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon
+                matTooltip="Upload to Cloud Server was successful"
+                class="md-app-hint">cloud_done
+      </mat-icon>
+    </div>
+    <mat-card-title class="mat-body">DOWNLOAD STATUS</mat-card-title>
+    <mat-card-subtitle class="mat-small"></mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="" id="preview"/>
   <mat-card-content>
-<div [ngStyle]="{'background-image': 'url('+ imageUrl +')'}">
-</div>
+    <mat-progress-bar
+      mode="determinate"
+      [value]=""
+      #progress>
+    </mat-progress-bar>
   </mat-card-content>
   <mat-card-actions>
-    <p class="md-app-hint">test</p>
+    <div class="row">
+      <div class="col-6">
+        <p class="mat-body">{{imageModel.name}}</p>
+      </div>
+      <div class="col-2">
+        <a [href]="imageModel.url"
+           [disabled]="!imageModel.url"
+           mat-icon-button
+           matTooltip="View uploaded file"
+           target="_blank"
+           rel="noopener"
+           mat-button>
+          <mat-icon>visibility</mat-icon>
+        </a>
+      </div>
+      <div class="col-2">
+        <a mat-icon-button
+           matTooltip="Cancel File Upload"
+           (click)="handleFileDowmload()"
+           [disabled]="(isDownloadCompleted | async)">
+          <mat-icon>cancel</mat-icon>
+        </a>
+      </div>
+      <div class="col-2">
+        <a mat-icon-button
+           (click)="handleFileUpload()"
+           [disabled]="(isUploadCompleted | async)">
+          <mat-icon>{{playPauseIcon}}</mat-icon>
+        </a>
+      </div>
+    </div>
   </mat-card-actions>
 </mat-card>
+
+<!-- START: File Info Menu -->
+<mat-menu #fileInfoMenu="matMenu"
+          class="avatar-button">
+  <mat-card class="mat-elevation-z0">
+    <!-- START: File Info Card -->
+    <mat-card-header>
+      <div class="row">
+        <div class="col-xsm-12
+              col-sm-2
+              col-md-2
+              col-lg-2
+              col-xl-2">
+          <mat-icon>info_circle
+          </mat-icon>
+        </div>
+        <div class="md-app-small-text
+              col-xsm-12">
+          File Info
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-divider></mat-divider>
+      <app-info-card [title]="['Name']" [msg]="[fileName]"></app-info-card>
+      <app-info-card [title]="['Type']" [msg]="[fileType]"></app-info-card>
+      <app-info-card [title]="['Size']" [msg]="[fileSize]"></app-info-card>
+    </mat-card-content>
+    <mat-card-actions class="md-app-black-bg">
+      <mat-divider></mat-divider>
+      <div class="row">
+        <div class="md-app-hint-value
+              mat-small
+              md-app-padding-left-10
+              col-xsm-12">
+          Upload Status
+        </div>
+      </div>
+      <div class="row">
+        <div class="md-app-hint
+              md-app-small-text
+              md-app-padding-left-10
+              col-xsm-12">
+          Completed -
+        </div>
+        <div class="md-app-hint-value md-app-small-text col-xsm-12">
+          {{(percentage | async)}} %
+        </div>
+      </div>
+
+      <div *ngIf="snapshot | async as snap" class="row">
+        <div class="md-app-hint
+              md-app-small-text
+              md-app-padding-left-10
+              col-xsm-12">
+          Transferred -
+        </div>
+        <div class="md-app-hint-value
+               md-app-small-text
+               md-app-padding-left-10
+               col-xsm-12">{{ (snap.bytesTransferred| fileSize) }}
+        </div>
+      </div>
+    </mat-card-actions>
+    <!-- END: File Info Card -->
+  </mat-card>
+</mat-menu>
+<!-- END: File Info Menu -->
+
 
