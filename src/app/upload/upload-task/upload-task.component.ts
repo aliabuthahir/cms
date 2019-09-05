@@ -168,7 +168,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
         .animationEnd
         .subscribe(percentage => {
           if (percentage.value === 100) {
-            this.isFileUploadStarted = 'Completed';
+            this.isFileUploadStarted = this.COMPLETED;
             this.isUploadCompleted.next(true);
             this.file = undefined;
             this.toolBarSvc
