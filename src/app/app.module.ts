@@ -44,7 +44,6 @@ import {FileSizePipe} from '../pipes/file-size.pipe';
 import {TextLastpartPipe} from '../pipes/text-lastpart.pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { BottomMessageComponent } from './upload/bottom-message/bottom-message.component';
 
 @NgModule({
   declarations: [
@@ -62,9 +61,7 @@ import { BottomMessageComponent } from './upload/bottom-message/bottom-message.c
     TextFirstpartPipe,
     TextLastpartPipe,
     InfoCardComponent,
-    InfoTitleComponent,
-    BottomMessageComponent
-  ],
+    InfoTitleComponent],
   imports: [
     BrowserModule,
     FormsModule,

@@ -9,8 +9,6 @@ import * as firebase from 'firebase/app';
 import {ToolbarService} from '../../services/toolbar.service';
 import {AppMessageModel} from '../../models/app-message.model';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {BottomMessageComponent} from "../upload/bottom-message/bottom-message.component";
-import {BottomSheetModel} from "../../models/bottom-sheet.model";
 
 const toDesktop = keyframes([
   style({
@@ -281,12 +279,12 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
         // this.bottomSheetMsg.totalFiles = this.filesToUpload.length;
         // this.bottomSheetMsg.totalFilesUploaded = this.totalFilesUploaded;
-
+/*
           this.bottomSheet.open(BottomMessageComponent, {
             data: {'totalFiles': this.filesToUpload.length,
             'totalFilesUploaded': this.totalFilesUploaded},
             restoreFocus: true
-          });
+          });*/
         // this.toolBarSvc
         //   .bottomSheetCommunicator
         //   .next(this.bottomSheetMsg);

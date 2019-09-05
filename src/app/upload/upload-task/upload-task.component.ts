@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {finalize, tap} from 'rxjs/operators';
@@ -22,14 +22,20 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input()
   private enableAutoUpload = 'false';
 
+  @ViewChild('image', {static: true})
+  image: ElementRef;
+
   @ViewChild('progress', {static: true})
   progressBar;
 
   @ViewChild('preview', {static: true})
   preview;
+
   private progressBarsubscription: Subscription;
   private isAutoUploadSubscription: Subscription;
   private isStatusClosed: Subject<boolean> = new Subject<boolean>();
+
+  previewFieldName = 'preview';
 
   private units = [
     'bytes',
@@ -49,9 +55,9 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
   COMPLETED = 'COMPLETED';
   CANCELLED = 'CANCELLED';
 
-  START='Start Upload';
-  PAUSE= 'Pause Upload';
-  RESUME='Resume Upload';
+  START = 'Start Upload';
+  PAUSE = 'Pause Upload';
+  RESUME = 'Resume Upload';
 
   playPauseToolTip = this.START;
 
@@ -96,6 +102,9 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
     this.listenForProgressChange();
 
     const fileName = this.file.name;
+    this.previewFieldName = `preview_${fileName}_${Date.now()}`;
+    console.log('preview name');
+    console.log(this.previewFieldName);
     this.fileName = fileName
       .substr(0, fileName.indexOf('.'))
       .toLocaleUpperCase();
@@ -110,26 +119,33 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.isUploadCompleted.next(false);
 
-    // FileReader support
-    if (FileReader) {
-      let image = new Image();
-      var fr = new FileReader();
-      fr.onload = function () {
-        // @ts-ignore
-        document.getElementById('preview').src = fr.result;
-      }
-      fr.readAsDataURL(this.file);
-    }
-    // Not supported
+    const fr = new FileReader();
+    fr.onload = (file => {
+      return evt => {
+        console.log(evt.target.result);
+        console.log(file);
+// @ts-ignore
+        document.getElementById(file).src = evt.target.result;
+      };
+    })(this.previewFieldName);
+    fr.readAsDataURL(this.file);
+
+    /*// Not supported
     else {
       // fallback -- perhaps submit the input to an iframe and temporarily store
       // them on the server until the user's session ends.
     }
+*/
     this.isUploadCompleted.next(false);
 
     if (this.enableAutoUpload === 'true') {
       this.handleFileUpload();
     }
+  }
+
+  createListItem(evt, file) {
+    console.log(evt.target.result);
+    console.log(file);
   }
 
   startUpload() {
@@ -223,7 +239,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
 
   handleFileUploadCancel() {
     this.task.cancel();
-    this.isFileUploadStarted =  this.CANCELLED;
+    this.isFileUploadStarted = this.CANCELLED;
     this.playPauseToolTip = this.START;
     this.isUploadCancelled.next(true);
   }
