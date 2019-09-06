@@ -49,6 +49,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { ScrollListenerDirective } from '../directives/scroll-listener.directive';
 import { LoadSpinnerComponent } from './common/load-spinner/load-spinner.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatBottomSheetModule,
     MatChipsModule,
     MatGridListModule,
+    MatSlideToggleModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
