@@ -1,54 +1,54 @@
-<mat-card class="md-app-card child
-mat-elevation-z1" cdkTrapFocus>
-  <mat-card-header>
-    <div mat-card-avatar>
-      <mat-icon
-                matTooltip="Upload to Cloud Server was successful"
-                class="md-app-hint">cloud_done
-      </mat-icon>
-    </div>
-    <mat-card-title class="mat-body">DOWNLOAD STATUS</mat-card-title>
-    <mat-card-subtitle class="mat-small"></mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="{{imageModel.url}}" id="preview"/>
-  <mat-card-content>
-  </mat-card-content>
-  <mat-card-actions>
-    <div class="row">
-      <div class="col-6">
-        <p class="mat-body">{{imageModel.name}}</p>
+<mat-card class="md-app-card
+mat-elevation-z5" cdkTrapFocus>
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon
+          matTooltip="Upload to Cloud Server was successful"
+          class="md-app-hint">cloud_done
+        </mat-icon>
       </div>
-      <div class="col-2">
-        <a [href]="imageModel.url"
-           [disabled]="!imageModel.url"
-           mat-icon-button
-           matTooltip="View uploaded file"
-           target="_blank"
-           rel="noopener"
-           mat-button>
-          <mat-icon>visibility</mat-icon>
-        </a>
+      <mat-card-title class="mat-body">DOWNLOAD STATUS</mat-card-title>
+      <mat-card-subtitle class="mat-small"></mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{imageModel.url}}" id="preview"/>
+    <mat-card-content>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="row">
+        <div class="col-6">
+          <p class="mat-body">{{imageModel.name}}</p>
+        </div>
+        <div class="col-2">
+          <a [href]="imageModel.url"
+             [disabled]="!imageModel.url"
+             mat-icon-button
+             matTooltip="View uploaded file"
+             target="_blank"
+             rel="noopener"
+             mat-button>
+            <mat-icon>visibility</mat-icon>
+          </a>
+        </div>
+        <div class="col-2">
+          <a mat-icon-button
+             matTooltip="Delete This File In Cloud Storage"
+             (click)="handleFileDelete()"
+             [disabled]="(isDownloadCompleted | async)">
+            <mat-icon>cancel</mat-icon>
+          </a>
+        </div>
+        <div class="col-2">
+          <a mat-icon-button>
+            <!--
+                       (click)="handleFileDowmload()">
+            -->
+            <!--           [disabled]="(isUploadCompleted | async)">-->
+            <mat-icon>{{playPauseIcon}}</mat-icon>
+          </a>
+        </div>
       </div>
-      <div class="col-2">
-        <a mat-icon-button
-           matTooltip="Delete This File In Cloud Storage"
-           (click)="handleFileDelete()"
-           [disabled]="(isDownloadCompleted | async)">
-          <mat-icon>cancel</mat-icon>
-        </a>
-      </div>
-      <div class="col-2">
-        <a mat-icon-button>
-<!--
-           (click)="handleFileDowmload()">
--->
-<!--           [disabled]="(isUploadCompleted | async)">-->
-          <mat-icon>{{playPauseIcon}}</mat-icon>
-        </a>
-      </div>
-    </div>
-  </mat-card-actions>
-</mat-card>
+    </mat-card-actions>
+  </mat-card>
 
 <!-- START: File Info Menu -->
 <mat-menu #fileInfoMenu="matMenu"
@@ -73,11 +73,11 @@ mat-elevation-z1" cdkTrapFocus>
     </mat-card-header>
     <mat-card-content>
       <mat-divider></mat-divider>
-<!--
-      <app-info-card [title]="['Name']" [msg]="[fileName]"></app-info-card>
-      <app-info-card [title]="['Type']" [msg]="[fileType]"></app-info-card>
-      <app-info-card [title]="['Size']" [msg]="[fileSize]"></app-info-card>
--->
+      <!--
+            <app-info-card [title]="['Name']" [msg]="[fileName]"></app-info-card>
+            <app-info-card [title]="['Type']" [msg]="[fileType]"></app-info-card>
+            <app-info-card [title]="['Size']" [msg]="[fileSize]"></app-info-card>
+      -->
     </mat-card-content>
     <mat-card-actions class="md-app-black-bg">
       <mat-divider></mat-divider>
