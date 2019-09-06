@@ -1,35 +1,52 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {AngularFirestore} from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import {ImageModel} from '../../models/image.model';
 import {ToolbarService} from '../../services/toolbar.service';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {map, share} from 'rxjs/operators';
 
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss']
 })
-export class GalleryComponent implements OnInit, OnChanges {
+export class GalleryComponent
+  implements OnInit, OnDestroy, OnChanges {
   private images = new Array();
-
+  private totalColumns = 2;
   private fileDeleteSubscription: Subscription;
+  private handsetObserver: Subscription;
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      share()
+    );
 
   constructor(private storage: AngularFireStorage,
               private db: AngularFirestore,
-              private toolBarSvc: ToolbarService) {
+              private toolBarSvc: ToolbarService,
+              private breakpointObserver: BreakpointObserver) {
   }
 
   ngOnInit(): void {
-    this.toolBarSvc
+    this.handsetObserver = this.isHandset$.subscribe(isHandSet => {
+      isHandSet ? this.totalColumns = 1 : this.totalColumns = 2;
+    });
+    this.fileDeleteSubscription = this.toolBarSvc
       .fileDeleteCommunicator
       .subscribe(imageModel => {
-        console.log('delete atttempt....');
-        console.log(this.images.indexOf(imageModel));
-        this.images.splice(this.images.indexOf(imageModel),1);
+        this.images.splice(this.images.indexOf(imageModel), 1);
       });
+
     this.loadImages();
+  }
+
+  ngOnDestroy(): void {
+    this.fileDeleteSubscription.unsubscribe();
   }
 
   ngOnChanges(): void {

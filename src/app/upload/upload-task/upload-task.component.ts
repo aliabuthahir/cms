@@ -104,8 +104,6 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
 
     const fileName = this.file.name;
     this.previewFieldName = `preview_${fileName}_${Date.now()}`;
-    console.log('preview name');
-    console.log(this.previewFieldName);
     this.fileName = fileName
       .substr(0, fileName.indexOf('.'))
       .toLocaleUpperCase();
@@ -245,6 +243,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.task) {
       this.task.cancel();
     }
+//    this.file = undefined;
     this.isFileUploadStarted = this.CANCELLED;
     this.playPauseToolTip = this.START;
     this.isUploadCancelled.next(true);

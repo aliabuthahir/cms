@@ -48,7 +48,7 @@ import { FileTrimmerPipe } from '../pipes/file-trimmer.pipe';
 import {MatChipsModule} from '@angular/material/chips';
 import { ScrollListenerDirective } from '../directives/scroll-listener.directive';
 import { LoadSpinnerComponent } from './common/load-spinner/load-spinner.component';
-import {MatGridListModule} from "@angular/material/grid-list";
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
