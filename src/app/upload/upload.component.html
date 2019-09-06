@@ -1,26 +1,37 @@
 <mat-card class="md-app-card mat-elevation-z0" cdkTrapFocus>
-      <div class="row">
-        <div class="col-10">
-          <p>Upload Images
-          </p>
-        </div>
-        <div class="col-2">
-          <a mat-icon-button
-             matTooltip="Open Files To Upload"
-             (click)="toggleRightSideNav()">
-            <mat-icon>settings</mat-icon>
-          </a>
-        </div>
-      </div>
+  <div class="row">
+    <div class="col-8">
+      <p>Upload Images
+      </p>
+    </div>
+    <div class="col-2">
+      <mat-slide-toggle #showToolTips
+                        matTooltip="Show Tool Tips"
+                        [checked]=false
+                        class="md-app-padding-5">
+      </mat-slide-toggle>
+    </div>
+    <div class="col-2">
+      <a mat-icon-button
+         matTooltip="Open Files To Upload"
+         (click)="toggleRightSideNav()">
+        <mat-icon>settings</mat-icon>
+      </a>
+    </div>
+  </div>
   <div class="row
   md-app-margin-top-5">
-    <div class="col-12"><mat-divider></mat-divider></div>
+    <div class="col-12">
+      <mat-divider></mat-divider>
+    </div>
   </div>
   <div class="row md-app-margin-top-5  md-app-margin-bottom-20">
     <div class="col-10">
     </div>
     <div class="col-2 mat-body">
-      Open Files To Upload
+      <p *ngIf="showToolTips.checked">
+        Open Files To Upload
+      </p>
     </div>
   </div>
 
@@ -59,10 +70,14 @@
       <div class="col-8">
       </div>
       <div class="col-2 mat-body">
-        Auto Upload All Files
+        <p *ngIf="showToolTips.checked">
+          Auto Upload All Files
+        </p>
       </div>
       <div class="col-2 mat-body">
-        Cancel All Uploads
+        <p *ngIf="showToolTips.checked">
+          Cancel All Uploads
+        </p>
       </div>
     </div>
   </mat-card-actions>
