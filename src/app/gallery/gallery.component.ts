@@ -58,6 +58,7 @@ export class GalleryComponent
     storageRef.listAll().then(result => {
       result.items.forEach(imageRef => {
         // And finally display them
+        console.log(imageRef);
         imageRef.getDownloadURL().then(url => {
           // TODO: Display the image on the UI
           const imageModel = new ImageModel();
@@ -91,6 +92,12 @@ export class GalleryComponent
   scrollHandler(event) {
     console.log('--------------');
     console.log(event);
+  }
+
+  deleteAllChildren(){
+    this.toolBarSvc
+      .deleteChildCommunicator
+      .next(true);
   }
 
   getFileMetaData(storageRef, file) {

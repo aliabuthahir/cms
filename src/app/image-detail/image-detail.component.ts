@@ -1,16 +1,16 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AngularFireUploadTask} from '@angular/fire/storage';
 import {Observable, Subject, Subscription} from 'rxjs';
 import * as firebase from 'firebase';
-import {ToolbarService} from "../../services/toolbar.service";
+import {ToolbarService} from '../../services/toolbar.service';
 
 @Component({
   selector: 'app-image-detail',
   templateUrl: './image-detail.component.html',
   styleUrls: ['./image-detail.component.scss']
 })
-export class ImageDetailComponent implements OnInit {
+export class ImageDetailComponent implements OnInit, OnDestroy {
   @Input()
   imageModel;
 
@@ -20,7 +20,7 @@ export class ImageDetailComponent implements OnInit {
   private snapshot: Observable<any>;
   private downloadURL: string;
   private isDownloadCompleted: Subject<boolean> = new Subject<boolean>();
-  private isUploadCancelled: Subject<boolean> = new Subject<boolean>();
+  private deleteChildListener: Subscription;
 
   @Input()
   private enableAutoUpload = 'false';
@@ -71,7 +71,16 @@ export class ImageDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-   // this.handleFileDowmload();
+    this.deleteChildListener = this.toolBarSvc
+      .deleteChildCommunicator
+      .subscribe(isDeleted => {
+        this.handleFileDelete();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.deleteChildListener
+      .unsubscribe();
   }
 
   handleFileDelete() {

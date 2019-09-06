@@ -24,6 +24,7 @@ export class ToolbarService {
 
   toolBarCommunicator: Subject<boolean> = new Subject<boolean>();
   fileDeleteCommunicator: Subject<boolean> = new Subject<boolean>();
+  deleteChildCommunicator: Subject<boolean> = new Subject<boolean>();
 
 //  bottomSheetCommunicator: Subject<BottomSheetModel> = new Subject<BottomSheetModel>();
 
