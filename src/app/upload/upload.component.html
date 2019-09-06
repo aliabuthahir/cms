@@ -1,10 +1,10 @@
 <mat-card class="md-app-card mat-elevation-z0" cdkTrapFocus>
       <div class="row">
-        <div class="col-xsm-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+        <div class="col-10">
           <p>Upload Images
           </p>
         </div>
-        <div class="col-xsm-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+        <div class="col-2">
           <a mat-icon-button
              matTooltip="Open Files To Upload"
              (click)="toggleRightSideNav()">
@@ -13,30 +13,57 @@
         </div>
       </div>
   <div class="row
-  md-app-margin-top-5
-  md-app-margin-bottom-20">
+  md-app-margin-top-5">
     <div class="col-12"><mat-divider></mat-divider></div>
   </div>
+  <div class="row md-app-margin-top-5  md-app-margin-bottom-20">
+    <div class="col-10">
+    </div>
+    <div class="col-2 mat-body">
+      Open Files To Upload
+    </div>
+  </div>
+
   <mat-card-content>
     <app-uploader>
     </app-uploader>
   </mat-card-content>
   <mat-card-actions>
-  <div class="row">
-    <div class="col-xsm-12">
-    <mat-checkbox #autoUpload
-                  checked=true
-                  matTooltip="Auto Upload All Selected Files"
-                  (click)="enableAutoUpload()">Auto Upload Files
-    </mat-checkbox>
+    <div class="row">
+      <div class="col-8">
+      </div>
+      <div class="col-2">
+        <mat-slide-toggle #autoUpload
+                          (click)="enableAutoUpload()"
+                          matTooltip="Auto Upload All Selected Files"
+                          [checked]=true
+                          [disabled]=false
+                          class="md-app-padding-5">
+        </mat-slide-toggle>
+      </div>
+      <div class="col-2">
+        <a mat-icon-button
+           matTooltip="Cancel Upload of All Files"
+           (click)="cancelUploadOfAllFiles()"
+           class="md-app-padding-5">
+          <mat-icon>cloud_off</mat-icon>
+        </a>
+      </div>
     </div>
-    <div class="col-xsm-12">
-      <a mat-icon-button
-         matTooltip="Cancel Upload of All Files"
-         (click)="cancelUploadOfAllFiles()">
-        <mat-icon>cloud_off</mat-icon>
-      </a>
+    <div class="row md-app-margin-top-5">
+      <div class="col-12">
+        <mat-divider></mat-divider>
+      </div>
     </div>
-  </div>
+    <div class="row md-app-margin-top-5">
+      <div class="col-8">
+      </div>
+      <div class="col-2 mat-body">
+        Auto Upload All Files
+      </div>
+      <div class="col-2 mat-body">
+        Cancel All Uploads
+      </div>
+    </div>
   </mat-card-actions>
 </mat-card>
