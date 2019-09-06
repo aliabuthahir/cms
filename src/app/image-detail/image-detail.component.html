@@ -10,13 +10,8 @@ mat-elevation-z1" cdkTrapFocus>
     <mat-card-title class="mat-body">DOWNLOAD STATUS</mat-card-title>
     <mat-card-subtitle class="mat-small"></mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image src="" id="preview"/>
+  <img mat-card-image src="{{imageModel.url}}" id="preview"/>
   <mat-card-content>
-    <mat-progress-bar
-      mode="determinate"
-      [value]=""
-      #progress>
-    </mat-progress-bar>
   </mat-card-content>
   <mat-card-actions>
     <div class="row">
@@ -36,16 +31,18 @@ mat-elevation-z1" cdkTrapFocus>
       </div>
       <div class="col-2">
         <a mat-icon-button
-           matTooltip="Cancel File Upload"
-           (click)="handleFileDowmload()"
+           matTooltip="Delete This File In Cloud Storage"
+           (click)="handleFileDelete()"
            [disabled]="(isDownloadCompleted | async)">
           <mat-icon>cancel</mat-icon>
         </a>
       </div>
       <div class="col-2">
-        <a mat-icon-button
-           (click)="handleFileUpload()"
-           [disabled]="(isUploadCompleted | async)">
+        <a mat-icon-button>
+<!--
+           (click)="handleFileDowmload()">
+-->
+<!--           [disabled]="(isUploadCompleted | async)">-->
           <mat-icon>{{playPauseIcon}}</mat-icon>
         </a>
       </div>
@@ -76,9 +73,11 @@ mat-elevation-z1" cdkTrapFocus>
     </mat-card-header>
     <mat-card-content>
       <mat-divider></mat-divider>
+<!--
       <app-info-card [title]="['Name']" [msg]="[fileName]"></app-info-card>
       <app-info-card [title]="['Type']" [msg]="[fileType]"></app-info-card>
       <app-info-card [title]="['Size']" [msg]="[fileSize]"></app-info-card>
+-->
     </mat-card-content>
     <mat-card-actions class="md-app-black-bg">
       <mat-divider></mat-divider>

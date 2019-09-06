@@ -25,26 +25,40 @@ export class GalleryComponent implements OnInit, OnChanges {
   }
 
   loadImages() {
-/*
-    let storageRef = firebase.storage().ref('new_uploads');
-    storageRef.listAll().then(function(result) {
-      result.items.forEach(function(imageRef) {
+    const storageRef = firebase.storage().ref('new_uploads');
+    storageRef.listAll().then(result => {
+      result.items.forEach(imageRef => {
         // And finally display them
-        imageRef.getDownloadURL().then(function(url) {
+        imageRef.getDownloadURL().then(url => {
           // TODO: Display the image on the UI
-          let imageModel = new ImageModel();
-          imageModel.name =imageRef.name;
-          imageModel.url=url;
+          const imageModel = new ImageModel();
+          imageModel.name = imageRef.name;
+          imageModel.url = url;
           this.images.push(imageModel);
-        }).catch((error)=> {
-          // Handle any errors
+        }).catch(error => {
+          switch (error.code) {
+            case 'storage/object-not-found':
+              // File doesn't exist
+              break;
+
+            case 'storage/unauthorized':
+              // User doesn't have permission to access the object
+              break;
+
+            case 'storage/canceled':
+              // User canceled the upload
+              break;
+            case 'storage/unknown':
+              // Unknown error occurred, inspect the server response
+              break;
+          }
         });
       });
-    }).catch((error) =>{
+    }).catch(error => {
       // Handle any errors
     });
-*/
   }
+
   scrollHandler(event) {
     console.log('--------------');
     console.log(event);

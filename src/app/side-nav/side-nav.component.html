@@ -174,7 +174,7 @@
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="'over'"
                [opened]=false>
-    <mat-toolbar  color="primary">
+    <mat-toolbar  color="accent">
       <mat-toolbar-row>
         <div class="row">
           <div class="col-3">
@@ -185,14 +185,14 @@
             </a>
           </div>
           <div class="mat-body
-           col-9 align-items-center">
+           col-9">
             FILES TO UPLOAD
           </div>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>
 
-    <mat-card color='accent' class="mat-elevation-z0">
+    <mat-card class="mat-elevation-z0">
       <!-- START: File Upload Inner ToolBar -->
       <mat-card-content>
         <div class="row">

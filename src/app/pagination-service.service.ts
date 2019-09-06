@@ -1,3 +1,4 @@
+/*
 import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -7,7 +8,6 @@ import {QueryConfig} from '../models/QueryConfig.model';
   providedIn: 'root'
 })
 export class PaginationServiceService {
-/*
   // Source data
   private _done = new BehaviorSubject(false);
   private _loading = new BehaviorSubject(false);
@@ -108,6 +108,6 @@ export class PaginationServiceService {
       .subscribe();
 
   }
-*/
 
 }
+*/
