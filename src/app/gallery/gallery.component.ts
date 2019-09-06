@@ -3,6 +3,8 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {AngularFirestore} from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import {ImageModel} from '../../models/image.model';
+import {ToolbarService} from '../../services/toolbar.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-gallery',
@@ -10,13 +12,23 @@ import {ImageModel} from '../../models/image.model';
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent implements OnInit, OnChanges {
-  images = new Array();
+  private images = new Array();
+
+  private fileDeleteSubscription: Subscription;
 
   constructor(private storage: AngularFireStorage,
-              private db: AngularFirestore) {
+              private db: AngularFirestore,
+              private toolBarSvc: ToolbarService) {
   }
 
   ngOnInit(): void {
+    this.toolBarSvc
+      .fileDeleteCommunicator
+      .subscribe(imageModel => {
+        console.log('delete atttempt....');
+        console.log(this.images.indexOf(imageModel));
+        this.images.splice(this.images.indexOf(imageModel),1);
+      });
     this.loadImages();
   }
 
@@ -63,4 +75,21 @@ export class GalleryComponent implements OnInit, OnChanges {
     console.log('--------------');
     console.log(event);
   }
+
+  getFileMetaData(storageRef, file) {
+    // const storageRef = firebase.storage().ref('new_uploads');
+
+    // Create a reference to the file whose metadata we want to retrieve
+    const forestRef = storageRef.child('images/forest.jpg');
+
+// Get metadata properties
+    forestRef.getMetadata().then(metadata => {
+      // Metadata now contains the metadata for 'images/forest.jpg'
+    }).catch(error => {
+      // Uh-oh, an error occurred!
+    });
+  }
 }
+
+
+

@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {AngularFireUploadTask} from '@angular/fire/storage';
 import {Observable, Subject, Subscription} from 'rxjs';
 import * as firebase from 'firebase';
+import {ToolbarService} from "../../services/toolbar.service";
 
 @Component({
   selector: 'app-image-detail',
@@ -66,7 +67,7 @@ export class ImageDetailComponent implements OnInit {
 
   private isFileUploadStarted = this.NOT_STARTED;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private toolBarSvc: ToolbarService) {
   }
 
   ngOnInit() {
@@ -81,7 +82,9 @@ export class ImageDetailComponent implements OnInit {
 
 // Delete the file
     desertRef.delete().then(() => {
-      // File deleted successfully
+      this.toolBarSvc
+        .fileDeleteCommunicator
+        .next(this.imageModel);
     }).catch(error => {
       // Uh-oh, an error occurred!
     });

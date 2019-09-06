@@ -1,14 +1,24 @@
 <mat-card class="md-app-card mat-elevation-z0" cdkTrapFocus>
   <mat-card-header>
-    <mat-card-title>
-      <p class="mat-subheading-1
-      md-app-hint">Latest Photos</p>
-    </mat-card-title>
+    <div class="row">
+      <div class="col-6">
+        <mat-card-title>
+          <p class="mat-subheading-1">Latest Photos</p>
+        </mat-card-title>
+      </div>
+      <div class="col-6">
+        <mat-chip-list>
+          <mat-chip selected>
+            <mat-icon>image</mat-icon> {{images.length}}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
   </mat-card-header>
   <mat-card-content>
-    <div *ngIf="images; else noImages">
+    <div *ngIf="images; else noImages" class="parent" >
       <app-image-detail *ngFor="let image of images"
-                       [imageModel]="image"></app-image-detail>
+                        [imageModel]="image"></app-image-detail>
     </div>
 
     <ng-template #noImages>

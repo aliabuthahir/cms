@@ -23,6 +23,8 @@ export class ToolbarService {
   removeFromListCommunicator: Subject<boolean> = new Subject<boolean>();
 
   toolBarCommunicator: Subject<boolean> = new Subject<boolean>();
+  fileDeleteCommunicator: Subject<boolean> = new Subject<boolean>();
+
 //  bottomSheetCommunicator: Subject<BottomSheetModel> = new Subject<BottomSheetModel>();
 
   constructor() {
