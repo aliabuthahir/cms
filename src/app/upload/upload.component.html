@@ -41,8 +41,6 @@
   </mat-card-content>
   <mat-card-actions>
     <div class="row">
-      <div class="col-8">
-      </div>
       <div class="col-2">
         <mat-slide-toggle #autoUpload
                           (click)="enableAutoUpload()"
@@ -60,6 +58,8 @@
           <mat-icon>cloud_off</mat-icon>
         </a>
       </div>
+      <div class="col-8">
+      </div>
     </div>
     <div class="row md-app-margin-top-5">
       <div class="col-12">
@@ -67,8 +67,6 @@
       </div>
     </div>
     <div class="row md-app-margin-top-5">
-      <div class="col-5">
-      </div>
       <div class="col-4 mat-body">
         <p *ngIf="showToolTips.checked">
           Auto Upload All Files
@@ -78,6 +76,8 @@
         <p *ngIf="showToolTips.checked">
           Cancel All Uploads
         </p>
+      </div>
+      <div class="col-5">
       </div>
     </div>
 

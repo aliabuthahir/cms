@@ -189,34 +189,39 @@
       <!-- START: File Upload Inner ToolBar -->
       <mat-card-content>
         <div class="row">
-          <div class="col-xsm-12">
-            <mat-checkbox #autoUpload
-                          matTooltip="Auto Upload All Selected Files"
-                          (click)="changeAutoUploadStatus()"
-                          class="mat-body">Auto Upload Files
-            </mat-checkbox>
+          <div class="col-2">
+            <mat-slide-toggle #autoUpload
+                              (click)="changeAutoUploadStatus()"
+                              matTooltip="Auto Upload All Selected Files"
+                              [checked]=true
+                              [disabled]=false
+                              (click)="changeAutoUploadStatus()"
+                              class="md-app-padding-5">
+            </mat-slide-toggle>
           </div>
-          <div class="col-xsm-12">
-          <a mat-icon-button
-             matTooltip="Cancel Upload of All Files"
-          (click)="cancelUploadOfAllFiles()">
-            <mat-icon>cloud_off</mat-icon>
-          </a>
+          <div class="col-2">
+            <a mat-icon-button
+               matTooltip="Cancel Upload of All Files"
+               (click)="cancelUploadOfAllFiles()"
+               class="md-app-padding-5">
+              <mat-icon>cloud_off</mat-icon>
+            </a>
           </div>
-
-          <div
-               class="col-xsm-12">
+          <div class="col-2">
             <a mat-icon-button
                [disabled]="(totalFilesUploaded<filesToUpload.length)
                || (totalFilesUploaded>=filesToUpload.length)"
                matTooltip=""
-                    [matMenuTriggerFor]="uploadStatusMenu"
-                    aria-label="file upload status drop down menu trigger"
-                    class="mat-button">
+               [matMenuTriggerFor]="uploadStatusMenu"
+               aria-label="file upload status drop down menu trigger"
+               class="mat-button">
               <mat-icon>info_circle</mat-icon>
             </a>
           </div>
+          <div class="col-6">
+          </div>
         </div>
+
         <mat-divider></mat-divider>
       </mat-card-content>
       <!-- END: File Upload Inner ToolBar -->
