@@ -27,7 +27,6 @@ export class GalleryComponent
   private handsetObserver: Subscription;
 
   private yearDictionary = new TreeDataModel('Archives');
-  private yearList;
   private months = ['Jan', 'Feb', 'March', 'Apr'
     , 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   private monthToMonthNumber = {
@@ -35,6 +34,8 @@ export class GalleryComponent
     , May: 4, June: 5, July: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
   };
 
+  private totalFilesRecieved = 0;
+  private totalFilesProcessed = 0;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -53,6 +54,8 @@ export class GalleryComponent
   }
 
   ngOnInit(): void {
+    this.totalFilesRecieved = 0;
+    this.totalFilesProcessed = 0;
     this.handsetObserver = this.isHandset$.subscribe(isHandSet => {
       isHandSet ? this.totalColumns = 1 : this.totalColumns = 2;
     });
@@ -63,8 +66,6 @@ export class GalleryComponent
       });
 
     this.loadImages();
-    this.yearList = this.yearDictionary.children;
-
   }
 
   ngOnDestroy(): void {
@@ -80,6 +81,7 @@ export class GalleryComponent
     storageRef.listAll().then(result => {
       console.log('datae size-------');
       console.log(result.items.length);
+      this.totalFilesRecieved = result.items.length;
       result.items.forEach(imageRef => {
         // And finally display them
         imageRef.getDownloadURL().then(url => {
@@ -88,6 +90,7 @@ export class GalleryComponent
           imageModel.name = imageRef.name;
           imageModel.url = url;
           imageModel.fullPath = imageRef.fullPath;
+          this.totalFilesProcessed++;
 
           const fileName = imageRef.name;
           const fileDate = fileName.substr(0, fileName.indexOf('_'));
@@ -161,7 +164,6 @@ export class GalleryComponent
               yearToAdd.children = new Array();
               yearToAdd.children.push(monthToAdd);
               this.yearDictionary.children.push(yearToAdd);
-              this.yearList.push(year);
             }
           } else {
             const yearToAdd = new YearModel(year);
@@ -195,11 +197,7 @@ export class GalleryComponent
           }
         });
         console.log('----------sdfdsfdsfds--------------');
-        console.log(this.yearList);
         console.log(this.yearDictionary.children);
-        this.yearList = this.yearDictionary.children;
-        console.log(this.yearList);
-
       });
     }).catch(error => {
       // Handle any errors

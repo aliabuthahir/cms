@@ -32,8 +32,8 @@
   </div>
 
   <mat-card-content>
-    <div *ngFor="let node of yearDictionary.children">
-    <mat-tree [dataSource]="yearList" [treeControl]="treeController">
+    <div *ngIf="totalFilesProcessed == totalFilesRecieved">
+    <mat-tree [dataSource]="yearDictionary.children" [treeControl]="treeController">
       <mat-tree-node *matTreeNodeDef="let node"  matTreeNodeToggle>
         <li>
           <div>

@@ -150,7 +150,6 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
 
   startUpload() {
     const date = new Date('2013-04-05');
-    console.log(date.getMonth());
     const path = `new_uploads/${date}_${this.file.name}`;
     const ref = this.storage.ref('path');
     this.task = this.storage.upload(path, this.file);
