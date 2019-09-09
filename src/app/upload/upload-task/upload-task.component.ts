@@ -76,7 +76,8 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
       .autoUploadFilesObserver
       .subscribe(isAutoUploadEnabled => {
         this.enableAutoUpload = isAutoUploadEnabled ? 'true' : 'false';
-        if (this.enableAutoUpload === 'true') {
+        if ((this.enableAutoUpload === 'true')
+          && (this.file)) {
           if (this.isFileUploadStarted === this.NOT_STARTED) {
 //            this.isStatusClosed.next(false);
             this.startUpload();
@@ -249,7 +250,7 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.task) {
       this.task.cancel();
     }
-//    this.file = undefined;
+    this.file = undefined;
     this.isFileUploadStarted = this.CANCELLED;
     this.playPauseToolTip = this.START;
     this.isUploadCancelled.next(true);
