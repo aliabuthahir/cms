@@ -204,4 +204,12 @@ background-color: mat-color($dropZonePalette) !important;
   font-family: 'Roboto',arial,sans-serif;
 }
 
+@mixin button-theme($theme) {    
+    $accent: map-get($theme, accent);
+
+    .mat-button {
+        color: mat-color($accent);
+    }
+}
+
 

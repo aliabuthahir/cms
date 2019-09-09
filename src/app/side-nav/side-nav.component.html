@@ -46,15 +46,23 @@
             <div class="row">
               <div class="col-xsm-12">
                 <div mat-card-avatar class="md-app-profile-pic-icon">
-                  <mat-icon *ngIf="authSvc.currentUserDetails().isAnonymous"
-                            class="md-app-hint-value">account_circle
-                  </mat-icon>
+                  <div *ngIf="authSvc.currentUserDetails()">
+                    <mat-icon *ngIf="authSvc.currentUserDetails().isAnonymous"
+                              class="md-app-hint-value">account_circle
+                    </mat-icon>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-xsm-12">
-                <mat-card-title class="mat-body">{{authSvc.currentUserDetails().email}}</mat-card-title>
+                <mat-card-title
+                  class="mat-body"
+                  *ngIf="authSvc.currentUserDetails(); else emptyTitle">{{authSvc.currentUserDetails().email}}
+                </mat-card-title>
+                <ng-template #emptyTitle>
+                  <mat-card-title class="mat-body"></mat-card-title>
+                </ng-template>
               </div>
             </div>
             <div class="row">
@@ -107,15 +115,22 @@
           <div class="row">
             <div class="col-xsm-12">
               <div mat-card-avatar class="md-app-profile-pic-icon">
-                <mat-icon *ngIf="authSvc.currentUserDetails().isAnonymous"
-                          class="md-app-hint-value">account_circle
-                </mat-icon>
+                <div *ngIf="authSvc.currentUserDetails()">
+                  <mat-icon *ngIf="authSvc.currentUserDetails().isAnonymous"
+                            class="md-app-hint-value">account_circle
+                  </mat-icon>
+                </div>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-xsm-12">
-              <mat-card-title class="mat-body">{{authSvc.currentUserDetails().email}}</mat-card-title>
+              <div *ngIf="authSvc.currentUserDetails(); else emptyTitle1">
+                <mat-card-title class="mat-body">{{authSvc.currentUserDetails().email}}</mat-card-title>
+              </div>
+              <ng-template #emptyTitle1>
+                <mat-card-title></mat-card-title>
+              </ng-template>
             </div>
           </div>
           <div class="row">
@@ -174,14 +189,14 @@
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="'over'"
                [opened]=false>
-    <mat-toolbar  color="accent">
+    <mat-toolbar color="accent">
       <mat-toolbar-row>
-            <a mat-icon-button
-               matTooltip="Close Files To Upload"
-                    (click)="toolBarSvc.toggleRightSideNav()">
-              <mat-icon>close</mat-icon>
-            </a>
-            FILES TO UPLOAD
+        <a mat-icon-button
+           matTooltip="Close Files To Upload"
+           (click)="toolBarSvc.toggleRightSideNav()">
+          <mat-icon>close</mat-icon>
+        </a>
+        FILES TO UPLOAD
       </mat-toolbar-row>
     </mat-toolbar>
 
