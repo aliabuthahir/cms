@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "pimp-my-bootstrap.css";
+
 html {
   scroll-behavior: smooth;
 }
@@ -204,7 +206,7 @@ background-color: mat-color($dropZonePalette) !important;
   font-family: 'Roboto',arial,sans-serif;
 }
 
-@mixin button-theme($theme) {    
+@mixin button-theme($theme) {
     $accent: map-get($theme, accent);
 
     .mat-button {

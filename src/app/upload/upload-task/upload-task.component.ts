@@ -161,15 +161,11 @@ export class UploadTaskComponent implements OnInit, OnDestroy, AfterViewInit {
         this.downloadURL = await ref
           .getDownloadURL()
           .toPromise();
-        this.db
-          .collection('new_uploads')
-          .add({
-            downloadURL: this.downloadURL,
-            pathRef: path,
-            fileName: this.file.name,
-            uploadedFileName: '${date}_${this.file.name}',
-            dateUploaded: date
-          });
+        this.db.collection('uploads').add( {
+          fileName: this.file.name,
+          storedFileName: `${date}_${this.file.name}`,
+          fullPath: path,
+          downloadUrl: this.downloadURL});
       }),
     );
   }

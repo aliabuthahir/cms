@@ -51,6 +51,7 @@ import { LoadSpinnerComponent } from './common/load-spinner/load-spinner.compone
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTreeModule} from '@angular/material/tree';
+import {ScrollingModule} from "@angular/cdk/scrolling";
 
 @NgModule({
   declarations: [
@@ -77,8 +78,11 @@ import {MatTreeModule} from '@angular/material/tree';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    NgbModule,
+    ScrollingModule,
     BrowserAnimationsModule,
+/*
+    NgbModule,
+*/
     FormsModule,
     LayoutModule,
     MatToolbarModule,

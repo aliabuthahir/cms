@@ -1,26 +1,29 @@
 <mat-card class="md-app-card mat-elevation-z0" cdkTrapFocus>
   <div class="row">
-    <div class="col-xsm-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+    <div class="col-6">
       <p class="mat-subheading-1">Latest Photos</p>
     </div>
-    <div class="col-xsm-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-      <a mat-icon-button
+    <div class="col-2">
+      <button mat-icon-button
          matTooltip="Delete All Files Available in Cloud Storage"
          [disabled]="images.length<1"
         (click)="deleteAllChildren()">
         <mat-icon>delete_sweep</mat-icon>
-      </a>
-
+      </button>
+    </div>
+    <div class="col-2">
       <a mat-icon-button
          matTooltip="Total Files Available in Cloud Storage">
         <mat-icon>image</mat-icon> &nbsp; &nbsp;{{images.length}}
       </a>
-      <mat-icon
->
-
-      </mat-icon>
     </div>
-
+    <div class="col-2">
+      <mat-slide-toggle #showToolTips
+                        matTooltip="Show Tool Tips"
+                        [checked]=false
+                        class="md-app-padding-5">
+      </mat-slide-toggle>
+    </div>
   </div>
 
   <div class="row
@@ -30,8 +33,24 @@
       <mat-divider></mat-divider>
     </div>
   </div>
+  <div class="row md-app-margin-top-5">
+    <div class="col-4">
+    </div>
+    <div class="col-4 mat-body">
+      <p *ngIf="showToolTips.checked">
+        Delete All Files In Cloud Storage
+      </p>
+    </div>
+    <div class="col-4 mat-body">
+      <p *ngIf="showToolTips.checked">
+        Total Number of Files Available in Cloud Storage
+      </p>
+    </div>
+  </div>
+
 
   <mat-card-content>
+<!--
     <div *ngIf="totalFilesProcessed == totalFilesRecieved">
     <mat-tree [dataSource]="yearDictionary.children" [treeControl]="treeController">
       <mat-tree-node *matTreeNodeDef="let node"  matTreeNodeToggle>
@@ -63,7 +82,7 @@
       </mat-nested-tree-node>
     </mat-tree>
     </div>
-<!--
+-->
     <mat-grid-list
       cols="{{totalColumns}}"
       rowHeight="2:1" style="width: 100%; height: 100%; border: 1px solid green;"
@@ -77,7 +96,6 @@
       <span class="mat-body
       md-app-hint-value">No Images to show.</span>
     </ng-template>
--->
   </mat-card-content>
 </mat-card>
 

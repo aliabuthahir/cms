@@ -48,8 +48,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
-    this.toolBarSvc.enableSignInPage(true);
     this.buildForm();
+//    this.toolBarSvc.enableSignInPage(true);
   }
 
   ngOnDestroy(): void {
@@ -69,13 +69,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.signUpButtonText = 'SIGN IN';
   }
 
-  public login(): void {
+  public async login() {
     const userModel = new UserModel();
     userModel.email = this.userForm.value.email;
     userModel.passWord = this.userForm.value.password;
+    console.log('-----login page');
+    console.log(this.userForm.value.email);
+    console.log(this.userForm.value.password);
 
     if (!this.newUser) {
-      this.authSvc.signIn(userModel)
+      await this.authSvc.signIn(userModel)
         .then(() => {
           this.router.navigate(['/gallery']);
         })
@@ -90,7 +93,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           }, 2000);
         });
     } else if (this.newUser) {
-      this.authSvc.signUp(userModel)
+     await this.authSvc.signUp(userModel)
         .then(() => {
           this.router.navigate(['/signupsuccess']);
         })

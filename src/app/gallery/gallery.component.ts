@@ -65,6 +65,15 @@ export class GalleryComponent
         this.images.splice(this.images.indexOf(imageModel), 1);
       });
 
+
+    const result = this.db
+      .collection('uploads')
+      .snapshotChanges()
+      .subscribe(data =>{
+        console.log('colletion-------------------');
+        console.log(data);
+
+      });
     this.loadImages();
   }
 
@@ -73,7 +82,7 @@ export class GalleryComponent
   }
 
   ngOnChanges(): void {
-    // this.loadImages();
+     this.loadImages();
   }
 
   loadImages() {
